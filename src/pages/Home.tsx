@@ -8,6 +8,7 @@ import TrendingProducts from '../components/blocks/TrendingProducts';
 import Testimonials from '../components/blocks/Testimonials';
 import Questionaire from '../components/blocks/Questionaire';
 import Footer from '../components/blocks/Footer';
+import PaddedWrapper from '../components/PaddedWrapper';
 
 const HomeButtonsLinks: ILink[] = [
   { path: '/online-pharmacist', text: 'Talk to a pharmacist' },
@@ -30,7 +31,7 @@ const Home = () => {
   return (
     <div className="bg-white">
       <Navbar />
-      <div className="mx-5 md:mx-8 lg:mx-12">
+      <PaddedWrapper>
         <div className="flex justify-center md:hidden mx-7 my-5">
           <ProductSearchBar />
         </div>
@@ -60,7 +61,7 @@ const Home = () => {
         <Testimonials />
         <Questionaire />
         <Footer />
-      </div>
+      </PaddedWrapper>
     </div>
   );
 };

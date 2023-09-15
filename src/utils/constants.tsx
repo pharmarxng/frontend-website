@@ -108,3 +108,18 @@ export const activitiesList = [
     values: ['About Us', 'Help', 'Contact Us'],
   },
 ];
+
+export const onlinePharmacyHealthCardList = [
+  {
+    title: 'Consult with a pharmacist in-person',
+    img: '/svg/online_pharmacy_card_1.svg',
+    description:
+      'Experience personalized care with a visit to our pharmacy. Our skilled pharmacists are here to provide face-to-face consultations and expert diagnoses. Whether you have questions about medications, health concerns, or need guidance, our on-site consultations ensure you receive the care you deserve.',
+  },
+  {
+    title: 'Connect with a pharmacist online',
+    img: '/svg/online_pharmacy_card_2.svg',
+    description:
+      'Your health is just a click away. Chat directly with our experienced pharmacists through our website. Ask questions, discuss medications, and receive professional guidance from the comfort of your own space. Our virtual consultations make healthcare accessible whenever you need it.',
+  },
+];

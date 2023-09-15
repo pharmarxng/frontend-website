@@ -9,6 +9,8 @@ export default {
     screens: {
       'xs': '400px',
       'medium': '550px',
+      "mdPro":"870px",
+      "mdLite": "970px",
       ...defaultTheme.screens,
     },
     extend: {

@@ -7,6 +7,12 @@ export interface IPharmContextProps {
   children?: React.ReactNode;
 }
 
+export interface IOnlinePharmacyCardProps {
+  img: string;
+  title: string;
+  description: string;
+}
+
 export interface IProducts {
   id: string;
   name: string;
