@@ -93,3 +93,18 @@ export const questionaireList: IQuestionaire[] = [
       'We do not store your payment info on our end based on complaince to the Nigerian govt rules, we leverage a third party service approved by the govt to do so',
   },
 ];
+
+export const activitiesList = [
+  {
+    title: 'Plan a Visit',
+    values: ['In-person visit', 'Virtual Care Visit', 'Pharmacy location'],
+  },
+  {
+    title: 'Services',
+    values: ['Consultation', 'Shipping & Delivery', 'Order Pickup'],
+  },
+  {
+    title: 'Learn About Us',
+    values: ['About Us', 'Help', 'Contact Us'],
+  },
+];

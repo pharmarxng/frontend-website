@@ -26,6 +26,9 @@ export default {
         },
         deepBlue: {
           100: "#1A4570"
+        },
+        grey:{
+          100: '#2b2b2b'
         }
       },
       fontFamily:{body: ['Nunito'],
