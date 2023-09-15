@@ -15,7 +15,7 @@ const OnlinePharmacyHeader = () => {
           </div>
           <div>{''}</div>
         </div>
-        <div className="absolute z-40 bottom-[-100px] left-[15%] shadow-sm w-[70%]">
+        <div className="absolute z-40 bottom-[-100px] left-[10%] shadow-sm w-[80%]">
           <OnlinePharmacyForm />
         </div>
       </div>

@@ -123,3 +123,11 @@ export const onlinePharmacyHealthCardList = [
       'Your health is just a click away. Chat directly with our experienced pharmacists through our website. Ask questions, discuss medications, and receive professional guidance from the comfort of your own space. Our virtual consultations make healthcare accessible whenever you need it.',
   },
 ];
+
+export const aboutUsContentList = [
+  'PharmaRx Pharmacy is a retail outlet in the heart of Lekki. We put your healthcare first and we pride ourselves in providing you with quality products all the time without compromise.',
+  'We offer a wide range of products and services to meet your needs including prescription medications, over-the-counter products, personal care items, and health and wellness products.',
+  'We have experts that demonstrate professionalism in all their interactions with customers. This includes providing accurate information on medications, making recommendations on health and wellness products, and offering consultations with our pharmacists.',
+  'We make it easy for customers to get the products and services they need through our online prescription refills, home delivery, pickup, and extended hours of operation.',
+  'Our goal is to provide exceptional customer service at all times. This includes handling customer complaints with professionalism and going above and beyond to ensure customer satisfaction.',
+];

@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import { links } from '../utils/constants';
+import { Popover, Classes, Button } from '@blueprintjs/core';
+import { useState } from 'react';
 
 const Navbar = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const handleClose = () => {
+    setOpen(!open);
+  };
   return (
     <div className="bg-gray-300 text-black px-5 md:px-8 lg:px-12 font-inter text-lg/5 ">
       <nav className="flex justify-between items-center h-16 md:h-20">
@@ -30,11 +36,25 @@ const Navbar = () => {
           Register / Login
         </Link>
         <div className="md:hidden">
-          <img
-            src="/svg/Hamburger_menu.svg"
-            alt="Hamburger"
-            className="h-[40px] w-[40px] object-cover"
-          />
+          <Popover
+            interactionKind="click"
+            minimal={false}
+            placement="bottom"
+            content={
+              <div className="text-black bg-gray-300">
+                <h5>Popover title</h5>
+                <p>...</p>
+                <Button className={Classes.POPOVER_DISMISS} text="Dismiss" />
+              </div>
+            }
+          >
+            <img
+              onClick={handleClose}
+              src={`/svg/Hamburger_menu.svg`}
+              alt={`Hamburger`}
+              className="h-[40px] w-[40px] object-cover"
+            />
+          </Popover>
         </div>
       </nav>
     </div>

@@ -9,6 +9,7 @@ import Testimonials from '../components/blocks/Testimonials';
 import Questionaire from '../components/blocks/Questionaire';
 import Footer from '../components/blocks/Footer';
 import PaddedWrapper from '../components/PaddedWrapper';
+import AboutUs from '../components/blocks/AboutUs';
 
 const HomeButtonsLinks: ILink[] = [
   { path: '/online-pharmacist', text: 'Talk to a pharmacist' },
@@ -59,6 +60,7 @@ const Home = () => {
         <EssentialServices />
         <TrendingProducts />
         <Testimonials />
+        <AboutUs />
         <Questionaire />
         <Footer />
       </PaddedWrapper>
