@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
 import { links } from '../utils/constants';
-import { Popover, Classes, Button } from '@blueprintjs/core';
-import { useState } from 'react';
+import { Popover } from '@blueprintjs/core';
 
 const Navbar = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const handleClose = () => {
-    setOpen(!open);
-  };
   return (
     <div className="bg-gray-300 text-black px-5 md:px-8 lg:px-12 font-inter text-lg/5 ">
       <nav className="flex justify-between items-center h-16 md:h-20">
@@ -38,23 +33,44 @@ const Navbar = () => {
         <div className="md:hidden">
           <Popover
             interactionKind="click"
-            minimal={false}
+            popoverClassName="pt-popover-content-sizing"
             placement="bottom"
+            hasBackdrop={true}
             content={
-              <div className="text-black bg-gray-300">
-                <h5>Popover title</h5>
-                <p>...</p>
-                <Button className={Classes.POPOVER_DISMISS} text="Dismiss" />
+              <div className="text-black bg-white flex flex-col">
+                {links.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="flex items-center bg-gray-300 text-sm px-5 py-4 hover:shadow-sm hover:bg-white"
+                  >
+                    <span>{link.text}</span>
+                  </Link>
+                ))}
               </div>
             }
-          >
-            <img
-              onClick={handleClose}
-              src={`/svg/Hamburger_menu.svg`}
-              alt={`Hamburger`}
-              className="h-[40px] w-[40px] object-cover"
-            />
-          </Popover>
+            renderTarget={({ isOpen, ...targetProps }) => (
+              <div>
+                {isOpen ? (
+                  <img
+                    onClick={() => !isOpen}
+                    src="/svg/Hamburger_close.svg"
+                    alt="Close"
+                    className="h-[40px] w-[40px] object-cover"
+                    {...targetProps}
+                  />
+                ) : (
+                  <img
+                    onClick={() => !isOpen}
+                    src={`/svg/Hamburger_menu.svg`}
+                    alt={`Hamburger`}
+                    className="h-[40px] w-[40px] object-cover"
+                    {...targetProps}
+                  />
+                )}
+              </div>
+            )}
+          />
         </div>
       </nav>
     </div>

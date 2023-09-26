@@ -42,6 +42,9 @@ export default {
       fontSize:{
         "midbase": ["18px", {
           lineHeight: "22px"
+        }],
+        "header": ['40px', {
+          lineHeight: "48px"
         }]
       }
     },

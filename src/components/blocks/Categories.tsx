@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { categoriesList } from '../../utils/constants';
 
 const Categories = () => {
@@ -11,9 +12,12 @@ const Categories = () => {
             className="object-cover h-full w-full"
           />
         </div>
-        <div className="p-1 sm:p-2 mb-1 rounded bg-yellow-500 hover:bg-yellow-200 hover:shadow-lg hover:cursor-pointer">
+        <Link
+          to={`/category/${i.id}`}
+          className="p-1 sm:p-2 mb-1 rounded bg-yellow-500 hover:bg-yellow-200 hover:shadow-lg hover:cursor-pointer"
+        >
           {i.name}
-        </div>
+        </Link>
       </div>
     );
   });

@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer } from 'react';
 import { faker } from '@faker-js/faker';
 import { IPharmContextProps, IProducts } from '../utils/interfaces';
 import { cartReducer, productReducer } from './reducer';
+import { categoriesList } from '../utils/constants';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PharmContext = createContext({} as any);
@@ -18,6 +19,7 @@ const Context = ({ children }: IPharmContextProps) => {
     ratings: faker.helpers.arrayElement([1, 2, 3, 4, 5]),
     description: faker.commerce.productDescription(),
     title: faker.commerce.productName(),
+    categoryId: faker.helpers.arrayElement(categoriesList).id,
   }));
 
   const [state, dispatch] = useReducer(cartReducer, {

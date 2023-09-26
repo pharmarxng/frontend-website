@@ -23,6 +23,7 @@ export interface IProducts {
   inStock?: number;
   fastDelivery?: boolean;
   ratings: number;
+  categoryId?: string;
   qty?: number;
 }
 
