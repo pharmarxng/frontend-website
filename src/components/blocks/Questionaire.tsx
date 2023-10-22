@@ -2,9 +2,9 @@ import { questionaireList } from '../../utils/constants';
 import SingleQuestionaire from '../SingleQuestionaire';
 
 const Questionaire = () => {
-  const questionaireContent = questionaireList.map((i) => {
+  const questionaireContent = questionaireList.map((i, index) => {
     return (
-      <div>
+      <div key={index}>
         <SingleQuestionaire questionaire={i} />
       </div>
     );

@@ -1,14 +1,20 @@
-import { PharmState } from '../context/context';
+import { useEffect } from 'react';
+import { ProductState } from '../context/productContext';
+import { getProductsApi } from '../api/products';
 
-interface ProductSearchBarProps {
-  searched?: (payload: string) => void;
-}
-
-const ProductSearchBar = ({ searched }: ProductSearchBarProps) => {
+const ProductSearchBar = () => {
+  // Todo make it that searching here takes us to product details page
   const {
     productState: { searchQuery },
     productDispatch,
-  } = PharmState();
+  } = ProductState();
+
+  useEffect(() => {
+    const fetchData = async (params?: Record<string, unknown>) => {
+      await getProductsApi(productDispatch, params);
+    };
+    fetchData({ search: searchQuery });
+  }, [productDispatch, searchQuery]);
 
   return (
     <div
@@ -26,11 +32,7 @@ const ProductSearchBar = ({ searched }: ProductSearchBarProps) => {
         className="w-[85%] border-none focus:outline-none"
       />
       <div>
-        <img
-          src="/svg/search_icon.svg"
-          alt="Search"
-          onClick={() => searched && searched(searchQuery)}
-        />
+        <img src="/svg/search_icon.svg" alt="Search" />
       </div>
     </div>
   );

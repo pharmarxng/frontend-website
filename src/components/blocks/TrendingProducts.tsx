@@ -1,24 +1,31 @@
-import { PharmState } from '../../context/context';
+import { useEffect } from 'react';
+import { ProductState } from '../../context/productContext';
 import { IProducts } from '../../utils/interfaces';
 import ProductCard from '../ProductCard';
+import { getTrendingProductsApi } from '../../api/products';
 
 const TrendingProducts = () => {
-  // fecth product list with useEffect
-
-  // Replace with trending products fetched
   const {
-    state: { products },
-  } = PharmState();
+    productDispatch,
+    productState: { trendingProducts },
+  } = ProductState();
 
-  const productsContent = products
-    .slice(0, 8)
-    .map((i: IProducts, index: number) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      await getTrendingProductsApi(productDispatch);
+    };
+    fetchData();
+  }, [productDispatch]);
+
+  const productsContent = trendingProducts.map(
+    (i: IProducts, index: number) => {
       return (
         <div key={index}>
           <ProductCard prod={i} />
         </div>
       );
-    });
+    }
+  );
 
   return (
     <div className="py-5 sm:py-12 text-black">

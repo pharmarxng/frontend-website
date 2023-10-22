@@ -10,6 +10,9 @@ import Questionaire from '../components/blocks/Questionaire';
 import Footer from '../components/blocks/Footer';
 import PaddedWrapper from '../components/PaddedWrapper';
 import AboutUs from '../components/blocks/AboutUs';
+import { useEffect } from 'react';
+import { getProductsApi } from '../api/products';
+import { ProductState } from '../context/productContext';
 
 const HomeButtonsLinks: ILink[] = [
   { path: '/online-pharmacist', text: 'Talk to a pharmacist' },
@@ -18,6 +21,15 @@ const HomeButtonsLinks: ILink[] = [
 ];
 
 const Home = () => {
+  const { productDispatch } = ProductState();
+
+  useEffect(() => {
+    const fetchData = async (params?: unknown) => {
+      await getProductsApi(productDispatch, params);
+    };
+    fetchData();
+  }, [productDispatch]);
+
   const homeButtonContent = HomeButtonsLinks.map((i, index) => {
     return (
       <Link

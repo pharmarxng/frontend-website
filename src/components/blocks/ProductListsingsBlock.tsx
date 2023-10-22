@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { PharmState } from '../../context/context';
-import { categoriesList } from '../../utils/constants';
+import { useEffect } from 'react';
+import { ProductState } from '../../context/productContext';
 import { IProducts } from '../../utils/interfaces';
 import ProductCard from '../ProductCard';
+import { Link } from 'react-router-dom';
+import { getProductsApi, getSingleCategorysApi } from '../../api/products';
+import Paginator from '../Paginator';
 
 interface ProductListsingsBlockProps {
   categoryId: string;
@@ -10,29 +12,32 @@ interface ProductListsingsBlockProps {
 
 const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
   const {
-    state: { products },
-  } = PharmState();
-  // const [pagination, setPagination] = useState({});
-  const [currentPage] = useState(1);
-  const [productsPerPage] = useState(3);
+    productDispatch,
+    productState: { category, products, pagination },
+  } = ProductState();
 
-  console.log({ products });
-  const category = categoriesList.find((i) => i.id === categoryId);
+  const fetchData = async (params?: Record<string, unknown>) => {
+    console.log('It is inside fetchData');
+    await getProductsApi(productDispatch, params);
+    console.log('It has run the api call');
+  };
 
-  const foundProducts = products.filter(
-    (i: IProducts) => i.categoryId === categoryId
-  );
+  useEffect(() => {
+    const fetchCategory = async (categoryId: string) => {
+      await getSingleCategorysApi(productDispatch, categoryId);
+    };
+    fetchCategory(categoryId);
+  }, [productDispatch, categoryId]);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = foundProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
-  const content = currentProducts.map((prod: IProducts) => {
-    return <ProductCard prod={prod} />;
+  const content = products.map((prod: IProducts) => {
+    return (
+      <Link key={prod.id} to={`/product/${prod.id}`}>
+        <ProductCard prod={prod} />
+      </Link>
+    );
   });
+
+  console.log({ pagination });
 
   return (
     <div className="text-black">
@@ -40,14 +45,21 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
         {category?.name}
       </div>
       <div className="sm:flex justify-between text-sm/4 sm:text-midbase">
-        <div>{`Showing 1 - 20 of 50 products`}</div>
+        <div>{`Showing 1 - 20 of ${pagination.totalDocs} products`}</div>
         <div>{`Sort by: Alphabetically, A-Z`}</div>
       </div>
-      {foundProducts ? (
+      {products ? (
         <div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 md:grid-cols-4 ">
             {content}
           </div>
+          <Paginator
+            pageLimit={pagination?.limit}
+            maxPages={pagination?.totalPages}
+            currentPage={pagination?.page}
+            getPageApi={fetchData}
+            // setLoading={setItemLoading}
+          />
         </div>
       ) : (
         <div>Loading...</div>

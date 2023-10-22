@@ -4,6 +4,8 @@ import {
   IProducts,
   ProductActionType,
   ProductStateType,
+  AlertActionType,
+  AlertStateType,
 } from '../utils/interfaces';
 
 export const cartReducer = (
@@ -43,15 +45,59 @@ export const productReducer = (
     //   return { ...state, byFastDelivery: !state.byFastDelivery };
     // case 'FILTER_BY_RATING':
     //   return { ...state, byRating: action.payload };
-    case 'FILTER_BY_SEARCH':
-      return { ...state, searchQuery: action.payload };
     case 'CLEAR_FILTERS':
       return {
+        ...state,
+        searchQuery: '',
         // byStock: false,
         // byFastDelivery: false,
         // byRating: 0,
-        searchQuery: '',
       };
+    case 'FILTER_BY_SEARCH':
+      return { ...state, searchQuery: action.payload };
+    case 'GET_PRODUCTS':
+      return {
+        ...state,
+        products: action.payload?.docs,
+        pagination: {
+          hasNextPage: action.payload?.hasNextPage,
+          hasPrevPage: action.payload?.hasPrevPage,
+          limit: action.payload?.limit,
+          nextPage: action.payload?.nextPage,
+          page: action.payload?.page,
+          pagingCounter: action.payload?.pagingCounter,
+          prevPage: action.payload?.prevPage,
+          totalDocs: action.payload?.totalDocs,
+          totalPages: action.payload?.totalPages,
+        },
+      };
+    case 'GET_SINGLE_PRODUCT':
+      return { ...state, product: action.payload };
+    case 'GET_CATEGORIES':
+      return { ...state, categories: action.payload };
+    case 'GET_SINGLE_CATEGORY':
+      return { ...state, category: action.payload };
+    case 'GET_TRENDING_PRODUCTS':
+      return { ...state, trendingProducts: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const alertReducer = (
+  state: AlertStateType,
+  action: AlertActionType
+): AlertStateType => {
+  switch (action.type) {
+    case 'ALERT_SUCCESS' || 'ALERT_ERROR' || 'ALERT_INFO' || 'ALERT_WARNING':
+      return {
+        ...state,
+        type: action.type,
+        message: action.payload,
+        show: true,
+      };
+    case 'ALERT_CLEAR':
+      return { ...state, type: action.type, show: false };
     default:
       return state;
   }

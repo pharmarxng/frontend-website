@@ -19,7 +19,7 @@ export default {
           100: '#2D547B',
         },
         secondary: {
-          100: 'ebebeb',
+          100: '#ebebeb',
           200: '#D9D9D9',
 
         },
