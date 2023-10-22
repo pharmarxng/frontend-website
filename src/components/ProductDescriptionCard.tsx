@@ -7,7 +7,7 @@ interface ProductDescriptionCardProps {
 }
 
 const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
-  const [noOfUnits, setNoOfUnits] = useState<number>(1);
+  const [noOfUnits] = useState<number>(1);
 
   return (
     <div>

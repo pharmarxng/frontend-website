@@ -9,7 +9,7 @@ const SearchBar = () => {
   } = ProductState();
 
   useEffect(() => {
-    const fetchData = async (params?: unknown) => {
+    const fetchData = async (params?: Record<string, unknown>) => {
       await getProductsApi(productDispatch, params);
     };
     fetchData({ search: searchQuery });
