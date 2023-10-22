@@ -66,7 +66,7 @@ export const getTrendingProductsApi = async (
 
 export const getCategoriesApi = async (
   dispatch: React.Dispatch<ProductActionType>,
-  params?: unknown
+  params?: Record<string, unknown>
 ) => {
   const url = categorySubUrl + '/get-all';
   try {
@@ -88,7 +88,7 @@ export const getCategoriesApi = async (
 export const getSingleCategorysApi = async (
   dispatch: React.Dispatch<ProductActionType>,
   categoryId: string,
-  params?: unknown
+  params?: Record<string, unknown>
 ) => {
   const url = `${categorySubUrl}/${categoryId}`;
   try {

@@ -13,7 +13,7 @@ const Categories = () => {
   } = ProductState();
 
   useEffect(() => {
-    const fetchData = async (params?: unknown) => {
+    const fetchData = async (params?: Record<string, unknown>) => {
       setIsLoading(true);
       await getCategoriesApi(productDispatch, params);
       setIsLoading(false);

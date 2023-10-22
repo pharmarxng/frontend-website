@@ -24,7 +24,7 @@ const Home = () => {
   const { productDispatch } = ProductState();
 
   useEffect(() => {
-    const fetchData = async (params?: unknown) => {
+    const fetchData = async (params?: Record<string, unknown>) => {
       await getProductsApi(productDispatch, params);
     };
     fetchData();
