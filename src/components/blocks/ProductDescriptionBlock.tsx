@@ -8,7 +8,7 @@ interface ProductDescriptionBlockProps {
 const ProductDescriptionBlock = ({ product }: ProductDescriptionBlockProps) => {
   return (
     <div>
-      <div>
+      <div className="sm:grid sm:grid-cols-2">
         <div>
           <img src={product.image} alt="product image" />
         </div>

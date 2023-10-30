@@ -8,6 +8,7 @@ const CartContext = createContext({} as any);
 const CartContextProvider = ({ children }: IContextProps) => {
   const [cartState, cartDispatch] = useReducer(cartReducer, {
     cart: [],
+    checkedItems: [],
   });
 
   return (

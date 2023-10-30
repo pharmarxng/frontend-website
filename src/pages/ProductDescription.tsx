@@ -1,4 +1,3 @@
-// import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductByIdApi } from '../api/products';
@@ -23,8 +22,6 @@ const ProductDescription = () => {
     };
     fetchData();
   }, [productDispatch, productId]);
-
-  console.log({ product });
 
   return (
     <div className="bg-white">

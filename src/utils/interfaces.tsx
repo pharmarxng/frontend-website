@@ -19,12 +19,14 @@ export interface IProducts {
   price: string;
   image: string;
   description: string;
-  inStock?: number;
+  inStock?: boolean;
   fastDelivery?: boolean;
   rating: number;
   categoryId?: string;
   qty?: number;
   reviews?: string[];
+  noOfUnitsAvailable: number;
+  noOfUnitsToPurchase?: number;
 }
 
 export interface ICategory {
@@ -48,18 +50,29 @@ type AddAction = {
 
 type RemoveAction = {
   type: 'REMOVE_FROM_CART';
-  payload: IProducts;
+  payload: string;
 };
 
-type ChangeQTYAction = {
-  type: 'CHANGE_CART_QTY';
-  payload: IProducts;
+type ToggleProductCheckAction = {
+  type: 'TOGGLE_PRODUCT_CHECK';
+  payload: string;
 };
 
-export type CartActionType = AddAction | RemoveAction | ChangeQTYAction;
+type ToggleCheckAllAction = {
+  type: 'TOGGLE_PRODUCT_CHECK_ALL';
+};
+
+export type CartActionType =
+  | AddAction
+  | RemoveAction
+  | IncreasePurchaseableUnitsAction
+  | ReducePurchaseableUnitsAction
+  | ToggleCheckAllAction
+  | ToggleProductCheckAction;
 
 export type CartStateType = {
   cart: IProducts[];
+  checkedItems: string[];
 };
 
 export type ProductStateType = {
@@ -70,9 +83,9 @@ export type ProductStateType = {
   pagination?: unknown;
   categories?: ICategory[];
   category?: ICategory;
+  sort?: string;
   // byStock: boolean;
   // byRating: number;
-  // sort?: string;
 };
 
 type GetProductsAction = {
@@ -107,6 +120,10 @@ type ClearFilterAction = {
   type: 'CLEAR_FILTERS';
 };
 
+type ClearSortAction = {
+  type: 'CLEAR_SORT';
+};
+
 type GetCategoriesAction = {
   type: 'GET_CATEGORIES';
   payload: ICategory[];
@@ -122,18 +139,36 @@ type GetTrendingProductsAction = {
   payload: IProducts[];
 };
 
+type SortAction = {
+  type: 'SORT_ALPHABETICALLY';
+  payload: string;
+};
+
+type ReducePurchaseableUnitsAction = {
+  type: 'REDUCE_PURCHASEABLE_UNIT';
+  payload: string;
+};
+
+type IncreasePurchaseableUnitsAction = {
+  type: 'INCREASE_PURCHASEABLE_UNIT';
+  payload: string;
+};
+
 export type ProductActionType =
-  // | SortAction
-  // | StockFilterAction
-  // | DeliveryFilterAction
-  // | RatingFilterAction
+  | SortAction
+  | ClearSortAction
   | ClearFilterAction
   | SearchFilterAction
   | GetProductsAction
   | GetSingleProductAction
   | GetCategoriesAction
   | GetSingleCategoryAction
-  | GetTrendingProductsAction;
+  | GetTrendingProductsAction
+  | IncreasePurchaseableUnitsAction
+  | ReducePurchaseableUnitsAction;
+// | StockFilterAction
+// | DeliveryFilterAction
+// | RatingFilterAction;
 
 type AlertSuccessType = {
   type: 'ALERT_SUCCESS';

@@ -12,6 +12,7 @@ const ProductContextProvider = ({ children }: IContextProps) => {
     pagination: {},
     searchQuery: '',
     categories: [],
+    sort: 'Alphabetically, A-Z',
   });
 
   return (

@@ -88,3 +88,8 @@ export const aboutUsContentList = [
   'We make it easy for customers to get the products and services they need through our online prescription refills, home delivery, pickup, and extended hours of operation.',
   'Our goal is to provide exceptional customer service at all times. This includes handling customer complaints with professionalism and going above and beyond to ensure customer satisfaction.',
 ];
+
+export const productListingDropdownOptions = [
+  'Alphabetically, A-Z',
+  'Alphabetically, Z-A',
+];

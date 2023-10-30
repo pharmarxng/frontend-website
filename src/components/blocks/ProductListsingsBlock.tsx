@@ -1,25 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductState } from '../../context/productContext';
 import { IProducts } from '../../utils/interfaces';
 import ProductCard from '../ProductCard';
 import { Link } from 'react-router-dom';
 import { getProductsApi, getSingleCategorysApi } from '../../api/products';
 import Paginator from '../Paginator';
+import FadeLoader from 'react-spinners/FadeLoader';
+import Dropdown from '../Dropdown';
+import { productListingDropdownOptions } from '../../utils/constants';
 
 interface ProductListsingsBlockProps {
   categoryId: string;
 }
 
 const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const {
     productDispatch,
-    productState: { category, products, pagination },
+    productState: { category, products, pagination, sort },
   } = ProductState();
 
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const fetchData = async (params?: Record<string, unknown>) => {
-    console.log('It is inside fetchData');
+    setLoading(true);
     await getProductsApi(productDispatch, params);
-    console.log('It has run the api call');
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -37,7 +46,16 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
     );
   });
 
-  console.log({ pagination });
+  const calculateStartIndex = () => {
+    return (pagination.page - 1) * pagination.limit + 1;
+  };
+
+  const calculateEndIndex = () => {
+    const endIndex = pagination.page * pagination.limit;
+    return endIndex > pagination.totalDocs ? pagination.totalDocs : endIndex;
+  };
+
+  //  Todo work on the dropdown
 
   return (
     <div className="text-black">
@@ -45,12 +63,31 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
         {category?.name}
       </div>
       <div className="sm:flex justify-between text-sm/4 sm:text-midbase">
-        <div>{`Showing 1 - 20 of ${pagination.totalDocs} products`}</div>
-        <div>{`Sort by: Alphabetically, A-Z`}</div>
-      </div>
-      {products ? (
         <div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 md:grid-cols-4 ">
+          {`Showing ${calculateStartIndex()} - ${calculateEndIndex()} of `}
+          <span className="font-bold">{`${pagination.totalDocs} products`}</span>
+        </div>
+        <div>
+          {`Sort by: `}
+          <Dropdown
+            options={productListingDropdownOptions}
+            selectedOption={sort}
+            onSelect={() => {}}
+          />
+        </div>
+      </div>
+      {loading ? (
+        <div className="flex justify-center mt-10">
+          <FadeLoader
+            color={'#2D547B'}
+            loading={loading}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      ) : (
+        <div>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
             {content}
           </div>
           <Paginator
@@ -58,11 +95,9 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
             maxPages={pagination?.totalPages}
             currentPage={pagination?.page}
             getPageApi={fetchData}
-            // setLoading={setItemLoading}
+            setLoading={setLoading}
           />
         </div>
-      ) : (
-        <div>Loading...</div>
       )}
     </div>
   );

@@ -15,7 +15,6 @@ export const getProductsApi = async (
       params,
     });
     const responseData = response.data.data;
-    console.log({ responseData });
 
     dispatch({
       type: 'GET_PRODUCTS',
