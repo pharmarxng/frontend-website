@@ -39,6 +39,11 @@ export const getProductByIdApi = async (
       type: 'GET_SINGLE_PRODUCT',
       payload: responseData,
     });
+
+    dispatch({
+      type: 'SET_RECENT_PRODUCTS',
+      payload: responseData,
+    });
   } catch (error) {
     console.log(error);
     // alertDispatch(alertActions.error(error.response?.data.message));

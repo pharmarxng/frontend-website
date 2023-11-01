@@ -54,15 +54,27 @@ export const questionaireList: IQuestionaire[] = [
 export const activitiesList = [
   {
     title: 'Plan a Visit',
-    values: ['In-person visit', 'Virtual Care Visit', 'Pharmacy location'],
+    values: [
+      { title: 'In-person visit', linkedTo: '/contact' },
+      { title: 'Virtual Care Visit', linkedTo: '/contact' },
+      { title: 'Pharmacy location', linkedTo: '/' },
+    ],
   },
   {
     title: 'Services',
-    values: ['Consultation', 'Shipping & Delivery', 'Order Pickup'],
+    values: [
+      { title: 'Consultation', linkedTo: '/online-pharmacist' },
+      { title: 'Shipping & Delivery', linkedTo: '/' },
+      { title: 'Order Pickup', linkedTo: '/' },
+    ],
   },
   {
     title: 'Learn About Us',
-    values: ['About Us', 'Help', 'Contact Us'],
+    values: [
+      { title: 'About Us', linkedTo: '/#about-us' },
+      { title: 'Help', linkedTo: '/help-and-support' },
+      { title: 'Contact Us', linkedTo: '/contact' },
+    ],
   },
 ];
 

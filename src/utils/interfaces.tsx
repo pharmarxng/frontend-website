@@ -16,7 +16,7 @@ export interface IOnlinePharmacyCardProps {
 export interface IProducts {
   id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
   description: string;
   inStock?: boolean;
@@ -84,6 +84,7 @@ export type ProductStateType = {
   categories?: ICategory[];
   category?: ICategory;
   sort?: string;
+  recentlyViewed: IProducts[];
   // byStock: boolean;
   // byRating: number;
 };
@@ -154,6 +155,11 @@ type IncreasePurchaseableUnitsAction = {
   payload: string;
 };
 
+type setRecentlyViewedProductsAction = {
+  type: 'SET_RECENT_PRODUCTS';
+  payload: IProducts;
+};
+
 export type ProductActionType =
   | SortAction
   | ClearSortAction
@@ -165,7 +171,8 @@ export type ProductActionType =
   | GetSingleCategoryAction
   | GetTrendingProductsAction
   | IncreasePurchaseableUnitsAction
-  | ReducePurchaseableUnitsAction;
+  | ReducePurchaseableUnitsAction
+  | setRecentlyViewedProductsAction;
 // | StockFilterAction
 // | DeliveryFilterAction
 // | RatingFilterAction;
