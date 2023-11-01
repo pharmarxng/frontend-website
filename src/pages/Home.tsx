@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import ProductSearchBar from '../components/ProductSearchBar';
 import { ILink } from '../utils/interfaces';
@@ -22,6 +22,16 @@ const HomeButtonsLinks: ILink[] = [
 
 const Home = () => {
   const { productDispatch } = ProductState();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     const fetchData = async (params?: Record<string, unknown>) => {
@@ -72,7 +82,9 @@ const Home = () => {
         <EssentialServices />
         <TrendingProducts />
         <Testimonials />
-        <AboutUs />
+        <div id="about-us">
+          <AboutUs />
+        </div>
         <Questionaire />
         <Footer />
       </PaddedWrapper>

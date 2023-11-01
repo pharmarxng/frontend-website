@@ -247,6 +247,23 @@ export const productReducer = (
         product: updatedProduct,
       };
     }
+    case 'SET_RECENT_PRODUCTS': {
+      const { recentlyViewed } = state;
+      const updatedArrayOfRecentItems = [...recentlyViewed];
+      const productIndex = updatedArrayOfRecentItems.findIndex(
+        (prod) => prod.id === action.payload.id
+      );
+      if (productIndex === -1) {
+        if (recentlyViewed.length === 4) {
+          updatedArrayOfRecentItems.shift();
+          updatedArrayOfRecentItems.push(action.payload);
+        } else if (recentlyViewed.length < 4) {
+          updatedArrayOfRecentItems.push(action.payload);
+        }
+      }
+
+      return { ...state, recentlyViewed: updatedArrayOfRecentItems };
+    }
     // case 'FILTER_BY_STOCK':
     //   return { ...state, byStock: !state.byStock };
     // case 'FILTER_BY_DELIVERY':X

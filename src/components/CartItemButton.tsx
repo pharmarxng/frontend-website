@@ -29,7 +29,7 @@ const CartItemButton = ({
   };
 
   return (
-    <div className="flex shadow-lg rounded-lg border border-greyBorder-100 px-1 py-4 space-x-2 md:px-3 md:py-5 md:space-x-4">
+    <div className="flex shadow-lg rounded-lg border border-greyBorder-100 px-2 py-4 space-x-5 sm:space-x-7 md:space-x-5 sm:px-5 md:px-3 md:py-5">
       <CartItemButtonWrapper
         onclick={handleReducePurchaseableUnit}
         disabled={!noOfPurchasebleUnits}
