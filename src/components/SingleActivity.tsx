@@ -1,11 +1,17 @@
+import { Link } from 'react-router-dom';
+
 interface SingleActivityProps {
   title: string;
-  values: string[];
+  values: { title: string; linkedTo: string }[];
 }
 
 const SingleActivity = ({ title, values }: SingleActivityProps) => {
   const content = values.map((i, index) => {
-    return <div key={index}>{i}</div>;
+    return (
+      <Link to={i.linkedTo} key={index}>
+        {i.title}
+      </Link>
+    );
   });
   return (
     <div className="text-base/5 ">

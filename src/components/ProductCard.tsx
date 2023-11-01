@@ -1,4 +1,5 @@
 import { IProducts } from '../utils/interfaces';
+import NairaWrapper from './NairaWrapper';
 import Rating from './Rating';
 
 interface ProductCardProps {
@@ -22,14 +23,9 @@ const ProductCard = ({ prod }: ProductCardProps) => {
         <Rating rating={prod.rating} onClick={() => {}} />
       </div>
       <div className="text-xs/4 sm:text-base/5 mb-5">{prod.description}</div>
-      <div className="flex text-xs/4 sm:text-midbase">
-        <img
-          src="/svg/naira.svg"
-          alt="naira logo"
-          className="w-5 h-5 sm:w-6 sm:h-6"
-        />
+      <NairaWrapper classDef="text-xs/4 sm:text-midbase">
         {prod.price.toLocaleString()}
-      </div>
+      </NairaWrapper>
     </div>
   );
 };

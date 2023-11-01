@@ -3,6 +3,7 @@ import PaddedWrapper from '../components/PaddedWrapper';
 import SearchBar from '../components/SearchBar';
 import CartBlock from '../components/blocks/CartBlock';
 import Footer from '../components/blocks/Footer';
+import RecentlyViewedProducts from '../components/blocks/RecentlyViewedProducts';
 
 const Cart = () => {
   return (
@@ -13,6 +14,7 @@ const Cart = () => {
           <SearchBar />
         </div>
         <CartBlock />
+        <RecentlyViewedProducts />
         <Footer />
       </PaddedWrapper>
     </div>
