@@ -17,10 +17,12 @@ export default {
       colors:{
         primary: {
           100: '#2D547B',
+          200: '#2B2B2B;',
         },
         secondary: {
           100: '#ebebeb',
           200: '#D9D9D9',
+          300: '#1A4570',
 
         },
         search:{
@@ -46,7 +48,8 @@ export default {
         "header": ['40px', {
           lineHeight: "48px"
         }]
-      }
+      },
+
     },
   },
   plugins: [],
