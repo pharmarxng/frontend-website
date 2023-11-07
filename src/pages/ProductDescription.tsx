@@ -1,4 +1,3 @@
-// import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductByIdApi } from '../api/products';
@@ -8,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import Footer from '../components/blocks/Footer';
 import ProductDescriptionBlock from '../components/blocks/ProductDescriptionBlock';
 import { ProductState } from '../context/productContext';
+import RecentlyViewedProducts from '../components/blocks/RecentlyViewedProducts';
 
 const ProductDescription = () => {
   const { productId } = useParams();
@@ -22,9 +22,8 @@ const ProductDescription = () => {
       await getProductByIdApi(productDispatch, productId!);
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productDispatch, productId]);
-
-  console.log({ product });
 
   return (
     <div className="bg-white">
@@ -34,7 +33,7 @@ const ProductDescription = () => {
           <SearchBar />
         </div>
         {product && <ProductDescriptionBlock product={product} />}
-
+        <RecentlyViewedProducts currentLyViewedProductId={productId} />
         <Footer />
       </PaddedWrapper>
     </div>

@@ -54,15 +54,27 @@ export const questionaireList: IQuestionaire[] = [
 export const activitiesList = [
   {
     title: 'Plan a Visit',
-    values: ['In-person visit', 'Virtual Care Visit', 'Pharmacy location'],
+    values: [
+      { title: 'In-person visit', linkedTo: '/contact' },
+      { title: 'Virtual Care Visit', linkedTo: '/contact' },
+      { title: 'Pharmacy location', linkedTo: '/' },
+    ],
   },
   {
     title: 'Services',
-    values: ['Consultation', 'Shipping & Delivery', 'Order Pickup'],
+    values: [
+      { title: 'Consultation', linkedTo: '/online-pharmacist' },
+      { title: 'Shipping & Delivery', linkedTo: '/' },
+      { title: 'Order Pickup', linkedTo: '/' },
+    ],
   },
   {
     title: 'Learn About Us',
-    values: ['About Us', 'Help', 'Contact Us'],
+    values: [
+      { title: 'About Us', linkedTo: '/#about-us' },
+      { title: 'Help', linkedTo: '/help-and-support' },
+      { title: 'Contact Us', linkedTo: '/contact' },
+    ],
   },
 ];
 
@@ -87,4 +99,9 @@ export const aboutUsContentList = [
   'We have experts that demonstrate professionalism in all their interactions with customers. This includes providing accurate information on medications, making recommendations on health and wellness products, and offering consultations with our pharmacists.',
   'We make it easy for customers to get the products and services they need through our online prescription refills, home delivery, pickup, and extended hours of operation.',
   'Our goal is to provide exceptional customer service at all times. This includes handling customer complaints with professionalism and going above and beyond to ensure customer satisfaction.',
+];
+
+export const productListingDropdownOptions = [
+  'Alphabetically, A-Z',
+  'Alphabetically, Z-A',
 ];

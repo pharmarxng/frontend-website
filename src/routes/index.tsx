@@ -4,8 +4,6 @@ import OnlinePharmacy from '../pages/OnlinePharmacy';
 import Shop from '../pages/Shop';
 import ProductListings from '../pages/ProductListings';
 import ProductDescription from '../pages/ProductDescription';
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
 
 const ManiRoutes = () => {
   return (
@@ -16,8 +14,6 @@ const ManiRoutes = () => {
         <Route path="/online-pharmacist" element={<OnlinePharmacy />} />
         <Route path="/category/:categoryId" element={<ProductListings />} />
         <Route path="/product/:productId" element={<ProductDescription />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/Signup" element={<Signup />} />
         {/* <Route path="*" element={<NotFoundError />} /> */}
       </Routes>
     </BrowserRouter>

@@ -15,7 +15,6 @@ export const getProductsApi = async (
       params,
     });
     const responseData = response.data.data;
-    console.log({ responseData });
 
     dispatch({
       type: 'GET_PRODUCTS',
@@ -38,6 +37,11 @@ export const getProductByIdApi = async (
 
     dispatch({
       type: 'GET_SINGLE_PRODUCT',
+      payload: responseData,
+    });
+
+    dispatch({
+      type: 'SET_RECENT_PRODUCTS',
       payload: responseData,
     });
   } catch (error) {

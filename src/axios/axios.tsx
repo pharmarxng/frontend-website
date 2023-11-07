@@ -3,7 +3,6 @@ import axios from 'axios';
 const baseURL = import.meta.env.VITE_REACT_APP_API_URL;
 
 const instance = axios.create({ baseURL });
-console.log({ baseURL });
 
 // instance.interceptors.request.use(
 //   (config) => {

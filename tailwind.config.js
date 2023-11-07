@@ -33,6 +33,9 @@ export default {
         },
         grey:{
           100: '#2b2b2b'
+        },
+        greyBorder:{
+          100: '#F0F0F0'
         }
       },
       fontFamily:{body: ['Nunito'],
