@@ -4,6 +4,13 @@ import OnlinePharmacy from '../pages/OnlinePharmacy';
 import Shop from '../pages/Shop';
 import ProductListings from '../pages/ProductListings';
 import ProductDescription from '../pages/ProductDescription';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
+import Otp from '../pages/Otp';
+import Reset from '../pages/Reset';
+import ConfirmPassword from '../pages/ConfirmPassword';
+
+
 
 const ManiRoutes = () => {
   return (
@@ -14,6 +21,11 @@ const ManiRoutes = () => {
         <Route path="/online-pharmacist" element={<OnlinePharmacy />} />
         <Route path="/category/:categoryId" element={<ProductListings />} />
         <Route path="/product/:productId" element={<ProductDescription />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
+        <Route path="/Otp" element={<Otp />} />
+        <Route path="/Reset" element={<Reset />} />
+        <Route path="/ComfirmPassword" element={<ConfirmPassword />} />
         {/* <Route path="*" element={<NotFoundError />} /> */}
       </Routes>
     </BrowserRouter>
