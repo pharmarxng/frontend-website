@@ -12,6 +12,7 @@ import ConfirmPassword from '../pages/ConfirmPassword';
 
 
 
+
 const ManiRoutes = () => {
   return (
     <BrowserRouter>
