@@ -5,7 +5,7 @@ import Label from '../components/Label';
 
 const Login = () => {
   return (
-    <div className="bg-white font-normal text-primary-200">
+    <div className="bg-white font-normal text-primary-200 h-full">
       <Navbar />
       <div className='flex items-center bg-white h-[330px] md:h-[477px] py-[30px] md:py-[88px]'>
         <div className="w-[343px] md:w-[666px] h-[270px] m-auto center">

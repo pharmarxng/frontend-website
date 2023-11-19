@@ -9,6 +9,7 @@ import Signup from '../pages/Signup';
 import Otp from '../pages/Otp';
 import Reset from '../pages/Reset';
 import ConfirmPassword from '../pages/ConfirmPassword';
+import HelpAndSupport from '../pages/HelpAndSupport';
 
 
 
@@ -27,6 +28,7 @@ const ManiRoutes = () => {
         <Route path="/Otp" element={<Otp />} />
         <Route path="/Reset" element={<Reset />} />
         <Route path="/ComfirmPassword" element={<ConfirmPassword />} />
+        <Route path="/help-and-support" element={<HelpAndSupport />} />
         {/* <Route path="*" element={<NotFoundError />} /> */}
       </Routes>
     </BrowserRouter>
