@@ -32,7 +32,7 @@ const EssentialServices = () => {
       <div className="text-xl/6 sm:text-3xl/10 mb-14">
         <div className="font-bold mb-5 sm:mb-14">Health where you are</div>
         <div className="text-base/5 font-medium">
-          Essential services at PharmRX
+          Essential services at PharmaRX
         </div>
       </div>
       <div className="border-gray-200 shadow-md py-7 ">

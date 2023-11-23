@@ -1,8 +1,30 @@
 import { Link } from 'react-router-dom';
 import { links } from '../utils/constants';
 import { Popover } from '@blueprintjs/core';
+import { openWhatsapp } from '../utils/whatsapp';
 
 const Navbar = () => {
+  const handleLinkRendering = (classDef: string) => {
+    return links.map((link) => {
+      if (link.path === '/prescription') {
+        return (
+          <div
+            key={link.path}
+            className={classDef}
+            onClick={() => openWhatsapp()}
+          >
+            {link.text}
+          </div>
+        );
+      }
+      return (
+        <Link key={link.path} to={link.path} className={classDef}>
+          <span>{link.text}</span>
+        </Link>
+      );
+    });
+  };
+
   return (
     <div className="bg-gray-300 text-black px-5 md:px-8 lg:px-12 font-inter text-lg/5 ">
       <nav className="flex justify-between items-center h-16 md:h-20">
@@ -18,11 +40,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="hidden md:flex space-x-4">
-          {links.map((link) => (
-            <Link key={link.path} to={link.path} className="flex items-center">
-              <span>{link.text}</span>
-            </Link>
-          ))}
+          {handleLinkRendering('flex items-center')}
         </div>
         <Link
           to="/login"
@@ -38,15 +56,9 @@ const Navbar = () => {
             hasBackdrop={true}
             content={
               <div className="text-black bg-white flex flex-col">
-                {links.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className="flex items-center bg-gray-300 text-sm px-5 py-4 hover:shadow-sm hover:bg-white"
-                  >
-                    <span>{link.text}</span>
-                  </Link>
-                ))}
+                {handleLinkRendering(
+                  'flex items-center bg-gray-300 text-sm px-5 py-4 hover:shadow-sm hover:bg-white'
+                )}
               </div>
             }
             renderTarget={({ isOpen, ...targetProps }) => (
