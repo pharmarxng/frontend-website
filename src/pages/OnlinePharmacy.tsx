@@ -10,7 +10,7 @@ const OnlinePharmacy = () => {
   return (
     <div className="bg-white">
       <Navbar />
-      <div className="mx-5 md:mx-0">
+     <div className="mx-5 md:mx-0">
         <OnlinePharmacyHeader />
       </div>
 
