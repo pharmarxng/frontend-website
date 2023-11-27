@@ -11,6 +11,8 @@ import Reset from '../pages/Reset';
 import ConfirmPassword from '../pages/ConfirmPassword';
 import HelpAndSupport from '../pages/HelpAndSupport';
 import { PATH } from '../utils/path-constant';
+import Cart from '../pages/Cart';
+import ShippingInfo from '../pages/DeliveryInfo';
 
 const ManiRoutes = () => {
   return (
@@ -18,6 +20,8 @@ const ManiRoutes = () => {
       <Routes>
         <Route path={PATH.HOME} element={<Home />} />
         <Route path={PATH.SHOP} element={<Shop />} />
+        <Route path={PATH.CART} element={<Cart />} />
+        <Route path={PATH.DELIVERY_INFO} element={<ShippingInfo />} />
         <Route path={PATH.ONLINE_PHARMACIST} element={<OnlinePharmacy />} />
         <Route
           path={`${PATH.CATEGORY}/:categoryId`}
