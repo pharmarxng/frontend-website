@@ -9,6 +9,7 @@ interface InputProps {
   classDef?: string;
   id?: string;
   onBlur?: FocusEventHandler<HTMLInputElement> | undefined;
+  error?: string | boolean;
 }
 
 const Input = ({
@@ -20,6 +21,7 @@ const Input = ({
   changed,
   id,
   onBlur,
+  error,
 }: InputProps) => {
   return (
     <div>
@@ -33,6 +35,7 @@ const Input = ({
         placeholder={placeholder ? placeholder : undefined}
         className={`border-gray-200 border rounded-lg pl-4 py-3 w-full ${classDef}`}
       />
+      <span className="text-red-700 text-xs lg:text-sm">{error}</span>
     </div>
   );
 };

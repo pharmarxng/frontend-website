@@ -68,7 +68,7 @@ const Home = () => {
             </div>
             <div className="flex">
               <img
-                src="/svg/Home_Image.svg"
+                src="/svg/Home_Image1.svg"
                 alt="Home"
                 className="object-cover w-full h-64 md:h-auto"
               />
