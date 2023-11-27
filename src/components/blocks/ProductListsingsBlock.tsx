@@ -8,12 +8,17 @@ import Paginator from '../Paginator';
 import FadeLoader from 'react-spinners/FadeLoader';
 import Dropdown from '../Dropdown';
 import { productListingDropdownOptions } from '../../utils/constants';
+// import { PATH } from '../../utils/path-constant';
 
 interface ProductListsingsBlockProps {
-  categoryId: string;
+  categoryId?: string;
+  searchQuery?: string;
 }
 
-const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
+const ProductListsingsBlock = ({
+  categoryId,
+  searchQuery,
+}: ProductListsingsBlockProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const {
     productDispatch,
@@ -21,7 +26,7 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
   } = ProductState();
 
   useEffect(() => {
-    fetchData();
+    fetchData({ search: searchQuery ? searchQuery : null });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -35,7 +40,7 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
     const fetchCategory = async (categoryId: string) => {
       await getSingleCategorysApi(productDispatch, categoryId);
     };
-    fetchCategory(categoryId);
+    fetchCategory(categoryId!);
   }, [productDispatch, categoryId]);
 
   const content = products.map((prod: IProducts) => {
@@ -59,9 +64,11 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
 
   return (
     <div className="text-black">
-      <div className="text-2xl/7 sm:text-4xl md:text-header">
-        {category?.name}
-      </div>
+      {categoryId && (
+        <div className="text-2xl/7 sm:text-4xl md:text-header">
+          {category?.name}
+        </div>
+      )}
       <div className="sm:flex justify-between text-sm/4 sm:text-midbase">
         <div>
           {`Showing ${calculateStartIndex()} - ${calculateEndIndex()} of `}
@@ -104,19 +111,3 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
 };
 
 export default ProductListsingsBlock;
-
-// <div>
-// <Paginator
-//   currentPage={currentPage}
-//   pageLimit={productsPerPage}
-//   maxPages={Math.ceil(foundProducts.length / productsPerPage)}
-//   getPageApi={(obj) => {
-//     // Handle the API call to get the data for the new page here
-//     // Update the state accordingly
-//     // Example: fetchItem(obj).then((data) => { /* Update state */ });
-//   }}
-//   setLoading={(v) => {
-//     // Update the loading state in your component
-//   }}
-// />
-// </div>

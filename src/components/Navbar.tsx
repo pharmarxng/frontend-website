@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import { links } from '../utils/constants';
 import { Popover } from '@blueprintjs/core';
-import { openWhatsapp } from '../utils/whatsapp';
+import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
 
 const Navbar = () => {
   const handleLinkRendering = (classDef: string) => {
     return links.map((link) => {
-      if (link.path === '/prescription') {
+      if (link.path === '/prescription' || link.path === '/contact') {
         return (
           <div
             key={link.path}
             className={classDef}
-            onClick={() => openWhatsapp()}
+            onClick={() => openWhatsapp(navbarMessages(link.path))}
           >
             {link.text}
           </div>
@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-300 text-black px-5 md:px-8 lg:px-12 font-inter text-lg/5 ">
+    <div className="bg-secondary-200 text-black px-5 md:px-8 lg:px-12 font-inter text-lg/5 ">
       <nav className="flex justify-between items-center h-16 md:h-20">
         <div className="flex items-center hover:border-transparent hover:shadow-sm">
           <Link to="/">
@@ -57,7 +57,7 @@ const Navbar = () => {
             content={
               <div className="text-black bg-white flex flex-col">
                 {handleLinkRendering(
-                  'flex items-center bg-gray-300 text-sm px-5 py-4 hover:shadow-sm hover:bg-white'
+                  'flex items-center bg-white text-sm px-5 py-4 hover:shadow-sm hover:bg-gray-300'
                 )}
               </div>
             }
@@ -68,7 +68,7 @@ const Navbar = () => {
                     onClick={() => !isOpen}
                     src="/svg/Hamburger_close.svg"
                     alt="Close"
-                    className="h-[40px] w-[40px] object-cover"
+                    className="h-[40px] w-[40px] object-cover "
                     {...targetProps}
                   />
                 ) : (
@@ -76,7 +76,7 @@ const Navbar = () => {
                     onClick={() => !isOpen}
                     src={`/svg/Hamburger_menu.svg`}
                     alt={`Hamburger`}
-                    className="h-[40px] w-[40px] object-cover"
+                    className="h-[40px] w-[40px] object-cover "
                     {...targetProps}
                   />
                 )}
