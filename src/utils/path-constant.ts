@@ -13,4 +13,6 @@ export const PATH = {
   CATEGORY: '/category',
   PRODUCT: '/product',
   SEARCH: '/search',
+  CART: '/cart',
+  DELIVERY_INFO: '/delivery-info',
 };
