@@ -1,14 +1,14 @@
 import Navbar from '../components/Navbar';
 import PaddedWrapper from '../components/PaddedWrapper';
+import DeliveryForm from '../components/blocks/Payment';
 import Footer from '../components/blocks/Footer';
-import ShippingForm from '../components/blocks/ShippingForm';
 
 const DeliveryInfo = () => {
   return (
     <div className="bg-white">
       <Navbar />
       <PaddedWrapper>
-        <ShippingForm />
+        <DeliveryForm />
         <Footer />
       </PaddedWrapper>
     </div>
