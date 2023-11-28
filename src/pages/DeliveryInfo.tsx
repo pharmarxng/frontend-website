@@ -5,7 +5,7 @@ import Footer from '../components/blocks/Footer';
 
 const DeliveryInfo = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
         <DeliveryForm />

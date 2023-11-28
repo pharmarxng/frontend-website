@@ -12,11 +12,8 @@ export const links: ILink[] = [
 ];
 
 export const authLinks: ILink[] = [
-  { path: PATH.LOGIN, text: `Login` },
-  { path: PATH.SIGNUP, text: `Signup` },
-  { path: PATH.OTP, text: `OTP` },
-  { path: PATH.RESET_PASSWORD, text: `Reset Password` },
-  { path: PATH.CONFIRM_PASSWORD, text: `Confirm Password` },
+  { path: PATH.LOGIN, text: `Login`, icon: 'auth_logo' },
+  { path: PATH.CART, text: `Cart`, icon: 'cart_logo' },
 ];
 
 export const essentialServiceLinks: (ILink & { img: string })[] = [

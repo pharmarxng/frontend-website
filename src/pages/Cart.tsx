@@ -7,7 +7,7 @@ import RecentlyViewedProducts from '../components/blocks/RecentlyViewedProducts'
 
 const Cart = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
         <div className="flex justify-center my-7">

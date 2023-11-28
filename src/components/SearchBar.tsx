@@ -1,37 +1,45 @@
-import { useEffect } from 'react';
-import { getProductsApi } from '../api/products';
+import { FormEvent, useState } from 'react';
 import { ProductState } from '../context/productContext';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '../utils/path-constant';
 
 const SearchBar = () => {
-  const {
-    productState: { searchQuery },
-    productDispatch,
-  } = ProductState();
+  const { productDispatch } = ProductState();
+  const [query, setQuery] = useState<string>('');
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async (params?: Record<string, unknown>) => {
-      await getProductsApi(productDispatch, params);
-    };
-    fetchData({ search: searchQuery });
-  }, [productDispatch, searchQuery]);
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    searchProducts();
+  };
+
+  const handleSearchSubmit = () => {
+    searchProducts();
+  };
+
+  const searchProducts = () => {
+    productDispatch({
+      type: 'FILTER_BY_SEARCH',
+      payload: query,
+    });
+    if (query.length > 0) navigate(`${PATH.SEARCH}/${query}`);
+  };
 
   return (
-    <div className="text-black border-grey-200 border flex w-full sm:w-[65%]">
-      <div>
+    <form
+      className="text-black border-grey-200 border flex w-full sm:w-[65%]"
+      onSubmit={handleFormSubmit}
+    >
+      <div onClick={handleSearchSubmit}>
         <img src="/svg/search_icon.svg" alt="Search" />
       </div>
       <input
         placeholder="Search Products"
-        value={searchQuery}
-        onChange={(e) =>
-          productDispatch({
-            type: 'FILTER_BY_SEARCH',
-            payload: e.target.value,
-          })
-        }
-        className="focus:outline-none text-base/5 sm:text-midbase"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="focus:outline-none text-base/5 sm:text-midbase dark:bg-white "
       />
-    </div>
+    </form>
   );
 };
 
