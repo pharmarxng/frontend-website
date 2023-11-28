@@ -1,6 +1,7 @@
 export interface ILink {
   path: string;
   text: string;
+  icon?: string;
 }
 
 export interface IContextProps {

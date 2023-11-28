@@ -9,20 +9,27 @@ const ProductSearchBar = () => {
   const [query, setQuery] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    searchProducts();
+  };
+
+  const handleSearchSubmit = () => {
+    searchProducts();
+  };
+
+  const searchProducts = () => {
     productDispatch({
       type: 'FILTER_BY_SEARCH',
       payload: query,
     });
-
-    navigate(`${PATH.SEARCH}/${query}`);
+    if (query.length > 0) navigate(`${PATH.SEARCH}/${query}`);
   };
 
   return (
     <form
       className={`flex justify-between bg-white text-black w-full md:w-80 px-4 border-solid border-2`}
-      onSubmit={handleSearchSubmit}
+      onSubmit={handleFormSubmit}
     >
       <input
         placeholder="Search for products"
@@ -30,7 +37,7 @@ const ProductSearchBar = () => {
         onChange={(e) => setQuery(e.target.value)}
         className="w-[85%] border-none focus:outline-none"
       />
-      <div>
+      <div onClick={handleSearchSubmit}>
         <img src="/svg/search_icon.svg" alt="Search" />
       </div>
     </form>

@@ -20,15 +20,20 @@ const ProductListsingsBlock = ({
   searchQuery,
 }: ProductListsingsBlockProps) => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [order, setOrder] = useState<string>(productListingDropdownOptions[0]);
+
   const {
     productDispatch,
-    productState: { category, products, pagination, sort },
+    productState: { category, products, pagination },
   } = ProductState();
 
   useEffect(() => {
-    fetchData({ search: searchQuery ? searchQuery : null });
+    fetchData({
+      search: searchQuery ? searchQuery : null,
+      sort: getSortParam(),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchQuery, order]);
 
   const fetchData = async (params?: Record<string, unknown>) => {
     setLoading(true);
@@ -60,16 +65,27 @@ const ProductListsingsBlock = ({
     return endIndex > pagination.totalDocs ? pagination.totalDocs : endIndex;
   };
 
-  //  Todo work on the dropdown
+  const handleOrderChange = (selectedOrder: string) => {
+    setOrder(selectedOrder);
+  };
+
+  const getSortParam = () => {
+    return order === productListingDropdownOptions[0] ? 'name,1' : 'name,-1';
+  };
 
   return (
     <div className="text-black">
       {categoryId && (
-        <div className="text-2xl/7 sm:text-4xl md:text-header">
+        <div className="text-2xl/7 sm:text-4xl md:text-header text-deepBlue-100 mb-5 md:mb-8">
           {category?.name}
         </div>
       )}
-      <div className="sm:flex justify-between text-sm/4 sm:text-midbase">
+      {category?.description && (
+        <div className="text-sm/4 sm:text-midbase mb-5 md:mb-8">
+          {category?.description}
+        </div>
+      )}
+      <div className="sm:flex justify-between text-sm/4 sm:text-midbase mb-5 md:mb-8 space-y-4 sm:space-y-0">
         <div>
           {`Showing ${calculateStartIndex()} - ${calculateEndIndex()} of `}
           <span className="font-bold">{`${pagination.totalDocs} products`}</span>
@@ -78,8 +94,8 @@ const ProductListsingsBlock = ({
           {`Sort by: `}
           <Dropdown
             options={productListingDropdownOptions}
-            selectedOption={sort}
-            onSelect={() => {}}
+            selectedValue={order}
+            onChange={handleOrderChange}
           />
         </div>
       </div>
@@ -94,9 +110,15 @@ const ProductListsingsBlock = ({
         </div>
       ) : (
         <div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
-            {content}
-          </div>
+          {products.length ? (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
+              {content}
+            </div>
+          ) : (
+            <div className="text-sm/4 sm:text-midbase flex justify-center">
+              No products found
+            </div>
+          )}
           <Paginator
             pageLimit={pagination?.limit}
             maxPages={pagination?.totalPages}

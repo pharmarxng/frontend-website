@@ -5,7 +5,7 @@ import ShippingForm from '../components/blocks/ShippingForm';
 
 const DeliveryInfo = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
         <ShippingForm />
