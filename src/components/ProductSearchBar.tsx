@@ -35,7 +35,7 @@ const ProductSearchBar = () => {
         placeholder="Search for products"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-[85%] border-none focus:outline-none"
+        className="w-[85%] border-none focus:outline-none dark:bg-white "
       />
       <div onClick={handleSearchSubmit}>
         <img src="/svg/search_icon.svg" alt="Search" />
