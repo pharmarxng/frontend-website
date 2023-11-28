@@ -17,10 +17,12 @@ export default {
       colors:{
         primary: {
           100: '#2D547B',
+          200: '#2B2B2B;',
         },
         secondary: {
           100: '#ebebeb',
           200: '#D9D9D9',
+          300: '#1A4570',
 
         },
         search:{
@@ -33,7 +35,8 @@ export default {
           100: '#2b2b2b'
         },
         greyBorder:{
-          100: '#F0F0F0'
+          100: '#F0F0F0',
+          200: '#DADADA'
         }
       },
       fontFamily:{body: ['Nunito'],
@@ -49,7 +52,8 @@ export default {
         "header": ['40px', {
           lineHeight: "48px"
         }]
-      }
+      },
+
     },
   },
   plugins: [],

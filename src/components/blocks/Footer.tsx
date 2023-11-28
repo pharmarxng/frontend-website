@@ -4,7 +4,6 @@ import Socials from '../Socials';
 const Footer = () => {
   return (
     <div className="py-5 sm:py-12">
-      // This is for mobile
       <div className="sm:hidden">
         <Activities />
         <div className="flex justify-center">
@@ -14,7 +13,7 @@ const Footer = () => {
           <img src="/svg/pharmLogo.svg" alt="Logo" />
         </div>
       </div>
-      // This is for desktop
+
       <div className="hidden sm:block">
         <div className="flex justify-between">
           <div>

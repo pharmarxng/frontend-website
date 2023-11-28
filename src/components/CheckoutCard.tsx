@@ -1,13 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import { CartState } from '../context/cartContext';
 import { IProducts } from '../utils/interfaces';
 import BorderedWrappper from './BorderedWrappper';
 import Button from './Button';
 import NairaWrapper from './NairaWrapper';
+import { PATH } from '../utils/path-constant';
 
 const CheckoutCard = () => {
   const {
     cartState: { cart, checkedItems },
   } = CartState();
+  const navigate = useNavigate();
+
+  const handleCheckoutClick = () => {
+    navigate(`${PATH.DELIVERY_INFO}`);
+  };
 
   const calculateSubTotal = () => {
     let subTotal = 0;
@@ -38,6 +45,7 @@ const CheckoutCard = () => {
         </div>
       </div>
       <Button
+        onclick={handleCheckoutClick}
         disabled={grandTotal <= 0}
         buttonStyle="bg-deepBlue-100 text-white"
       >

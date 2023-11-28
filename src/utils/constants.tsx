@@ -1,13 +1,19 @@
 import { faker } from '@faker-js/faker';
 import { ILink, IQuestionaire } from './interfaces';
+import { PATH } from './path-constant';
 
 export const links: ILink[] = [
-  { path: '/', text: 'Home' },
-  { path: '/shop', text: 'Shop' },
-  { path: '/prescription', text: 'Prescription' },
-  { path: '/online-pharmacist', text: 'Online Pharmacist' },
-  { path: '/help-and-support', text: 'Help & Support' },
-  { path: '/contact', text: 'Contact Us' },
+  { path: PATH.HOME, text: 'Home' },
+  { path: PATH.SHOP, text: 'Shop' },
+  { path: PATH.PRESCRIPTION, text: 'Prescription' },
+  { path: PATH.ONLINE_PHARMACIST, text: 'Online Pharmacist' },
+  { path: PATH.HELP_AND_SUPPORT, text: 'Help & Support' },
+  { path: PATH.CONTACT, text: 'Contact Us' },
+];
+
+export const authLinks: ILink[] = [
+  { path: PATH.LOGIN, text: `Login`, icon: 'auth_logo' },
+  { path: PATH.CART, text: `Cart`, icon: 'cart_logo' },
 ];
 
 export const essentialServiceLinks: (ILink & { img: string })[] = [

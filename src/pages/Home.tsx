@@ -52,7 +52,7 @@ const Home = () => {
     );
   });
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
         <div className="flex justify-center md:hidden mx-7 my-5">
@@ -68,7 +68,7 @@ const Home = () => {
             </div>
             <div className="flex">
               <img
-                src="/svg/Home_Image.svg"
+                src="/svg/Home_Image1.svg"
                 alt="Home"
                 className="object-cover w-full h-64 md:h-auto"
               />

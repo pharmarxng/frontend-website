@@ -6,16 +6,19 @@ import ProductListsingsBlock from '../components/blocks/ProductListsingsBlock';
 import Footer from '../components/blocks/Footer';
 
 const ProductListings = () => {
-  const { categoryId } = useParams();
+  const { categoryId, searchQuery } = useParams();
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
         <div className="flex justify-center my-7">
           <SearchBar />
         </div>
-        <ProductListsingsBlock categoryId={categoryId!} />
+        <ProductListsingsBlock
+          categoryId={categoryId}
+          searchQuery={searchQuery}
+        />
         <Footer />
       </PaddedWrapper>
     </div>

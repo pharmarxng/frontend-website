@@ -8,22 +8,32 @@ import Paginator from '../Paginator';
 import FadeLoader from 'react-spinners/FadeLoader';
 import Dropdown from '../Dropdown';
 import { productListingDropdownOptions } from '../../utils/constants';
+// import { PATH } from '../../utils/path-constant';
 
 interface ProductListsingsBlockProps {
-  categoryId: string;
+  categoryId?: string;
+  searchQuery?: string;
 }
 
-const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
+const ProductListsingsBlock = ({
+  categoryId,
+  searchQuery,
+}: ProductListsingsBlockProps) => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [order, setOrder] = useState<string>(productListingDropdownOptions[0]);
+
   const {
     productDispatch,
-    productState: { category, products, pagination, sort },
+    productState: { category, products, pagination },
   } = ProductState();
 
   useEffect(() => {
-    fetchData();
+    fetchData({
+      search: searchQuery ? searchQuery : null,
+      sort: getSortParam(),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchQuery, order]);
 
   const fetchData = async (params?: Record<string, unknown>) => {
     setLoading(true);
@@ -35,7 +45,7 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
     const fetchCategory = async (categoryId: string) => {
       await getSingleCategorysApi(productDispatch, categoryId);
     };
-    fetchCategory(categoryId);
+    fetchCategory(categoryId!);
   }, [productDispatch, categoryId]);
 
   const content = products.map((prod: IProducts) => {
@@ -55,14 +65,27 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
     return endIndex > pagination.totalDocs ? pagination.totalDocs : endIndex;
   };
 
-  //  Todo work on the dropdown
+  const handleOrderChange = (selectedOrder: string) => {
+    setOrder(selectedOrder);
+  };
+
+  const getSortParam = () => {
+    return order === productListingDropdownOptions[0] ? 'name,1' : 'name,-1';
+  };
 
   return (
     <div className="text-black">
-      <div className="text-2xl/7 sm:text-4xl md:text-header">
-        {category?.name}
-      </div>
-      <div className="sm:flex justify-between text-sm/4 sm:text-midbase">
+      {categoryId && (
+        <div className="text-2xl/7 sm:text-4xl md:text-header text-deepBlue-100 mb-5 md:mb-8">
+          {category?.name}
+        </div>
+      )}
+      {category?.description && (
+        <div className="text-sm/4 sm:text-midbase mb-5 md:mb-8">
+          {category?.description}
+        </div>
+      )}
+      <div className="sm:flex justify-between text-sm/4 sm:text-midbase mb-5 md:mb-8 space-y-4 sm:space-y-0">
         <div>
           {`Showing ${calculateStartIndex()} - ${calculateEndIndex()} of `}
           <span className="font-bold">{`${pagination.totalDocs} products`}</span>
@@ -71,8 +94,8 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
           {`Sort by: `}
           <Dropdown
             options={productListingDropdownOptions}
-            selectedOption={sort}
-            onSelect={() => {}}
+            selectedValue={order}
+            onChange={handleOrderChange}
           />
         </div>
       </div>
@@ -87,9 +110,15 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
         </div>
       ) : (
         <div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
-            {content}
-          </div>
+          {products.length ? (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
+              {content}
+            </div>
+          ) : (
+            <div className="text-sm/4 sm:text-midbase flex justify-center">
+              No products found
+            </div>
+          )}
           <Paginator
             pageLimit={pagination?.limit}
             maxPages={pagination?.totalPages}
@@ -104,19 +133,3 @@ const ProductListsingsBlock = ({ categoryId }: ProductListsingsBlockProps) => {
 };
 
 export default ProductListsingsBlock;
-
-// <div>
-// <Paginator
-//   currentPage={currentPage}
-//   pageLimit={productsPerPage}
-//   maxPages={Math.ceil(foundProducts.length / productsPerPage)}
-//   getPageApi={(obj) => {
-//     // Handle the API call to get the data for the new page here
-//     // Update the state accordingly
-//     // Example: fetchItem(obj).then((data) => { /* Update state */ });
-//   }}
-//   setLoading={(v) => {
-//     // Update the loading state in your component
-//   }}
-// />
-// </div>
