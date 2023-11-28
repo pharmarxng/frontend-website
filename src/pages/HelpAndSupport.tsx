@@ -65,7 +65,7 @@ const HelpAndSupport = () => {
   };
 
   return (
-    <div className="bg-white text-black">
+    <div className="bg-white min-h-screen text-black">
       <Navbar />
       <PaddedWrapper>
         <div className="pt-7 flex justify-center">

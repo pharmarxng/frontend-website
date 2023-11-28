@@ -9,7 +9,7 @@ const ProductListings = () => {
   const { categoryId, searchQuery } = useParams();
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
         <div className="flex justify-center my-7">

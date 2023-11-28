@@ -52,7 +52,7 @@ const Home = () => {
     );
   });
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
         <div className="flex justify-center md:hidden mx-7 my-5">

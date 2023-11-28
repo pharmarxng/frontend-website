@@ -8,7 +8,7 @@ import Testimonials from '../components/blocks/Testimonials';
 
 const OnlinePharmacy = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <div className="mx-5 md:mx-0">
         <OnlinePharmacyHeader />
