@@ -13,6 +13,7 @@ import AboutUs from '../components/blocks/AboutUs';
 import { useEffect } from 'react';
 import { getProductsApi } from '../api/products';
 import { ProductState } from '../context/productContext';
+import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
 
 const HomeButtonsLinks: ILink[] = [
   { path: '/online-pharmacist', text: 'Talk to a pharmacist' },
@@ -41,6 +42,17 @@ const Home = () => {
   }, [productDispatch]);
 
   const homeButtonContent = HomeButtonsLinks.map((i, index) => {
+    if (i.path === '/prescription' || i.path === '/contact') {
+      return (
+        <div
+          key={index}
+          onClick={() => openWhatsapp(navbarMessages(i.path))}
+          className="text-black rounded py-3 px-4 md:py-5 md:px-12 bg-gray-300 text-xs/5 md:text-2xl/7 my-1 md:my-4 hover:shadow-2xl hover:bg-gray-100 hover:cursor-pointer"
+        >
+          {i.text}
+        </div>
+      );
+    }
     return (
       <Link
         key={index}

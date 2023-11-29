@@ -1,8 +1,33 @@
 import { Link } from 'react-router-dom';
 import { essentialServiceLinks } from '../../utils/constants';
+import { navbarMessages, openWhatsapp } from '../../utils/whatsapp';
 
 const EssentialServices = () => {
   const essentialServicesContent = essentialServiceLinks.map((i, index) => {
+    if (i.path === '/prescription' || i.path === '/contact') {
+      return (
+        <div
+          id="found"
+          key={index}
+          onClick={() => openWhatsapp(navbarMessages(i.path))}
+          className={`text-black text-xs/5 xs:text-sm/5 sm:text-base/5 md:text-xl/6 flex flex-col items-center ${
+            index === 3 ? 'md:border-r-0 md:border-b-0' : 'border-r border-b'
+          } ${index === 1 ? 'border-r-0 sm:border-r' : ''} ${
+            index === 2 ? 'border-b-0' : ''
+          } sm:border-b-0  sm:w-full`}
+        >
+          <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 flex justify-center items-center mt-7 mb-7">
+            <img
+              src={`/svg/${i.img}.svg`}
+              alt={i.img}
+              className="object-cover h-full w-full"
+            />
+          </div>
+          <div className="whitespace-nowrap mb-7">{i.text}</div>
+        </div>
+      );
+    }
+
     return (
       <div
         id="found"

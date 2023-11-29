@@ -3,6 +3,8 @@ import { OrderState } from '../../context/orderContext';
 import { IProducts } from '../../utils/interfaces';
 import FormButton from '../FormButton';
 import axios from '../../axios/axios';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '../../utils/path-constant';
 
 const PickupDetailsBlock = () => {
   const {
@@ -12,6 +14,7 @@ const PickupDetailsBlock = () => {
   const {
     cartState: { cart, checkedItems },
   } = CartState();
+  const navigate = useNavigate();
 
   const disableButton = () => {
     return email?.length <= 0;
@@ -34,6 +37,7 @@ const PickupDetailsBlock = () => {
       .post('/api/v1/order/create-order', body)
       .then((response) => {
         console.log({ response });
+        navigate(`${PATH.ORDER_SUCCESS}`);
         return response.data.data;
       })
       .catch((e) => {

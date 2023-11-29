@@ -15,6 +15,7 @@ import Cart from '../pages/Cart';
 import DeliveryInfo from '../pages/DeliveryInfo';
 import ShippingInfo from '../pages/ShippingInfo';
 import { useEffect } from 'react';
+import OrderSuccess from '../pages/OrderSuccess';
 
 const ManiRoutes = () => {
   const ScrollToTop = () => {
@@ -33,6 +34,7 @@ const ManiRoutes = () => {
         <Route path={PATH.HOME} element={<Home />} />
         <Route path={PATH.SHOP} element={<Shop />} />
         <Route path={PATH.CART} element={<Cart />} />
+        <Route path={PATH.ORDER_SUCCESS} element={<OrderSuccess />} />
         <Route path={PATH.DELIVERY_INFO} element={<DeliveryInfo />} />
         <Route path={PATH.SHIPPING_INFO} element={<ShippingInfo />} />
         <Route path={PATH.ONLINE_PHARMACIST} element={<OnlinePharmacy />} />

@@ -8,6 +8,8 @@ import { getStandardDeliveryFeesApi } from '../../api/products';
 import { IProducts, IShipping } from '../../utils/interfaces';
 import { FadeLoader } from 'react-spinners';
 import axios from '../../axios/axios';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '../../utils/path-constant';
 
 const ShippingForm = () => {
   const {
@@ -22,6 +24,7 @@ const ShippingForm = () => {
     },
     orderDispatch,
   } = OrderState();
+  const navigate = useNavigate();
 
   const {
     cartState: { shippingList, cart, checkedItems, shipping },
@@ -77,6 +80,7 @@ const ShippingForm = () => {
       .post('/api/v1/order/create-order', body)
       .then((response) => {
         console.log(response);
+        navigate(`${PATH.ORDER_SUCCESS}`);
         return response.data.data;
       })
       .catch((e) => {

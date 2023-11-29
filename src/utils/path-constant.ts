@@ -16,4 +16,5 @@ export const PATH = {
   CART: '/cart',
   DELIVERY_INFO: '/delivery-info',
   SHIPPING_INFO: '/shipping-info',
+  ORDER_SUCCESS: '/order-success',
 };
