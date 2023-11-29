@@ -32,7 +32,8 @@ export default {
           100: "#1A4570"
         },
         grey:{
-          100: '#2b2b2b'
+          100: '#2b2b2b',
+          200: '#D1DAE2'
         },
         greyBorder:{
           100: '#F0F0F0',

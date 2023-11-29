@@ -111,3 +111,16 @@ export const productListingDropdownOptions = [
   'Alphabetically, A-Z',
   'Alphabetically, Z-A',
 ];
+
+export const radioButtonContent = [
+  {
+    type: 'delivery',
+    image: '/images/carbon_delivery.png',
+    label: 'Ship',
+  },
+  {
+    type: 'pickup',
+    image: '/images/solar_shop-2-linear.png',
+    label: 'Pick up',
+  },
+];

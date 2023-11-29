@@ -37,7 +37,7 @@ const SearchBar = () => {
         placeholder="Search Products"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="focus:outline-none text-base/5 sm:text-midbase dark:bg-white "
+        className="focus:outline-none text-base/5 sm:text-midbase dark:text-black dark:bg-white"
       />
     </form>
   );

@@ -8,7 +8,7 @@ import { PATH } from '../utils/path-constant';
 
 const CheckoutCard = () => {
   const {
-    cartState: { cart, checkedItems },
+    cartState: { cart, checkedItems, shipping },
   } = CartState();
   const navigate = useNavigate();
 
@@ -26,7 +26,8 @@ const CheckoutCard = () => {
     return subTotal;
   };
 
-  const grandTotal = calculateSubTotal() + 0;
+  const shippingFee = shipping ? shipping.price : 0;
+  const grandTotal = calculateSubTotal() + shippingFee;
 
   return (
     <BorderedWrappper classDef="px-5 pt-5 pb-12 pb-8 md:px-8 text-base/5 md:text-xl/6 my-7 md:my-0">
@@ -34,6 +35,10 @@ const CheckoutCard = () => {
         <div className="flex justify-between pb-6 md:pb-9">
           <div>Subtotal</div>
           <NairaWrapper>{calculateSubTotal().toLocaleString()}</NairaWrapper>
+        </div>
+        <div className="flex justify-between pb-6 md:pb-9">
+          <div>Shipping Fee</div>
+          <NairaWrapper>{shipping ? shipping.price : 0}</NairaWrapper>
         </div>
         <div className="flex justify-between pb-6 md:pb-9 border-dashed border-b-2 border-[#CBD2E0]">
           <div>Discount</div>

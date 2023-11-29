@@ -15,4 +15,5 @@ export const PATH = {
   SEARCH: '/search',
   CART: '/cart',
   DELIVERY_INFO: '/delivery-info',
+  SHIPPING_INFO: '/shipping-info',
 };

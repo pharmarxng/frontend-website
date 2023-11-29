@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
 
 interface SingleActivityProps {
   title: string;
@@ -7,8 +8,19 @@ interface SingleActivityProps {
 
 const SingleActivity = ({ title, values }: SingleActivityProps) => {
   const content = values.map((i, index) => {
+    if (i.linkedTo === '/prescription' || i.linkedTo === '/contact') {
+      return (
+        <div
+          className="hover:cursor-pointer"
+          key={index}
+          onClick={() => openWhatsapp(navbarMessages(i.linkedTo))}
+        >
+          {i.title}
+        </div>
+      );
+    }
     return (
-      <Link to={i.linkedTo} key={index}>
+      <Link className="hover:cursor-pointer" to={i.linkedTo} key={index}>
         {i.title}
       </Link>
     );

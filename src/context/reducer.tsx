@@ -6,7 +6,47 @@ import {
   ProductStateType,
   AlertActionType,
   AlertStateType,
+  IShipping,
+  OrderStateType,
+  OrderActionType,
 } from '../utils/interfaces';
+
+export const orderReducer = (
+  state: OrderStateType,
+  action: OrderActionType
+): OrderStateType => {
+  switch (action.type) {
+    case 'SET_EMAIL':
+      return { ...state, email: action.payload };
+
+    case 'SET_DELIVERY_TYPE':
+      return { ...state, deliveryType: action.payload };
+
+    case 'SET_FIRST_NAME':
+      return { ...state, firstName: action.payload };
+
+    case 'SET_LAST_NAME':
+      return { ...state, lastName: action.payload };
+
+    case 'SET_ADDRESS':
+      return { ...state, address: action.payload };
+
+    case 'SET_CITY':
+      return { ...state, city: action.payload };
+
+    case 'SET_PHONE':
+      return { ...state, phone: action.payload };
+
+    case 'SET_POSTAL_CODE':
+      return { ...state, postalCode: action.payload };
+
+    case 'SET_DISCOUNT_CODE':
+      return { ...state, discountCode: action.payload };
+
+    default:
+      return state;
+  }
+};
 
 export const cartReducer = (
   state: CartStateType,
@@ -107,6 +147,19 @@ export const cartReducer = (
         });
       }
       return { ...state, checkedItems: updatedCheckItem };
+    }
+    case 'SET_SHIPPING': {
+      const { shipping } = state;
+      let updatedShipping: IShipping | undefined = undefined;
+      if (!shipping) {
+        updatedShipping = action.payload;
+      } else if (shipping.id !== action.payload.id) {
+        updatedShipping = action.payload;
+      }
+      return { ...state, shipping: updatedShipping };
+    }
+    case 'SET_SHIPPING_LIST': {
+      return { ...state, shippingList: action.payload };
     }
     default:
       return state;
