@@ -42,6 +42,7 @@ const CartBlock = () => {
                 payload: cartItem.id,
               })
             }
+            className="dark:text-black dark:bg-white"
           />
           <div className="flex space-x-7 items-center text-sm/4 sm:text-lg/6 col-span-3">
             <div className="w-24 h-20 sm:w-32 sm:h-24">
@@ -84,6 +85,7 @@ const CartBlock = () => {
                 payload: cartItem.id,
               })
             }
+            className="dark:text-black dark:bg-white"
           />
           <div className="w-24 h-20 sm:w-36 sm:h-28 mx-7 sm:mx-10">
             <img
@@ -136,6 +138,7 @@ const CartBlock = () => {
                       type: 'TOGGLE_PRODUCT_CHECK_ALL',
                     })
                   }
+                  className="dark:text-black dark:bg-white"
                 />
                 <div className="col-span-3">PRODUCT</div>
                 <div>QUANTITY</div>
