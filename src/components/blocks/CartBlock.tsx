@@ -1,20 +1,28 @@
+import { useNavigate } from 'react-router-dom';
 import { CartState } from '../../context/cartContext';
 import { IProducts } from '../../utils/interfaces';
+import Button from '../Button';
 import CartItemButton from '../CartItemButton';
 import CheckoutCard from '../CheckoutCard';
 import NairaWrapper from '../NairaWrapper';
+import { PATH } from '../../utils/path-constant';
 
 const CartBlock = () => {
   const {
     cartDispatch,
     cartState: { cart, checkedItems },
   } = CartState();
+  const navigate = useNavigate();
 
   const handleRemoveItemFromCart = (id: string) => {
     cartDispatch({
       type: 'REMOVE_FROM_CART',
       payload: id,
     });
+  };
+
+  const goToShop = () => {
+    navigate(`${PATH.SHOP}`);
   };
 
   const cartContent = cart.map((cartItem: IProducts) => {
@@ -34,6 +42,7 @@ const CartBlock = () => {
                 payload: cartItem.id,
               })
             }
+            className="dark:text-black dark:bg-white"
           />
           <div className="flex space-x-7 items-center text-sm/4 sm:text-lg/6 col-span-3">
             <div className="w-24 h-20 sm:w-32 sm:h-24">
@@ -76,6 +85,7 @@ const CartBlock = () => {
                 payload: cartItem.id,
               })
             }
+            className="dark:text-black dark:bg-white"
           />
           <div className="w-24 h-20 sm:w-36 sm:h-28 mx-7 sm:mx-10">
             <img
@@ -128,6 +138,7 @@ const CartBlock = () => {
                       type: 'TOGGLE_PRODUCT_CHECK_ALL',
                     })
                   }
+                  className="dark:text-black dark:bg-white"
                 />
                 <div className="col-span-3">PRODUCT</div>
                 <div>QUANTITY</div>
@@ -143,6 +154,14 @@ const CartBlock = () => {
       ) : (
         <div className="text-center text-base/5 sm:text-2xl">
           Opps... You have nothing in your cart yet
+          <div className="flex justify-center mt-2">
+            <Button
+              onclick={goToShop}
+              buttonStyle="bg-deepBlue-100 text-white px-2"
+            >
+              Continue Shopping
+            </Button>
+          </div>
         </div>
       )}
     </div>

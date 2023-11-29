@@ -9,7 +9,6 @@ const OrderContextProvider = ({ children }: IContextProps) => {
   const [orderState, orderDispatch] = useReducer(orderReducer, {
     email: '',
     deliveryType: 'delivery',
-    deliveryFee: '',
     firstName: '',
     lastName: '',
     address: '',

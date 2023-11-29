@@ -22,9 +22,6 @@ export const orderReducer = (
     case 'SET_DELIVERY_TYPE':
       return { ...state, deliveryType: action.payload };
 
-    case 'SET_DELIVERY_FEE':
-      return { ...state, deliveryFee: action.payload };
-
     case 'SET_FIRST_NAME':
       return { ...state, firstName: action.payload };
 
@@ -160,6 +157,9 @@ export const cartReducer = (
         updatedShipping = action.payload;
       }
       return { ...state, shipping: updatedShipping };
+    }
+    case 'SET_SHIPPING_LIST': {
+      return { ...state, shippingList: action.payload };
     }
     default:
       return state;

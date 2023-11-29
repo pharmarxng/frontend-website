@@ -36,7 +36,7 @@ const Input = ({
         onChange={changed}
         value={value}
         placeholder={placeholder ? placeholder : undefined}
-        className={`border-gray-200 border rounded-lg pl-4 py-3 w-full dark:bg-white  ${classDef}`}
+        className={`border-gray-200 border rounded-lg pl-4 py-3 w-full dark:text-black dark:bg-white  ${classDef}`}
       />
       <span className="text-red-700 text-xs lg:text-sm">{error}</span>
     </div>

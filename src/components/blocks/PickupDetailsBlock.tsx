@@ -1,11 +1,44 @@
+import { CartState } from '../../context/cartContext';
 import { OrderState } from '../../context/orderContext';
+import { IProducts } from '../../utils/interfaces';
 import FormButton from '../FormButton';
+import axios from '../../axios/axios';
 
 const PickupDetailsBlock = () => {
-  const { orderState } = OrderState();
+  const {
+    orderState: { email },
+  } = OrderState();
+
+  const {
+    cartState: { cart, checkedItems },
+  } = CartState();
 
   const disableButton = () => {
-    return orderState.email?.length <= 0;
+    return email?.length <= 0;
+  };
+
+  const goToOrderPayment = () => {
+    const products = cart
+      .filter((product: IProducts) => checkedItems.includes(product.id))
+      .map((product: IProducts) => ({
+        productId: product.id,
+        quantity: product.noOfUnitsToPurchase,
+      }));
+
+    const body = {
+      deliveryType: 'pickup',
+      products,
+      email,
+    };
+    axios
+      .post('/api/v1/order/create-order', body)
+      .then((response) => {
+        console.log({ response });
+        return response.data.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -16,7 +49,9 @@ const PickupDetailsBlock = () => {
         <div>1A, Providence Mall, Providence Street, Lekki Phase 1, Lagos</div>
       </div>
       <div className="flex justify-end mt-14">
-        <FormButton disabled={disableButton()}>Continue to payment</FormButton>
+        <FormButton disabled={disableButton()} clicked={goToOrderPayment}>
+          Continue to payment
+        </FormButton>
       </div>
     </div>
   );

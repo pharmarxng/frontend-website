@@ -1,8 +1,9 @@
 import axios from '../axios/axios';
-import { ProductActionType } from '../utils/interfaces';
+import { CartActionType, ProductActionType } from '../utils/interfaces';
 
 const productSubUrl = '/api/v1/product';
 const categorySubUrl = '/api/v1/category';
+const orderSubUrl = '/api/v1/order';
 
 export const getProductsApi = async (
   dispatch: React.Dispatch<ProductActionType>,
@@ -103,6 +104,27 @@ export const getSingleCategorysApi = async (
 
     dispatch({
       type: 'GET_SINGLE_CATEGORY',
+      payload: responseData,
+    });
+  } catch (error) {
+    console.log(error);
+    // alertDispatch(alertActions.error(error.response?.data.message));
+  }
+};
+
+export const getStandardDeliveryFeesApi = async (
+  dispatch: React.Dispatch<CartActionType>,
+  params?: Record<string, unknown>
+) => {
+  const url = `${orderSubUrl}/get-delivery-fees`;
+  try {
+    const response = await axios.get(url, {
+      params,
+    });
+    const responseData = response.data.data;
+
+    dispatch({
+      type: 'SET_SHIPPING_LIST',
       payload: responseData,
     });
   } catch (error) {
