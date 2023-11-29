@@ -1,18 +1,18 @@
 import Navbar from '../components/Navbar';
 import PaddedWrapper from '../components/PaddedWrapper';
 import Footer from '../components/blocks/Footer';
-import DeliveryInfoBlock from '../components/blocks/DeliveryInfoBlock';
+import ShippingInfoBlock from '../components/blocks/ShippingInfoBlock';
 
-const DeliveryInfo = () => {
+const ShippingInfo = () => {
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
-        <DeliveryInfoBlock />
+        <ShippingInfoBlock />
         <Footer />
       </PaddedWrapper>
     </div>
   );
 };
 
-export default DeliveryInfo;
+export default ShippingInfo;

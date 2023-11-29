@@ -10,6 +10,7 @@ interface InputProps {
   id?: string;
   onBlur?: FocusEventHandler<HTMLInputElement> | undefined;
   error?: string | boolean;
+  checked?: boolean;
 }
 
 const Input = ({
@@ -22,10 +23,12 @@ const Input = ({
   id,
   onBlur,
   error,
+  checked,
 }: InputProps) => {
   return (
     <div>
       <input
+        checked={checked}
         id={id}
         onBlur={onBlur}
         type={type}

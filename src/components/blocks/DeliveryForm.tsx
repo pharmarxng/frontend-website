@@ -1,128 +1,83 @@
 import { Link } from 'react-router-dom';
 import Input from '../Input';
-import Navbar from '../Navbar';
-import Label from '../Label';
-
+import { OrderState } from '../../context/orderContext';
+import ShippingDetailsForm from './ShippingDetailsForm';
+import { radioButtonContent } from '../../utils/constants';
+import PickupDetailsBlock from './PickupDetailsBlock';
 
 const DeliveryForm = () => {
+  const {
+    orderState: { email, deliveryType },
+    orderDispatch,
+  } = OrderState();
+
   return (
-    <div className='flex flex-col text-black pt-[30px] gap-12 ite'>
-      <form>
-        {/* Contact Section */}
-        <div className='flex justify-between items-center border-2 grey-300 rounded-t-lg font-medium px-1'>
-          <div className='flex items-center'>
-            <div className='opacity-50'>
-              <Label label="Contact" />
+    <div className="text-black py-6  flex flex-col items-center w-full">
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col flex-1 text-sm md:text-lg gap-5 md:gap-10 w-full">
+          <div className="font-medium text-base md:text-lg flex flex-col gap-6">
+            <div className="md:flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0">
+              <label>Contact</label>
+              <div>
+                Have an account?{' '}
+                <span className="text-[#1A4570] font-semibold">
+                  <Link to="/login">Log in</Link>
+                </span>
+              </div>
             </div>
             <Input
-              placeholder="brightpreye@gmail.com"
+              placeholder="Email*"
               name="email"
-              type="text"
-              value=""
-              changed={(e) => { }}
-              classDef="border-none focus:outline-none text-black bg-white text-sm md:text-lg"
+              type="email"
+              value={email}
+              changed={(e: React.ChangeEvent<HTMLInputElement>) =>
+                orderDispatch({ type: 'SET_EMAIL', payload: e.target.value })
+              }
+              classDef="mt-2 border-[2px] text-sm md:text-lg"
             />
           </div>
-          <div className='flex justify-end text-sm text-deepBlue-100 md:text-lg'>change</div>
+
+          <label className="font-semibold text-base md:text-lg flex flex-col items-start gap-6">
+            Delivery method
+            <div className="w-full">
+              {radioButtonContent.map((option) => (
+                <div
+                  key={option.type}
+                  className={`flex gap-3 p-4 rounded-lg w-full h-12 ${
+                    deliveryType === option.type ? 'bg-grey-200' : 'bg-white'
+                  } items-center`}
+                >
+                  <Input
+                    name="deliveryType"
+                    type="radio"
+                    value={option.type}
+                    checked={deliveryType === option.type}
+                    changed={() =>
+                      orderDispatch({
+                        type: 'SET_DELIVERY_TYPE',
+                        payload: option.type,
+                      })
+                    }
+                    classDef="mt-2 border-[2px]  h-[14px] md:h-[19px]"
+                  />
+                  <img
+                    src={option.image}
+                    alt={`delivery-type-${option.type}`}
+                    className="object-cover "
+                  />
+                  <span className="text-sm md:text-lg">{option.label}</span>
+                </div>
+              ))}
+            </div>
+          </label>
+
+          {deliveryType === 'delivery' ? (
+            <ShippingDetailsForm />
+          ) : (
+            <PickupDetailsBlock />
+          )}
         </div>
-
-        {/* Ship To Section */}
-        <div className='flex justify-between items-center border-2 grey-300 rounded-b-lg px-1'>
-          <div className='flex items-center'>
-            <div className='opacity-50'>
-              <Label label="Ship to" />
-            </div>
-            <Input
-              placeholder="No 45 Abraham George street, Ikeja, Lagos, Nigeria"
-              name="email"
-              type="text"
-              value=""
-              changed={(e) => { }}
-              classDef="border-none focus:outline-none text-black bg-white text-sm md:text-lg"
-            />
-          </div>
-          <div className='flex justify-end text-sm text-deepBlue-100 md:text-lg'>change</div>
-        </div>
-      </form>
-
-      <div className='flex flex-col gap-6'>
-        <div className='font-medium text-base md:text-lg'>Shipping Method</div>
-        <div className='font-medium text-sm md:text-lg'>We are committed to delivering standard shipping orders to you within 2-24 hours, provided that the orders are placed Monday to Friday before 2 pm. If you're seeking express delivery, simply return to your cart and click on the chat widget. Our team is here to assist you with expediting your order.</div>
       </div>
-
-
-      <div className='h-[150px] overflow-y-auto'>
-        <form className='border-2 borber-grey-300 rounded-lg text-sm md:text-lg font-medium'>
-
-          <div className='flex justify-between items-center h-16 font-medium px-7'>
-            <div className='flex gap-3'>
-              <Input
-                placeholder="brightpreye@gmail.com"
-                name="email"
-                type="radio"
-                value=""
-                changed={(e) => { }}
-                classDef="w-[14px h-[14px] md:w-[19px] md:h-[19px]"
-              />
-              <div>Standard (Ajah/Sangotedo)</div>
-            </div>
-            <div className='flex justify-end text-deepBlue-100'>&#x20A6; 7000</div>
-          </div>
-
-
-          <div className='flex justify-between h-16 items-center border-y-2 grey-300  font-medium px-7'>
-            <div className='flex gap-3'>
-              <Input
-                placeholder="brightpreye@gmail.com"
-                name="email"
-                type="radio"
-                value=""
-                changed={(e) => { }}
-                classDef="w-[14px h-[14px] md:w-[19px] md:h-[19px]"
-              />
-              <div>Standard (Ajah/Sangotedo)</div>
-            </div>
-            <div className='flex justify-end text-deepBlue-100'>&#x20A6; 7000</div>
-          </div>
-
-          <div className='flex justify-between h-16 items-center font-medium px-7'>
-            <div className='flex gap-3'>
-              <Input
-                placeholder="brightpreye@gmail.com"
-                name="email"
-                type="radio"
-                value=""
-                changed={(e) => { }}
-                classDef="w-[14px h-[14px] md:w-[19px] md:h-[19px]"
-              />
-              <div>Standard (Ajah/Sangotedo)</div>
-            </div>
-            <div className='flex justify-end text-deepBlue-100'>&#x20A6; 7000</div>
-          </div>
-
-
-          <div className='flex justify-between h-16 items-center border-t-2 grey-300 font-medium px-7'>
-            <div className='flex gap-3'>
-              <Input
-                placeholder="brightpreye@gmail.com"
-                name="email"
-                type="radio"
-                value=""
-                changed={(e) => { }}
-                classDef="w-[14px h-[14px] md:w-[19px] md:h-[19px]"
-              />
-              <div>Standard (Ajah/Sangotedo)</div>
-            </div>
-            <div className='flex justify-end text-deepBlue-100'>&#x20A6; 7000</div>
-          </div>
-        </form>
-
-      </div>
-            
-      <div className="bg-[#2D547B] rounded-[10px] w-full h-[47px] md:h-[74px] flex justify-center items-center">
-        <div className="font-semibold text-base font-semibold md:text-[24px] text-white">Continue to shipping</div>
-      </div>
-
     </div>
   );
 };

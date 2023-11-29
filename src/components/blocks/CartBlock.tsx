@@ -133,7 +133,7 @@ const CartBlock = () => {
                 <div>QUANTITY</div>
                 <div>PRICE</div>
               </div>
-              <div>{cartContent}</div>
+              <div className="h h-96 overflow-y-auto">{cartContent}</div>
             </div>
             <div>
               <CheckoutCard />

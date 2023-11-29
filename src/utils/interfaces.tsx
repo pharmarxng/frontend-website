@@ -4,6 +4,17 @@ export interface ILink {
   icon?: string;
 }
 
+export interface IShipping {
+  location: string;
+  price: number;
+  id: string;
+}
+
+export interface IOrderProducts {
+  productId: string;
+  quantity: number;
+}
+
 export interface IContextProps {
   children?: React.ReactNode;
 }
@@ -62,6 +73,10 @@ type ToggleProductCheckAction = {
 type ToggleCheckAllAction = {
   type: 'TOGGLE_PRODUCT_CHECK_ALL';
 };
+type SetShippingAction = {
+  type: 'SET_SHIPPING';
+  payload: IShipping;
+};
 
 export type CartActionType =
   | AddAction
@@ -69,11 +84,13 @@ export type CartActionType =
   | IncreasePurchaseableUnitsAction
   | ReducePurchaseableUnitsAction
   | ToggleCheckAllAction
-  | ToggleProductCheckAction;
+  | ToggleProductCheckAction
+  | SetShippingAction;
 
 export type CartStateType = {
   cart: IProducts[];
   checkedItems: string[];
+  shipping?: IShipping;
 };
 
 export type ProductStateType = {
@@ -213,4 +230,79 @@ export type AlertStateType = {
   type: string;
   message: string;
   show: boolean;
+};
+
+type SetEmailAction = {
+  type: 'SET_EMAIL';
+  payload: string;
+};
+
+type SetDeliveryTypeAction = {
+  type: 'SET_DELIVERY_TYPE';
+  payload: 'pickup' | 'delivery';
+};
+
+type SetDeliveryFeeAction = {
+  type: 'SET_DELIVERY_FEE';
+  payload: string;
+};
+
+type SetFirstNameAction = {
+  type: 'SET_FIRST_NAME';
+  payload: string;
+};
+
+type SetLastNameAction = {
+  type: 'SET_LAST_NAME';
+  payload: string;
+};
+
+type SetAddressAction = {
+  type: 'SET_ADDRESS';
+  payload: string;
+};
+
+type SetCityAction = {
+  type: 'SET_CITY';
+  payload: string;
+};
+
+type SetPhoneAction = {
+  type: 'SET_PHONE';
+  payload: string;
+};
+
+type SetPostalCodeAction = {
+  type: 'SET_POSTAL_CODE';
+  payload: string;
+};
+
+type SetDiscountCodeAction = {
+  type: 'SET_DISCOUNT_CODE';
+  payload: string;
+};
+
+export type OrderActionType =
+  | SetEmailAction
+  | SetDeliveryTypeAction
+  | SetDeliveryFeeAction
+  | SetFirstNameAction
+  | SetLastNameAction
+  | SetAddressAction
+  | SetCityAction
+  | SetPhoneAction
+  | SetPostalCodeAction
+  | SetDiscountCodeAction;
+
+export type OrderStateType = {
+  email?: string;
+  deliveryType?: 'pickup' | 'delivery';
+  deliveryFee?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: string;
+  city?: string;
+  phone?: string;
+  postalCode?: string;
+  discountCode?: string;
 };
