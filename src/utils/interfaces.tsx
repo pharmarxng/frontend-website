@@ -73,6 +73,12 @@ type ToggleProductCheckAction = {
 type ToggleCheckAllAction = {
   type: 'TOGGLE_PRODUCT_CHECK_ALL';
 };
+
+type SetShippingListAction = {
+  type: 'SET_SHIPPING_LIST';
+  payload: IShipping[];
+};
+
 type SetShippingAction = {
   type: 'SET_SHIPPING';
   payload: IShipping;
@@ -85,12 +91,14 @@ export type CartActionType =
   | ReducePurchaseableUnitsAction
   | ToggleCheckAllAction
   | ToggleProductCheckAction
+  | SetShippingListAction
   | SetShippingAction;
 
 export type CartStateType = {
   cart: IProducts[];
   checkedItems: string[];
   shipping?: IShipping;
+  shippingList?: IShipping[];
 };
 
 export type ProductStateType = {
@@ -242,11 +250,6 @@ type SetDeliveryTypeAction = {
   payload: 'pickup' | 'delivery';
 };
 
-type SetDeliveryFeeAction = {
-  type: 'SET_DELIVERY_FEE';
-  payload: string;
-};
-
 type SetFirstNameAction = {
   type: 'SET_FIRST_NAME';
   payload: string;
@@ -285,7 +288,6 @@ type SetDiscountCodeAction = {
 export type OrderActionType =
   | SetEmailAction
   | SetDeliveryTypeAction
-  | SetDeliveryFeeAction
   | SetFirstNameAction
   | SetLastNameAction
   | SetAddressAction
@@ -297,7 +299,6 @@ export type OrderActionType =
 export type OrderStateType = {
   email?: string;
   deliveryType?: 'pickup' | 'delivery';
-  deliveryFee?: string;
   firstName?: string;
   lastName?: string;
   address?: string;

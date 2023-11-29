@@ -18,7 +18,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   const handleSelect = (value: string) => {
-    console.log('handleSelect', value);
     onChange(value);
     setIsOpen(false);
   };

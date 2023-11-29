@@ -79,7 +79,7 @@ const Navbar = () => {
               </div>
             }
             renderTarget={({ isOpen, ...targetProps }) => (
-              <div>
+              <div className="hover:cursor-pointer">
                 {isOpen ? (
                   <img
                     onClick={() => !isOpen}
