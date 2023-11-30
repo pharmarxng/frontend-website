@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { keys } from '../config/keys';
 // import store from 'store2';
-const baseURL = import.meta.env.VITE_REACT_APP_API_URL;
+const baseURL = keys.API_URL;
 
 const instance = axios.create({ baseURL });
 
