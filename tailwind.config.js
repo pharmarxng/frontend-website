@@ -33,7 +33,9 @@ export default {
         },
         grey:{
           100: '#2b2b2b',
-          200: '#D1DAE2'
+          200: '#D1DAE2',
+          300: '#CBD2E0',
+          400: '#F5F5F5',
         },
         greyBorder:{
           100: '#F0F0F0',
