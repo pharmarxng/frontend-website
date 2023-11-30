@@ -17,4 +17,5 @@ export const PATH = {
   DELIVERY_INFO: '/delivery-info',
   SHIPPING_INFO: '/shipping-info',
   ORDER_SUCCESS: '/order-success',
+  ORDER_LIST: '/order-list',
 };
