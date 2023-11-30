@@ -8,8 +8,9 @@ import { getStandardDeliveryFeesApi } from '../../api/products';
 import { IProducts, IShipping } from '../../utils/interfaces';
 import { FadeLoader } from 'react-spinners';
 import axios from '../../axios/axios';
-import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../utils/path-constant';
+
+console.log({ domain: window.location.host });
 
 const ShippingForm = () => {
   const {
@@ -24,7 +25,6 @@ const ShippingForm = () => {
     },
     orderDispatch,
   } = OrderState();
-  const navigate = useNavigate();
 
   const {
     cartState: { shippingList, cart, checkedItems, shipping },
@@ -56,7 +56,7 @@ const ShippingForm = () => {
     orderDispatch({ type: 'SET_ADDRESS', payload: localAddress });
   };
 
-  const goToOrderPayment = () => {
+  const goToOrderPayment = async () => {
     const products = cart
       .filter((product: IProducts) => checkedItems.includes(product.id))
       .map((product: IProducts) => ({
@@ -76,16 +76,27 @@ const ShippingForm = () => {
       phone,
       postalCode,
     };
-    axios
-      .post('/api/v1/order/create-order', body)
-      .then((response) => {
-        console.log(response);
-        navigate(`${PATH.ORDER_SUCCESS}`);
-        return response.data.data;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    try {
+      const response = await axios.post('/api/v1/order/create-order', body);
+      console.log({ response });
+      if (response.data.statusCode !== 201) {
+        throw new Error(response.data.message);
+      }
+      const order = response.data.data;
+      const paymentBody = {
+        orderId: order.orderId,
+        callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${order.orderId}`,
+      };
+
+      const paymentResponse = await axios.post(
+        '/api/v1/order/make-payment',
+        paymentBody
+      );
+      console.log({ paymentResponse });
+      window.location.href = paymentResponse.data.data.authorization_url;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const shippingListContent =
