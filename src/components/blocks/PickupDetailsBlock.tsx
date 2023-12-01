@@ -3,6 +3,8 @@ import { OrderState } from '../../context/orderContext';
 import { IProducts } from '../../utils/interfaces';
 import FormButton from '../FormButton';
 import axios from '../../axios/axios';
+import { PATH } from '../../utils/path-constant';
+import { useNavigate } from 'react-router-dom';
 
 const PickupDetailsBlock = () => {
   const {
@@ -12,12 +14,13 @@ const PickupDetailsBlock = () => {
   const {
     cartState: { cart, checkedItems },
   } = CartState();
+  const navigate = useNavigate();
 
   const disableButton = () => {
     return email?.length <= 0;
   };
 
-  const goToOrderPayment = () => {
+  const goToOrderPayment = async () => {
     const products = cart
       .filter((product: IProducts) => checkedItems.includes(product.id))
       .map((product: IProducts) => ({
@@ -30,15 +33,17 @@ const PickupDetailsBlock = () => {
       products,
       email,
     };
-    axios
-      .post('/api/v1/order/create-order', body)
-      .then((response) => {
-        console.log({ response });
-        return response.data.data;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    try {
+      const response = await axios.post('/api/v1/order/create-order', body);
+      console.log({ response });
+      if (response.data.statusCode !== 201) {
+        throw new Error(response.data.message);
+      }
+      const order = response.data.data;
+      navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

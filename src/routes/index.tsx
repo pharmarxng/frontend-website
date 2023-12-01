@@ -15,6 +15,8 @@ import Cart from '../pages/Cart';
 import DeliveryInfo from '../pages/DeliveryInfo';
 import ShippingInfo from '../pages/ShippingInfo';
 import { useEffect } from 'react';
+import OrderDetails from '../pages/OrderDetails';
+import OrderList from '../pages/OrderList';
 
 const ManiRoutes = () => {
   const ScrollToTop = () => {
@@ -33,6 +35,8 @@ const ManiRoutes = () => {
         <Route path={PATH.HOME} element={<Home />} />
         <Route path={PATH.SHOP} element={<Shop />} />
         <Route path={PATH.CART} element={<Cart />} />
+        <Route path={PATH.ORDER_LIST} element={<OrderList />} /> 
+        <Route path={`${PATH.ORDER_DETAILS}/:id`} element={<OrderDetails />} />
         <Route path={PATH.DELIVERY_INFO} element={<DeliveryInfo />} />
         <Route path={PATH.SHIPPING_INFO} element={<ShippingInfo />} />
         <Route path={PATH.ONLINE_PHARMACIST} element={<OnlinePharmacy />} />

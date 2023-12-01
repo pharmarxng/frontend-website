@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import OrderSummaryCard from './OrderSummaryCard';
 import { CartState } from '../context/cartContext';
 import { useNavigate } from 'react-router-dom';
@@ -14,10 +14,11 @@ const OrderSummaryWrapper = ({ children, plain }: OrderSummaryWrapperProps) => {
     cartState: { cart },
   } = CartState();
   const navigate = useNavigate();
-
-  if (!cart.length) {
-    navigate(`${PATH.CART}`);
-  }
+  useEffect(() => {
+    if (!cart.length) {
+      navigate(`${PATH.CART}`);
+    }
+  }, [cart.length, navigate]);
 
   return (
     <div className="md:flex md:flex-row-reverse  text-black md:mt-14">

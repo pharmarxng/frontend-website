@@ -74,6 +74,10 @@ type ToggleCheckAllAction = {
   type: 'TOGGLE_PRODUCT_CHECK_ALL';
 };
 
+type CheckAllProductsAction = {
+  type: 'CHECK_ALL_PRODUCTS';
+};
+
 type SetShippingListAction = {
   type: 'SET_SHIPPING_LIST';
   payload: IShipping[];
@@ -90,6 +94,7 @@ export type CartActionType =
   | IncreasePurchaseableUnitsAction
   | ReducePurchaseableUnitsAction
   | ToggleCheckAllAction
+  | CheckAllProductsAction
   | ToggleProductCheckAction
   | SetShippingListAction
   | SetShippingAction;

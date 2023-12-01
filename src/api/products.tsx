@@ -132,3 +132,21 @@ export const getStandardDeliveryFeesApi = async (
     // alertDispatch(alertActions.error(error.response?.data.message));
   }
 };
+
+export const getOrderByIdApi = async (
+  id: string,
+  params?: Record<string, unknown>
+) => {
+  const url = `${orderSubUrl}/fetch-order/${id}`;
+  try {
+    const response = await axios.get(url, {
+      params,
+    });
+    const responseData = response.data.data;
+    console.log({ responseData });
+    return responseData;
+  } catch (error) {
+    console.log(error);
+    // alertDispatch(alertActions.error(error.response?.data.message));
+  }
+};

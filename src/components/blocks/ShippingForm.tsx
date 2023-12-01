@@ -8,6 +8,10 @@ import { getStandardDeliveryFeesApi } from '../../api/products';
 import { IProducts, IShipping } from '../../utils/interfaces';
 import { FadeLoader } from 'react-spinners';
 import axios from '../../axios/axios';
+import { PATH } from '../../utils/path-constant';
+import { useNavigate } from 'react-router-dom';
+
+console.log({ domain: window.location.host });
 
 const ShippingForm = () => {
   const {
@@ -33,6 +37,7 @@ const ShippingForm = () => {
     address ? address : ''
   );
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -53,7 +58,7 @@ const ShippingForm = () => {
     orderDispatch({ type: 'SET_ADDRESS', payload: localAddress });
   };
 
-  const goToOrderPayment = () => {
+  const goToOrderPayment = async () => {
     const products = cart
       .filter((product: IProducts) => checkedItems.includes(product.id))
       .map((product: IProducts) => ({
@@ -73,15 +78,16 @@ const ShippingForm = () => {
       phone,
       postalCode,
     };
-    axios
-      .post('/api/v1/order/create-order', body)
-      .then((response) => {
-        console.log(response);
-        return response.data.data;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    try {
+      const response = await axios.post('/api/v1/order/create-order', body);
+      if (response.data.statusCode !== 201) {
+        throw new Error(response.data.message);
+      }
+      const order = response.data.data;
+      navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const shippingListContent =

@@ -7,7 +7,11 @@ import axios from '../axios/axios';
 import { FormEvent, useState } from 'react';
 import FormButton from './FormButton';
 
-const OrderSummaryCard = () => {
+interface OrderSummaryCardProps {
+  bare?: boolean;
+}
+
+const OrderSummaryCard = ({ bare }: OrderSummaryCardProps) => {
   const {
     cartState: { cart, checkedItems, shipping },
   } = CartState();
@@ -66,24 +70,29 @@ const OrderSummaryCard = () => {
           <NairaWrapper>{grandTotal}</NairaWrapper>
         </div>
       </div>
-      <div className="mt-5 mb-4">Discount Code:</div>
-      <form
-        onSubmit={handleFormSubmit}
-        className="flex justify-between items-center"
-      >
-        <div className="mr-5">
-          <Input
-            placeholder="Add discount code"
-            name="symptom"
-            type="text"
-            value={discountCode}
-            changed={(e) => setdiscountCode(e.target.value)}
-          />
+
+      {!bare && (
+        <div>
+          <div className="mt-5 mb-4">Discount Code:</div>
+          <form
+            onSubmit={handleFormSubmit}
+            className="flex justify-between items-center"
+          >
+            <div className="mr-5">
+              <Input
+                placeholder="Add discount code"
+                name="symptom"
+                type="text"
+                value={discountCode}
+                changed={(e) => setdiscountCode(e.target.value)}
+              />
+            </div>
+            <FormButton disabled={discountCode.length <= 2} consistent>
+              Apply
+            </FormButton>
+          </form>
         </div>
-        <FormButton disabled={discountCode.length <= 2} consistent>
-          Apply
-        </FormButton>
-      </form>
+      )}
     </BorderedWrappper>
   );
 };
