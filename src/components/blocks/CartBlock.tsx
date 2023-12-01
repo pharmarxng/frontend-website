@@ -144,7 +144,13 @@ const CartBlock = () => {
                 <div>QUANTITY</div>
                 <div>PRICE</div>
               </div>
-              <div className="h h-96 overflow-y-auto">{cartContent}</div>
+              <div
+                className={`${
+                  cart.length >= 2 ? 'h-80 md:h-96' : 'h-56'
+                } overflow-y-auto`}
+              >
+                {cartContent}
+              </div>
             </div>
             <div>
               <CheckoutCard />

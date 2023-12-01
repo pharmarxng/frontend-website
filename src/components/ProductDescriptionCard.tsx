@@ -23,6 +23,7 @@ const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
   };
 
   const checkAllProductsInCart = () => {
+    cartDispatch({ type: 'ADD_TO_CART', payload: product });
     cartDispatch({
       type: 'CHECK_ALL_PRODUCTS',
     });
@@ -36,7 +37,6 @@ const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
   };
 
   const handleAddToCart = () => {
-    cartDispatch({ type: 'ADD_TO_CART', payload: product });
     checkAllProductsInCart();
     navigate(`${PATH.CART}`);
   };
