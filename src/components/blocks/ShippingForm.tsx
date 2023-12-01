@@ -9,6 +9,7 @@ import { IProducts, IShipping } from '../../utils/interfaces';
 import { FadeLoader } from 'react-spinners';
 import axios from '../../axios/axios';
 import { PATH } from '../../utils/path-constant';
+import { useNavigate } from 'react-router-dom';
 
 console.log({ domain: window.location.host });
 
@@ -36,6 +37,7 @@ const ShippingForm = () => {
     address ? address : ''
   );
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -78,22 +80,11 @@ const ShippingForm = () => {
     };
     try {
       const response = await axios.post('/api/v1/order/create-order', body);
-      console.log({ response });
       if (response.data.statusCode !== 201) {
         throw new Error(response.data.message);
       }
       const order = response.data.data;
-      const paymentBody = {
-        orderId: order.orderId,
-        callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${order.orderId}`,
-      };
-
-      const paymentResponse = await axios.post(
-        '/api/v1/order/make-payment',
-        paymentBody
-      );
-      console.log({ paymentResponse });
-      window.location.href = paymentResponse.data.data.authorization_url;
+      navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
     } catch (error) {
       console.log(error);
     }

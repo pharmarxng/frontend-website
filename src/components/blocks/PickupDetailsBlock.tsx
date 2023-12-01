@@ -4,6 +4,7 @@ import { IProducts } from '../../utils/interfaces';
 import FormButton from '../FormButton';
 import axios from '../../axios/axios';
 import { PATH } from '../../utils/path-constant';
+import { useNavigate } from 'react-router-dom';
 
 const PickupDetailsBlock = () => {
   const {
@@ -13,7 +14,7 @@ const PickupDetailsBlock = () => {
   const {
     cartState: { cart, checkedItems },
   } = CartState();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const disableButton = () => {
     return email?.length <= 0;
@@ -39,17 +40,7 @@ const PickupDetailsBlock = () => {
         throw new Error(response.data.message);
       }
       const order = response.data.data;
-      const paymentBody = {
-        orderId: order.orderId,
-        callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${order.orderId}`,
-      };
-
-      const paymentResponse = await axios.post(
-        '/api/v1/order/make-payment',
-        paymentBody
-      );
-      console.log({ paymentResponse });
-      window.location.href = paymentResponse.data.data.authorization_url;
+      navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
     } catch (error) {
       console.log(error);
     }

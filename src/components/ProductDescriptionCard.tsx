@@ -4,6 +4,7 @@ import { ProductState } from '../context/productContext';
 import Button from './Button';
 import { CartState } from '../context/cartContext';
 import { useNavigate } from 'react-router-dom';
+import { PATH } from '../utils/path-constant';
 
 interface ProductDescriptionCardProps {
   product: IProducts;
@@ -21,6 +22,12 @@ const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
     });
   };
 
+  const checkAllProductsInCart = () => {
+    cartDispatch({
+      type: 'CHECK_ALL_PRODUCTS',
+    });
+  };
+
   const handleReducePurchaseableUnit = () => {
     productDispatch({
       type: 'REDUCE_PURCHASEABLE_UNIT',
@@ -30,7 +37,13 @@ const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
 
   const handleAddToCart = () => {
     cartDispatch({ type: 'ADD_TO_CART', payload: product });
-    navigate('/cart');
+    checkAllProductsInCart();
+    navigate(`${PATH.CART}`);
+  };
+
+  const handleBuyNow = () => {
+    checkAllProductsInCart();
+    navigate(`${PATH.DELIVERY_INFO}`);
   };
 
   return (
@@ -85,6 +98,7 @@ const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
           <Button
             buttonStyle="bg-yellow-500 w-full"
             disabled={!product.noOfUnitsToPurchase}
+            onclick={handleBuyNow}
           >
             Buy now
           </Button>

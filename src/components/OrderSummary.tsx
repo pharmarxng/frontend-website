@@ -9,7 +9,6 @@ interface OrderSummaryProps {
 }
 
 const OrderSummary = ({ order, bare, classDef }: OrderSummaryProps) => {
-  console.log({ fee: order.deliveryFee });
   return (
     <BorderedWrappper
       classDef={`px-5 pt-5 pb-12 pb-8 md:px-8 text-base/6 md:text-lg/6 my-7 md:my-0 ${
@@ -24,7 +23,9 @@ const OrderSummary = ({ order, bare, classDef }: OrderSummaryProps) => {
         </div>
         <div className="flex justify-between">
           <div>Shipping Fee</div>
-          <NairaWrapper>{order.deliveryFee.price}</NairaWrapper>
+          <NairaWrapper>
+            {order.deliveryFee ? order.deliveryFee.price : 0}
+          </NairaWrapper>
         </div>
         <div className="flex justify-between">
           <div>Discount</div>

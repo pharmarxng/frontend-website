@@ -138,6 +138,16 @@ export const cartReducer = (
         checkedItems: updatedCheckItem,
       };
     }
+    case 'CHECK_ALL_PRODUCTS': {
+      const { cart } = state;
+      let updatedCheckItem: string[] = [];
+
+      updatedCheckItem = cart.map((cartItem) => {
+        return cartItem.id;
+      });
+
+      return { ...state, checkedItems: updatedCheckItem };
+    }
     case 'TOGGLE_PRODUCT_CHECK_ALL': {
       const { cart, checkedItems } = state;
       let updatedCheckItem: string[] = [];
