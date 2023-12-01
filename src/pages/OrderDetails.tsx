@@ -58,19 +58,15 @@ const OrderDetails = () => {
   const handleOrderPayment = async (id: string) => {
     try {
       setLoading(true);
-      const paymentBody = {
+      const body = {
         id,
-        callback_url: `${window.location.host}.${PATH.ORDER_DETAILS}/${id}`,
+        callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
       };
-      console.log({
-        callback_url: `${window.location.host}.${PATH.ORDER_DETAILS}/${id}`,
-      });
 
       const paymentResponse = await axios.post(
         '/api/v1/order/make-payment',
-        paymentBody
+        body
       );
-      setLoading(false);
       window.location.href = paymentResponse.data.data.authorization_url;
     } catch (error) {
       console.log(error);
