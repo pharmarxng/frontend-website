@@ -41,26 +41,36 @@ const OrderDetails = () => {
 
   const handleOrderCancel = async (id: string) => {
     try {
+      setLoading(true);
       const response = await axios.get('/api/v1/order/cancel-order/' + id);
       const order = response.data.data;
       setOrder(order);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
+  console.log({
+    callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
+  });
+
   const handleOrderPayment = async (id: string) => {
     try {
+      setLoading(true);
       const paymentBody = {
         id,
-        callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
+        callback_url: `${window.location.host}.${PATH.ORDER_DETAILS}/${id}`,
       };
+      console.log({
+        callback_url: `${window.location.host}.${PATH.ORDER_DETAILS}/${id}`,
+      });
 
       const paymentResponse = await axios.post(
         '/api/v1/order/make-payment',
         paymentBody
       );
-
+      setLoading(false);
       window.location.href = paymentResponse.data.data.authorization_url;
     } catch (error) {
       console.log(error);
