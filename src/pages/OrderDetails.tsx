@@ -52,7 +52,7 @@ const OrderDetails = () => {
   };
 
   console.log({
-    callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
+    callback_url: `https://${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
   });
 
   const handleOrderPayment = async (id: string) => {
@@ -60,7 +60,7 @@ const OrderDetails = () => {
       setLoading(true);
       const body = {
         id,
-        callback_url: `${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
+        callback_url: `https://${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
       };
 
       const paymentResponse = await axios.post(
