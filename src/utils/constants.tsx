@@ -124,3 +124,48 @@ export const radioButtonContent = [
     label: 'Pick up',
   },
 ];
+
+export const inputFields = [
+  {
+    name: 'firstName',
+    placeholder: 'First name',
+    type: 'text',
+    dispatchValue: 'SET_FIRST_NAME',
+    label: 'First name*',
+  },
+  {
+    name: 'lastName',
+    placeholder: 'Last name',
+    type: 'text',
+    dispatchValue: 'SET_LAST_NAME',
+    label: 'Last name*',
+  },
+  {
+    name: 'phone',
+    placeholder: 'Enter your phone number',
+    type: 'text',
+    dispatchValue: 'SET_PHONE',
+    label: 'Phone Number*',
+  },
+  {
+    name: 'address',
+    placeholder: 'Enter your address',
+    type: 'text',
+    dispatchValue: 'SET_ADDRESS',
+    label: 'Address*',
+  },
+  {
+    name: 'city',
+    placeholder: 'City',
+    type: 'text',
+    dispatchValue: 'SET_CITY',
+    label: 'City*',
+  },
+  {
+    name: 'postalCode',
+    placeholder: 'Enter your postal code',
+    type: 'text',
+    dispatchValue: 'SET_POSTAL_CODE',
+    label: 'Postal Code',
+  },
+];

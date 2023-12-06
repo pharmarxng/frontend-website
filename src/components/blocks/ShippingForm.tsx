@@ -4,14 +4,12 @@ import FormButton from '../FormButton';
 import Input from '../Input';
 import Label from '../Label';
 import { CartState } from '../../context/cartContext';
-import { getStandardDeliveryFeesApi } from '../../api/products';
 import { IProducts, IShipping } from '../../utils/interfaces';
 import { FadeLoader } from 'react-spinners';
-import axios from '../../axios/axios';
 import { PATH } from '../../utils/path-constant';
 import { useNavigate } from 'react-router-dom';
-
-console.log({ domain: window.location.host });
+import { createOrderApi, getStandardDeliveryFeesApi } from '../../api/order';
+import { setItem } from '../../utils/auth';
 
 const ShippingForm = () => {
   const {
@@ -78,16 +76,9 @@ const ShippingForm = () => {
       phone,
       postalCode,
     };
-    try {
-      const response = await axios.post('/api/v1/order/create-order', body);
-      if (response.data.statusCode !== 201) {
-        throw new Error(response.data.message);
-      }
-      const order = response.data.data;
-      navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
-    } catch (error) {
-      console.log(error);
-    }
+    const { order, user, accessToken } = await createOrderApi(body);
+    setItem('auth', { user, accessToken });
+    navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
   };
 
   const shippingListContent =

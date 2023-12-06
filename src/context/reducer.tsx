@@ -9,7 +9,25 @@ import {
   IShipping,
   OrderStateType,
   OrderActionType,
+  AuthActionType,
+  AuthStateType,
 } from '../utils/interfaces';
+
+export const authReducer = (
+  state: AuthStateType,
+  action: AuthActionType
+): AuthStateType => {
+  switch (action.type) {
+    case 'SET_REDIRECT_PATH': {
+      return { ...state, redirectTo: action.payload };
+    }
+    case 'CLEAR_REDIRECT_PATH': {
+      return { ...state, redirectTo: null };
+    }
+    default:
+      return state;
+  }
+};
 
 export const orderReducer = (
   state: OrderStateType,
@@ -141,11 +159,9 @@ export const cartReducer = (
     case 'CHECK_ALL_PRODUCTS': {
       const { cart } = state;
       let updatedCheckItem: string[] = [];
-
       updatedCheckItem = cart.map((cartItem) => {
         return cartItem.id;
       });
-
       return { ...state, checkedItems: updatedCheckItem };
     }
     case 'TOGGLE_PRODUCT_CHECK_ALL': {

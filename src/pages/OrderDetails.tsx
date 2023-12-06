@@ -6,10 +6,10 @@ import Button from '../components/Button';
 import { PATH } from '../utils/path-constant';
 import Navbar from '../components/Navbar';
 import FadeLoader from 'react-spinners/FadeLoader';
-import { getOrderByIdApi } from '../api/products';
 import OrderSummary from '../components/OrderSummary';
 import { formatDate } from '../utils/date';
 import axios from '../axios/axios';
+import { getOrderByIdApi } from '../api/order';
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -17,7 +17,6 @@ const OrderDetails = () => {
   const [loading, setLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [order, setOrder] = useState<Record<string, any> | null>(null);
-  console.log({ order });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,10 +49,6 @@ const OrderDetails = () => {
       console.log(error);
     }
   };
-
-  console.log({
-    callback_url: `https://${window.location.host}${PATH.ORDER_DETAILS}/${id}`,
-  });
 
   const handleOrderPayment = async (id: string) => {
     try {
@@ -134,6 +129,12 @@ const OrderDetails = () => {
                       <span className="font-bold">Delivery Type: </span>
                       {order.deliveryType}
                     </div>
+                    {order.deliveryType === 'pickup' && (
+                      <div>
+                        <span className="font-bold">Pickup Location: </span>1A,
+                        Providence Mall, Providence Street, Lekki Phase 1, Lagos
+                      </div>
+                    )}
                     {order.deliveryType === 'delivery' && (
                       <div className="gap-2.5 ">
                         <div>

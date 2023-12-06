@@ -312,3 +312,18 @@ export type OrderStateType = {
   postalCode?: string;
   discountCode?: string;
 };
+
+type SetRedirectPath = {
+  type: 'SET_REDIRECT_PATH';
+  payload: string;
+};
+
+type ClearRedirectPath = {
+  type: 'CLEAR_REDIRECT_PATH';
+};
+
+export type AuthActionType = SetRedirectPath | ClearRedirectPath;
+
+export type AuthStateType = {
+  redirectTo?: string | null;
+};

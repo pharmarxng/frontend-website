@@ -3,7 +3,7 @@ import { ChangeEvent, FocusEventHandler, HTMLInputTypeAttribute } from 'react';
 interface InputProps {
   type: HTMLInputTypeAttribute;
   name: string;
-  value: string | ReadonlyArray<string> | number;
+  value?: string | ReadonlyArray<string> | number;
   changed?: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   classDef?: string;

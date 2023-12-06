@@ -15,6 +15,7 @@ const FormButton = ({
   type = 'submit',
   consistent,
   clicked,
+  classDef,
 }: FormButtonProps) => {
   return (
     <button
@@ -27,9 +28,9 @@ const FormButton = ({
           : ''
       } rounded-lg md:h-0 text-white text-xs/5 xs:text-base/5  mdPro:text-xl/6 px-7 ${
         consistent ? 'py-4 ' : 'py-2'
-      } md:px-3 md:py-7 ${
-        consistent ? 'w-auto' : 'w-full'
-      } md:w-auto bg-deepBlue-100 hover:bg-primary-100`}
+      } md:px-3 md:py-7 ${consistent ? 'w-auto' : 'w-full'} ${
+        classDef ? classDef : 'md:w-auto'
+      } bg-deepBlue-100 hover:bg-primary-100 ${classDef}`}
     >
       {children}
     </button>
