@@ -9,9 +9,11 @@ import { signUpApi } from '../api/auth';
 import { setItem } from '../utils/auth';
 import { FadeLoader } from 'react-spinners';
 import { PATH } from '../utils/path-constant';
+import { AlertState } from '../context/alertContext';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { alertDispatch } = AlertState();
   const [loading, setLoading] = useState<boolean>(false);
   const initialState = {
     firstName: '',
@@ -112,16 +114,25 @@ const Signup = () => {
             try {
               setSubmitting(true);
               setLoading(true);
-              const { user, accessToken } = await signUpApi({ ...values });
+              const result = await signUpApi({ ...values }, alertDispatch);
+              if (!result && !result.accessToken) {
+                throw new Error('Something went wrong');
+              }
+              const user = result.user;
+              const accessToken = result.accessToken;
               setItem('auth', { user, accessToken });
               setLoading(false);
               setSubmitting(false);
               resetForm({ values: initialState });
               navigate(`${PATH.HOME}`);
-            } catch (error) {
-              console.log(error);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error: any) {
               setLoading(false);
               setSubmitting(false);
+              alertDispatch({
+                type: 'ALERT_ERROR',
+                payload: error.message,
+              });
             }
           }}
         >

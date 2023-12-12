@@ -17,8 +17,13 @@ import ShippingInfo from '../pages/ShippingInfo';
 import { useEffect } from 'react';
 import OrderDetails from '../pages/OrderDetails';
 import OrderList from '../pages/OrderList';
+import AlertModal from '../components/AlertModal';
+import { AlertState } from '../context/alertContext';
 
 const ManiRoutes = () => {
+  const {
+    alertState: { show },
+  } = AlertState();
   const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -28,8 +33,10 @@ const ManiRoutes = () => {
 
     return null;
   };
+
   return (
     <div className="bg-white min-h-screen">
+      {show && <AlertModal />}
       <BrowserRouter>
         <ScrollToTop />
         <Routes>

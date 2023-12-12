@@ -359,7 +359,11 @@ export const alertReducer = (
   action: AlertActionType
 ): AlertStateType => {
   switch (action.type) {
-    case 'ALERT_SUCCESS' || 'ALERT_ERROR' || 'ALERT_INFO' || 'ALERT_WARNING':
+    case 'ALERT_SUCCESS':
+    case 'ALERT_ERROR':
+    case 'ALERT_INFO':
+    case 'ALERT_WARNING':
+      console.log('It is about to dispacth');
       return {
         ...state,
         type: action.type,
@@ -367,7 +371,7 @@ export const alertReducer = (
         show: true,
       };
     case 'ALERT_CLEAR':
-      return { ...state, type: action.type, show: false };
+      return { ...state, type: '', show: false, message: '' };
     default:
       return state;
   }

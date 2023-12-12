@@ -10,10 +10,12 @@ import OrderSummary from '../components/OrderSummary';
 import { formatDate } from '../utils/date';
 import axios from '../axios/axios';
 import { getOrderByIdApi } from '../api/order';
+import { AlertState } from '../context/alertContext';
 
 const OrderDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { alertDispatch } = AlertState();
   const [loading, setLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [order, setOrder] = useState<Record<string, any> | null>(null);
@@ -22,7 +24,7 @@ const OrderDetails = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const fetchedOrder = await getOrderByIdApi(id!);
+        const fetchedOrder = await getOrderByIdApi(id!, alertDispatch);
         setOrder(fetchedOrder);
       } catch (error) {
         console.error('Error fetching order:', error);
@@ -32,7 +34,7 @@ const OrderDetails = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, alertDispatch]);
 
   const goToShop = () => {
     navigate(PATH.SHOP);

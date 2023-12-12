@@ -10,6 +10,7 @@ import { PATH } from '../../utils/path-constant';
 import { useNavigate } from 'react-router-dom';
 import { createOrderApi, getStandardDeliveryFeesApi } from '../../api/order';
 import { setItem } from '../../utils/auth';
+import { AlertState } from '../../context/alertContext';
 
 const ShippingForm = () => {
   const {
@@ -24,7 +25,7 @@ const ShippingForm = () => {
     },
     orderDispatch,
   } = OrderState();
-
+  const { alertDispatch } = AlertState();
   const {
     cartState: { shippingList, cart, checkedItems, shipping },
     cartDispatch,
@@ -44,7 +45,7 @@ const ShippingForm = () => {
 
   const fetchData = async (params?: Record<string, unknown>) => {
     setLoading(true);
-    await getStandardDeliveryFeesApi(cartDispatch, params);
+    await getStandardDeliveryFeesApi(cartDispatch, alertDispatch, params);
     setLoading(false);
   };
 
@@ -76,9 +77,24 @@ const ShippingForm = () => {
       phone,
       postalCode,
     };
-    const { order, user, accessToken } = await createOrderApi(body);
-    setItem('auth', { user, accessToken });
-    navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
+
+    try {
+      const result = await createOrderApi(body, alertDispatch);
+      if (!result && !result.accessToken) {
+        throw new Error('Something went wrong');
+      }
+      const order = result.order;
+      const user = result.user;
+      const accessToken = result.accessToken;
+      setItem('auth', { user, accessToken });
+      navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.message,
+      });
+    }
   };
 
   const shippingListContent =

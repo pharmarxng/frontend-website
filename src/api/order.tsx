@@ -1,10 +1,11 @@
-import { CartActionType } from '../utils/interfaces';
+import { AlertActionType, CartActionType } from '../utils/interfaces';
 import axios from '../axios/axios';
 
 const orderSubUrl = '/api/v1/order';
 
 export const getOrderByIdApi = async (
   id: string,
+  alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
   const url = `${orderSubUrl}/fetch-order/${id}`;
@@ -15,14 +16,25 @@ export const getOrderByIdApi = async (
     const responseData = response.data.data;
     console.log({ responseData });
     return responseData;
-  } catch (error) {
-    console.log(error);
-    // alertDispatch(alertActions.error(error.response?.data.message));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
   }
 };
 
 export const getStandardDeliveryFeesApi = async (
   dispatch: React.Dispatch<CartActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
   const url = `${orderSubUrl}/get-delivery-fees`;
@@ -36,20 +48,44 @@ export const getStandardDeliveryFeesApi = async (
       type: 'SET_SHIPPING_LIST',
       payload: responseData,
     });
-  } catch (error) {
-    console.log(error);
-    // alertDispatch(alertActions.error(error.response?.data.message));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
   }
 };
 
-export const createOrderApi = async (body: Record<string, unknown>) => {
+export const createOrderApi = async (
+  body: Record<string, unknown>,
+  alertDispatch: React.Dispatch<AlertActionType>
+) => {
   try {
     const response = await axios.post('/api/v1/order/create-order', body);
     if (response.data.statusCode !== 201) {
       throw new Error(response.data.message);
     }
     return response.data.data;
-  } catch (error) {
-    console.log(error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
   }
 };

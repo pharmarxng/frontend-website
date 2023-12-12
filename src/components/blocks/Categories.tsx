@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getCategoriesApi } from '../../api/products';
 import { ICategory } from '../../utils/interfaces';
 import FadeLoader from 'react-spinners/FadeLoader';
+import { AlertState } from '../../context/alertContext';
 
 const Categories = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -11,15 +12,16 @@ const Categories = () => {
     productDispatch,
     productState: { categories },
   } = ProductState();
+  const { alertDispatch } = AlertState();
 
   useEffect(() => {
     const fetchData = async (params?: Record<string, unknown>) => {
       setIsLoading(true);
-      await getCategoriesApi(productDispatch, params);
+      await getCategoriesApi(productDispatch, alertDispatch, params);
       setIsLoading(false);
     };
     fetchData();
-  }, [productDispatch]);
+  }, [productDispatch, alertDispatch]);
 
   const categoriesContent = categories.map((i: ICategory) => {
     return (

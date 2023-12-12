@@ -11,12 +11,14 @@ import FormButton from '../components/FormButton';
 import { FadeLoader } from 'react-spinners';
 import { AuthState } from '../context/authContext';
 import { OrderState } from '../context/orderContext';
+import { AlertState } from '../context/alertContext';
 
 const Login = () => {
   const {
     authtDispatch,
     authState: { redirectTo },
   } = AuthState();
+  const { alertDispatch } = AlertState();
   const { orderDispatch } = OrderState();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
@@ -68,8 +70,17 @@ const Login = () => {
             try {
               setSubmitting(true);
               setLoading(true);
-              const { user, accessToken } = await logInApi({ ...values });
-              setItem('auth', { user, accessToken });
+              const result = await logInApi({ ...values }, alertDispatch);
+
+              if (!result && !result.accessToken) {
+                throw new Error('Something went wrong');
+              }
+              const user = result.user;
+              const accessToken = result.accessToken;
+              setItem('auth', {
+                user: user,
+                accessToken: accessToken,
+              });
               setLoading(false);
               setSubmitting(false);
               resetForm({ values: initialState });
@@ -100,10 +111,14 @@ const Login = () => {
               } else {
                 navigate(`${PATH.HOME}`);
               }
-            } catch (error) {
-              console.log(error);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error: any) {
               setLoading(false);
               setSubmitting(false);
+              alertDispatch({
+                type: 'ALERT_ERROR',
+                payload: error.message,
+              });
             }
           }}
         >

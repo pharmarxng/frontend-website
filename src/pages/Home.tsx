@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { getProductsApi } from '../api/products';
 import { ProductState } from '../context/productContext';
 import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
+import { AlertState } from '../context/alertContext';
 
 const HomeButtonsLinks: ILink[] = [
   { path: '/online-pharmacist', text: 'Talk to a pharmacist' },
@@ -23,6 +24,7 @@ const HomeButtonsLinks: ILink[] = [
 
 const Home = () => {
   const { productDispatch } = ProductState();
+  const { alertDispatch } = AlertState();
   const location = useLocation();
 
   useEffect(() => {
@@ -36,10 +38,10 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async (params?: Record<string, unknown>) => {
-      await getProductsApi(productDispatch, params);
+      await getProductsApi(productDispatch, alertDispatch, params);
     };
     fetchData();
-  }, [productDispatch]);
+  }, [productDispatch, alertDispatch]);
 
   const homeButtonContent = HomeButtonsLinks.map((i, index) => {
     if (i.path === '/prescription' || i.path === '/contact') {

@@ -6,12 +6,14 @@ import NairaWrapper from './NairaWrapper';
 import axios from '../axios/axios';
 import { FormEvent, useState } from 'react';
 import FormButton from './FormButton';
+import { AlertState } from '../context/alertContext';
 
 interface OrderSummaryCardProps {
   bare?: boolean;
 }
 
 const OrderSummaryCard = ({ bare }: OrderSummaryCardProps) => {
+  const { alertDispatch } = AlertState();
   const {
     cartState: { cart, checkedItems, shipping },
   } = CartState();
@@ -43,7 +45,17 @@ const OrderSummaryCard = ({ bare }: OrderSummaryCardProps) => {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response) {
+          alertDispatch({
+            type: 'ALERT_ERROR',
+            payload: error.response.data.message,
+          });
+        } else {
+          alertDispatch({
+            type: 'ALERT_ERROR',
+            payload: 'An error occurred.',
+          });
+        }
       });
   };
   const shippingFee = shipping ? shipping.price : 0;
