@@ -69,9 +69,10 @@ const Home = () => {
     <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
-        <div className="flex justify-center md:hidden mx-7 my-5">
+        <div className="flex justify-center  mx-7 my-5">
           <ProductSearchBar />
         </div>
+        <Categories />
         <div className="relative">
           <div className="flex flex-col md:flex-row">
             <div className="flex flex-col bg-primary-100 px-4 md:px-16">
@@ -88,11 +89,10 @@ const Home = () => {
               />
             </div>
           </div>
-          <div className="hidden md:flex justify-center absolute top-11 left-[35%] w-[30%]">
+          {/* <div className="hidden md:flex justify-center absolute top-11 left-[35%] w-[30%]">
             <ProductSearchBar />
-          </div>
+          </div> */}
         </div>
-        <Categories />
         <EssentialServices />
         <TrendingProducts />
         <Testimonials />

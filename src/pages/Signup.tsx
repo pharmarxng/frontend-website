@@ -115,7 +115,7 @@ const Signup = () => {
               setSubmitting(true);
               setLoading(true);
               const result = await signUpApi({ ...values }, alertDispatch);
-              if (!result && !result.accessToken) {
+              if (!result || !result.accessToken) {
                 throw new Error('Something went wrong');
               }
               const user = result.user;
@@ -129,10 +129,6 @@ const Signup = () => {
             } catch (error: any) {
               setLoading(false);
               setSubmitting(false);
-              alertDispatch({
-                type: 'ALERT_ERROR',
-                payload: error.message,
-              });
             }
           }}
         >
@@ -152,8 +148,8 @@ const Signup = () => {
               <div className="font-normal text-[18px] md:text-[32px]">
                 Sign Up
               </div>
-              <div className="h-[597px] px-[16px] py-[0px]">
-                <div className="grid gap-[8px] text-[14px] md:text-[18px] font-normal h-[48px] rounded-[6px]  border-[#CBD2E0]">
+              <div className="px-[16px] py-[0px]">
+                <div className="flex flex-col space-y-3 gap-[8px] text-[14px] md:text-[18px] font-normal rounded-[6px]  border-[#CBD2E0]">
                   <div>
                     <Label label="First Name*" />
                     <Input

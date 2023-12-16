@@ -72,7 +72,7 @@ const Login = () => {
               setLoading(true);
               const result = await logInApi({ ...values }, alertDispatch);
 
-              if (!result && !result.accessToken) {
+              if (!result || !result.accessToken) {
                 throw new Error('Something went wrong');
               }
               const user = result.user;
@@ -115,10 +115,6 @@ const Login = () => {
             } catch (error: any) {
               setLoading(false);
               setSubmitting(false);
-              alertDispatch({
-                type: 'ALERT_ERROR',
-                payload: error.message,
-              });
             }
           }}
         >
@@ -144,8 +140,8 @@ const Login = () => {
                 sign in.
               </div>
 
-              <div className="h-[253px] mt-[32px] ">
-                <div className="h-[160px] py-0 px-[16px]">
+              <div className="h-[253px] mt-[32px]">
+                <div className="h-[160px] py-0 px-[16px] flex flex-col space-y-3">
                   <div className="">
                     <Label label="Email*" />
                     <Input
