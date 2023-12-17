@@ -14,3 +14,12 @@ export const setItem = (key: string, token: any) => {
 export const removeItem = (key: string) => {
   localStorage.removeItem(key);
 };
+
+export const isAthenticated = () => {
+  const result = getItem('auth');
+  return result && result.user ? true : false;
+};
+
+export const logout = () => {
+  removeItem('auth');
+};

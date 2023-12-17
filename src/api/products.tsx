@@ -135,7 +135,7 @@ export const getCategoriesApi = async (
 
 export const getSingleCategorysApi = async (
   dispatch: React.Dispatch<ProductActionType>,
-  alertDispatch: React.Dispatch<AlertActionType>,
+  _alertDispatch: React.Dispatch<AlertActionType>,
   categoryId: string,
   params?: Record<string, unknown>
 ) => {
@@ -152,16 +152,16 @@ export const getSingleCategorysApi = async (
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    if (error.response) {
-      alertDispatch({
-        type: 'ALERT_ERROR',
-        payload: error.response.data.message,
-      });
-    } else {
-      alertDispatch({
-        type: 'ALERT_ERROR',
-        payload: 'An error occurred.',
-      });
-    }
+    // if (error.response) {
+    //   alertDispatch({
+    //     type: 'ALERT_ERROR',
+    //     payload: error.response.data.message,
+    //   });
+    // } else {
+    //   alertDispatch({
+    //     type: 'ALERT_ERROR',
+    //     payload: 'An error occurred.',
+    //   });
+    // }
   }
 };

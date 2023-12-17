@@ -11,11 +11,13 @@ import { formatDate } from '../utils/date';
 import axios from '../axios/axios';
 import { getOrderByIdApi } from '../api/order';
 import { AlertState } from '../context/alertContext';
+import { OrderState } from '../context/orderContext';
 
 const OrderDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { alertDispatch } = AlertState();
+  const { orderDispatch } = OrderState();
   const [loading, setLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [order, setOrder] = useState<Record<string, any> | null>(null);
@@ -24,7 +26,11 @@ const OrderDetails = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const fetchedOrder = await getOrderByIdApi(id!, alertDispatch);
+        const fetchedOrder = await getOrderByIdApi(
+          id!,
+          orderDispatch,
+          alertDispatch
+        );
         setOrder(fetchedOrder);
       } catch (error) {
         console.error('Error fetching order:', error);
@@ -34,7 +40,7 @@ const OrderDetails = () => {
     };
 
     fetchData();
-  }, [id, alertDispatch]);
+  }, [id, alertDispatch, orderDispatch]);
 
   const goToShop = () => {
     navigate(PATH.SHOP);
@@ -123,6 +129,10 @@ const OrderDetails = () => {
                     </div>
                   )}
                   <div className="flex flex-col gap-2.5 px-[17px] py-[22px] text-sm md:text-lg bg-grey-400">
+                    <div>
+                      <span className="font-bold">Orderid: </span>#
+                      {order.orderId}
+                    </div>
                     <div>
                       <span className="font-bold">Email: </span>
                       {order.email}

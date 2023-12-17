@@ -4,7 +4,7 @@ import FormButton from '../FormButton';
 import Input from '../Input';
 import Label from '../Label';
 import { CartState } from '../../context/cartContext';
-import { IProducts, IShipping } from '../../utils/interfaces';
+import { IProducts, IOrderDeliveryFees } from '../../utils/interfaces';
 import { FadeLoader } from 'react-spinners';
 import { PATH } from '../../utils/path-constant';
 import { useNavigate } from 'react-router-dom';
@@ -80,7 +80,7 @@ const ShippingForm = () => {
 
     try {
       const result = await createOrderApi(body, alertDispatch);
-      if (!result && !result.accessToken) {
+      if (!result || !result.accessToken) {
         throw new Error('Something went wrong');
       }
       const order = result.order;
@@ -90,16 +90,13 @@ const ShippingForm = () => {
       navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      alertDispatch({
-        type: 'ALERT_ERROR',
-        payload: error.message,
-      });
+      console.log(error);
     }
   };
 
   const shippingListContent =
     shippingList &&
-    shippingList.map((i: IShipping) => {
+    shippingList.map((i: IOrderDeliveryFees) => {
       return (
         <div
           key={i.id}
