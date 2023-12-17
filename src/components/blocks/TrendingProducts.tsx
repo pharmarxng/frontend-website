@@ -3,19 +3,21 @@ import { ProductState } from '../../context/productContext';
 import { IProducts } from '../../utils/interfaces';
 import ProductCard from '../ProductCard';
 import { getTrendingProductsApi } from '../../api/products';
+import { AlertState } from '../../context/alertContext';
 
 const TrendingProducts = () => {
   const {
     productDispatch,
     productState: { trendingProducts },
   } = ProductState();
+  const { alertDispatch } = AlertState();
 
   useEffect(() => {
     const fetchData = async () => {
-      await getTrendingProductsApi(productDispatch);
+      await getTrendingProductsApi(productDispatch, alertDispatch);
     };
     fetchData();
-  }, [productDispatch]);
+  }, [productDispatch, alertDispatch]);
 
   const productsContent = trendingProducts.map(
     (i: IProducts, index: number) => {

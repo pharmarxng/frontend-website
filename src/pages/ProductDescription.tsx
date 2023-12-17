@@ -8,10 +8,11 @@ import Footer from '../components/blocks/Footer';
 import ProductDescriptionBlock from '../components/blocks/ProductDescriptionBlock';
 import { ProductState } from '../context/productContext';
 import RecentlyViewedProducts from '../components/blocks/RecentlyViewedProducts';
+import { AlertState } from '../context/alertContext';
 
 const ProductDescription = () => {
   const { productId } = useParams();
-
+  const { alertDispatch } = AlertState();
   const {
     productDispatch,
     productState: { product },
@@ -19,7 +20,7 @@ const ProductDescription = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getProductByIdApi(productDispatch, productId!);
+      await getProductByIdApi(productDispatch, alertDispatch, productId!);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

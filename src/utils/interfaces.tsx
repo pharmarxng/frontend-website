@@ -4,13 +4,85 @@ export interface ILink {
   icon?: string;
 }
 
-export interface IShipping {
-  location: string;
-  price: number;
-  id: string;
+export enum DeliveryType {
+  pickup = 'pickup',
+  delivery = 'delivery',
 }
 
-export interface IOrderProducts {
+export enum PAYMENT_TYPE {
+  CARD_PAYMENT = 'card',
+  CASH = 'cash',
+  BANK_TRANSFER = 'bank_transfer',
+  USSD = 'ussd',
+  QR = 'qr',
+  BANK = 'bank',
+}
+
+export enum OrderStatus {
+  ONGOING = 'ongoing',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled',
+}
+
+interface IDefaultMongoFields {
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface IOrder extends IDefaultMongoFields {
+  id: string;
+  email: string;
+  orderId?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: string;
+  city?: string;
+  phone?: string;
+  postalCode?: string;
+  subTotal: number;
+  discountVoucher?: string | IOrderDiscountVoucher;
+  deliveryFee?: string | IOrderDeliveryFees;
+  total: number;
+  deliveryType: DeliveryType;
+  isPaid: boolean;
+  paymentType?: PAYMENT_TYPE;
+  authorization_url?: string;
+  payment_reference?: string;
+  status: OrderStatus;
+  products: IOrderedProducts[];
+  user: string | IUser;
+}
+
+export interface IUser extends IDefaultMongoFields {
+  id: string;
+  firstName: string;
+  lastName: string;
+  userName?: string;
+  address?: string;
+  email: string;
+  phone?: string;
+  password: string;
+}
+
+export interface IOrderedProducts extends IDefaultMongoFields {
+  id: string;
+  productId: string;
+  quantity: number;
+}
+
+export interface IOrderDiscountVoucher extends IDefaultMongoFields {
+  id: string;
+  discountCode: string;
+  percentage: number;
+}
+
+export interface IOrderDeliveryFees extends IDefaultMongoFields {
+  id: string;
+  location: string;
+  price: number;
+}
+
+export interface IOrderProducts extends IDefaultMongoFields {
   productId: string;
   quantity: number;
 }
@@ -25,7 +97,7 @@ export interface IOnlinePharmacyCardProps {
   description: string;
 }
 
-export interface IProducts {
+export interface IProducts extends IDefaultMongoFields {
   id: string;
   name: string;
   price: number;
@@ -41,7 +113,7 @@ export interface IProducts {
   noOfUnitsToPurchase?: number;
 }
 
-export interface ICategory {
+export interface ICategory extends IDefaultMongoFields {
   id: string;
   name: string;
   description: string;
@@ -80,12 +152,12 @@ type CheckAllProductsAction = {
 
 type SetShippingListAction = {
   type: 'SET_SHIPPING_LIST';
-  payload: IShipping[];
+  payload: IOrderDeliveryFees[];
 };
 
 type SetShippingAction = {
   type: 'SET_SHIPPING';
-  payload: IShipping;
+  payload: IOrderDeliveryFees;
 };
 
 export type CartActionType =
@@ -102,8 +174,8 @@ export type CartActionType =
 export type CartStateType = {
   cart: IProducts[];
   checkedItems: string[];
-  shipping?: IShipping;
-  shippingList?: IShipping[];
+  shipping?: IOrderDeliveryFees;
+  shippingList?: IOrderDeliveryFees[];
 };
 
 export type ProductStateType = {
@@ -299,9 +371,16 @@ export type OrderActionType =
   | SetCityAction
   | SetPhoneAction
   | SetPostalCodeAction
-  | SetDiscountCodeAction;
+  | SetDiscountCodeAction
+  | GetOrdersAction
+  | GetSingleOrderAction
+  | SearchFilterAction;
 
 export type OrderStateType = {
+  orders?: IOrder[];
+  searchQuery?: string;
+  order?: IOrder;
+  pagination?: unknown;
   email?: string;
   deliveryType?: 'pickup' | 'delivery';
   firstName?: string;
@@ -311,6 +390,29 @@ export type OrderStateType = {
   phone?: string;
   postalCode?: string;
   discountCode?: string;
+};
+
+type GetOrdersAction = {
+  type: 'GET_ORDERS';
+  payload: {
+    docs: IOrder[];
+    totalDocs: number;
+    limit: number;
+    hasPrevPage: boolean;
+    hasNextPage: boolean;
+    page?: number | undefined;
+    totalPages: number;
+    offset: number;
+    prevPage?: number | null | undefined;
+    nextPage?: number | null | undefined;
+    pagingCounter: number;
+    // meta?: any;
+  };
+};
+
+type GetSingleOrderAction = {
+  type: 'GET_SINGLE_ORDER';
+  payload: IOrder;
 };
 
 type SetRedirectPath = {

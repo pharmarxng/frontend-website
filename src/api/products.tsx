@@ -1,11 +1,12 @@
 import axios from '../axios/axios';
-import { ProductActionType } from '../utils/interfaces';
+import { AlertActionType, ProductActionType } from '../utils/interfaces';
 
 const productSubUrl = '/api/v1/product';
 const categorySubUrl = '/api/v1/category';
 
 export const getProductsApi = async (
   dispatch: React.Dispatch<ProductActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
   const url = productSubUrl + '/get-all';
@@ -20,14 +21,25 @@ export const getProductsApi = async (
       type: 'GET_PRODUCTS',
       payload: responseData,
     });
-  } catch (error) {
-    console.log(error);
-    // alertDispatch(alertActions.error(error.response?.data.message));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
   }
 };
 
 export const getProductByIdApi = async (
   dispatch: React.Dispatch<ProductActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>,
   productId: string
 ) => {
   const url = `${productSubUrl}/${productId}`;
@@ -44,14 +56,25 @@ export const getProductByIdApi = async (
       type: 'SET_RECENT_PRODUCTS',
       payload: responseData,
     });
-  } catch (error) {
-    console.log(error);
-    // alertDispatch(alertActions.error(error.response?.data.message));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
   }
 };
 
 export const getTrendingProductsApi = async (
-  dispatch: React.Dispatch<ProductActionType>
+  dispatch: React.Dispatch<ProductActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>
 ) => {
   const url = productSubUrl + '/get-trending-products';
   try {
@@ -62,14 +85,25 @@ export const getTrendingProductsApi = async (
       type: 'GET_TRENDING_PRODUCTS',
       payload: responseData,
     });
-  } catch (error) {
-    console.log(error);
-    // alertDispatch(alertActions.error(error.response?.data.message));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
   }
 };
 
 export const getCategoriesApi = async (
   dispatch: React.Dispatch<ProductActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
   const url = categorySubUrl + '/get-all';
@@ -83,14 +117,25 @@ export const getCategoriesApi = async (
       type: 'GET_CATEGORIES',
       payload: responseData,
     });
-  } catch (error) {
-    console.log(error);
-    // alertDispatch(alertActions.error(error.response?.data.message));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
   }
 };
 
 export const getSingleCategorysApi = async (
   dispatch: React.Dispatch<ProductActionType>,
+  _alertDispatch: React.Dispatch<AlertActionType>,
   categoryId: string,
   params?: Record<string, unknown>
 ) => {
@@ -105,8 +150,18 @@ export const getSingleCategorysApi = async (
       type: 'GET_SINGLE_CATEGORY',
       payload: responseData,
     });
-  } catch (error) {
-    console.log(error);
-    // alertDispatch(alertActions.error(error.response?.data.message));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    // if (error.response) {
+    //   alertDispatch({
+    //     type: 'ALERT_ERROR',
+    //     payload: error.response.data.message,
+    //   });
+    // } else {
+    //   alertDispatch({
+    //     type: 'ALERT_ERROR',
+    //     payload: 'An error occurred.',
+    //   });
+    // }
   }
 };
