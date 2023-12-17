@@ -68,7 +68,7 @@ const PickupDetailsBlock = ({
     };
     try {
       const result = await createOrderApi(body, alertDispatch);
-      if (!result && !result.accessToken) {
+      if (!result || !result.accessToken) {
         throw new Error('Something went wrong');
       }
       const order = result.order;
