@@ -1,23 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { authLinks, links } from '../utils/constants';
-import { Popover } from '@blueprintjs/core';
 import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
 import { ILink } from '../utils/interfaces';
 import { isAthenticated, logout } from '../utils/auth';
 import { PATH } from '../utils/path-constant';
-import { useState } from 'react';
 import ProductSearchBar from './ProductSearchBar';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<boolean>(false);
-
   const authVerifiedLinksForSmallScreens = !isAthenticated()
     ? authLinks.slice(2, 4)
     : authLinks.slice(3);
 
   const handleLogout = () => {
-    setOpen(false);
     logout();
     navigate(PATH.HOME);
   };
@@ -60,42 +55,26 @@ const Navbar = () => {
         return (
           <div
             key={link.path}
-            className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10"
+            className="relative group flex justify-center h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10"
           >
-            <Popover
-              interactionKind="click"
-              popoverClassName="pt-popover-content-sizing"
-              placement="bottom"
-              hasBackdrop={true}
-              isOpen={open}
-              onInteraction={(nextOpenState) => setOpen(nextOpenState)}
-              content={
-                <div className="text-black bg-white flex flex-col shadow-sm">
-                  <div className="border-b border-greyBorder-200">
-                    {handleLinkRendering(
-                      'flex items-center bg-white text-sm px-5 py-4 hover:shadow-sm hover:bg-gray-300',
-                      links
-                    )}
-                  </div>
-                  <div>
-                    {handleLinkRendering(
-                      'flex items-center bg-white text-sm px-5 py-4 hover:shadow-sm hover:bg-gray-300',
-                      authVerifiedLinksForSmallScreens
-                    )}
-                  </div>
-                </div>
-              }
-              onClosed={() => setOpen(false)}
-              renderTarget={({ ...targetProps }) => (
-                <div className="hover:cursor-pointer">
-                  <img
-                    src={`/svg/${link.icon}.svg`}
-                    alt={link.text}
-                    {...targetProps}
-                  />
-                </div>
-              )}
-            />
+            <div className="hover:cursor-pointer">
+              <img src={`/svg/${link.icon}.svg`} alt={link.text} />
+            </div>
+
+            <div className="hidden group-hover:flex absolute top-full z-50 text-black bg-white whitespace-nowrap flex-col shadow-sm">
+              <div className="border-b border-greyBorder-200">
+                {handleLinkRendering(
+                  'flex items-center bg-white text-sm px-5 py-4 hover:shadow-sm hover:bg-gray-300',
+                  links
+                )}
+              </div>
+              <div>
+                {handleLinkRendering(
+                  'flex items-center bg-white text-sm px-5 py-4 hover:shadow-sm hover:bg-gray-300',
+                  authVerifiedLinksForSmallScreens
+                )}
+              </div>
+            </div>
           </div>
         );
       }
