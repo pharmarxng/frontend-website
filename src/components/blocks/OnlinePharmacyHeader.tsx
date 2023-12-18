@@ -7,15 +7,15 @@ const OnlinePharmacyHeader = () => {
         <img
           src="/svg/pharmConsultant.svg"
           alt="Online Consultant"
-          className="z-20"
+          className=""
         />
-        <div className="grid grid-cols-4 absolute left-8 top-0 mt-5 mdPro:mt-12 mdLite:mt-24 lg:mt-36 xl:mt-44 z-40 text-black">
+        <div className="grid grid-cols-4 absolute left-8 top-0 mt-5 mdPro:mt-12 mdLite:mt-24 lg:mt-36 xl:mt-44  text-black">
           <div className="col-span-3">
             <HeaderDiv />
           </div>
           <div>{''}</div>
         </div>
-        <div className="absolute z-40 bottom-[-100px] left-[10%] shadow-sm w-[80%]">
+        <div className="absolute bottom-[-100px] left-[10%] shadow-sm w-[80%]">
           <OnlinePharmacyForm />
         </div>
       </div>

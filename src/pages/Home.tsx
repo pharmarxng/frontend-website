@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import ProductSearchBar from '../components/ProductSearchBar';
 import { ILink } from '../utils/interfaces';
 import Categories from '../components/blocks/Categories';
 import EssentialServices from '../components/blocks/EssentialServices';
@@ -69,9 +68,7 @@ const Home = () => {
     <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
-        <div className="flex justify-center  mx-7 my-5">
-          <ProductSearchBar />
-        </div>
+        {/* <div className="flex justify-center  mx-7 my-5"></div> */}
         <Categories />
         <div className="relative">
           <div className="flex flex-col md:flex-row">
@@ -89,9 +86,6 @@ const Home = () => {
               />
             </div>
           </div>
-          {/* <div className="hidden md:flex justify-center absolute top-11 left-[35%] w-[30%]">
-            <ProductSearchBar />
-          </div> */}
         </div>
         <EssentialServices />
         <TrendingProducts />
