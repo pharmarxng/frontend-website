@@ -7,7 +7,6 @@ const AlertModal = () => {
     alertState: { type, message, show },
     alertDispatch,
   } = AlertState();
-  console.log({ show });
   const handleClose = () => {
     alertDispatch({ type: 'ALERT_CLEAR' });
   };

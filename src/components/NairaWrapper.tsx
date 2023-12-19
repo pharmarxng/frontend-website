@@ -11,7 +11,7 @@ const NairaWrapper = ({ children, classDef }: NairaWrapperProps) => {
       <img
         src="/svg/naira.svg"
         alt="naira"
-        className="w-5 h-5 sm:w-6 sm:h-6 mr-1"
+        className="w-3 h-3 sm:w-6 sm:h-6 mr-1"
       />
       {children}
     </div>

@@ -104,7 +104,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen text-black">
+    <div className="bg-white text-black pb-5">
       <Navbar />
       <div className="flex item-center mt-[30px] px-[30px] py-[0px]">
         <Formik

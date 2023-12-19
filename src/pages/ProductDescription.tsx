@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { getProductByIdApi } from '../api/products';
 import Navbar from '../components/Navbar';
 import PaddedWrapper from '../components/PaddedWrapper';
-import SearchBar from '../components/SearchBar';
 import Footer from '../components/blocks/Footer';
 import ProductDescriptionBlock from '../components/blocks/ProductDescriptionBlock';
 import { ProductState } from '../context/productContext';
@@ -30,9 +29,6 @@ const ProductDescription = () => {
     <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
-        <div className="flex justify-center my-7">
-          <SearchBar />
-        </div>
         {product && <ProductDescriptionBlock product={product} />}
         <RecentlyViewedProducts currentLyViewedProductId={productId} />
         <Footer />

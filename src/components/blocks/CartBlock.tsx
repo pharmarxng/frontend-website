@@ -158,14 +158,17 @@ const CartBlock = () => {
           </div>
         </div>
       ) : (
-        <div className="text-center text-base/5 sm:text-2xl">
-          Opps... You have nothing in your cart yet
+        <div className="text-center text-base/5 sm:text-2xl flex flex-col space-y-3">
+          <div className=" text-xl">Your cart is empty!</div>
+          <div className=" text-base">
+            Browse our categories and discover our best deals!
+          </div>
           <div className="flex justify-center mt-2">
             <Button
               onclick={goToShop}
               buttonStyle="bg-deepBlue-100 text-white px-2"
             >
-              Continue Shopping
+              Start Shopping
             </Button>
           </div>
         </div>
