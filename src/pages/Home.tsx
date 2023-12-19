@@ -14,6 +14,7 @@ import { getProductsApi } from '../api/products';
 import { ProductState } from '../context/productContext';
 import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
 import { AlertState } from '../context/alertContext';
+import FlashSales from '../components/blocks/FlashSales';
 
 const HomeButtonsLinks: ILink[] = [
   { path: '/online-pharmacist', text: 'Talk to a pharmacist' },
@@ -68,7 +69,7 @@ const Home = () => {
     <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
-        {/* <div className="flex justify-center  mx-7 my-5"></div> */}
+        <FlashSales />
         <Categories />
         <div className="relative">
           <div className="flex flex-col md:flex-row">

@@ -113,7 +113,7 @@ const ProductListsingsBlock = ({
       ) : (
         <div>
           {products.length ? (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4">
               {content}
             </div>
           ) : (

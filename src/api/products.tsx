@@ -101,6 +101,30 @@ export const getTrendingProductsApi = async (
   }
 };
 
+export const getFlashProductsApi = async (
+  alertDispatch: React.Dispatch<AlertActionType>
+) => {
+  const url = productSubUrl + '/get-flash-products';
+  try {
+    const response = await axios.get(url);
+    return response.data.data;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
+  }
+};
+
 export const getCategoriesApi = async (
   dispatch: React.Dispatch<ProductActionType>,
   alertDispatch: React.Dispatch<AlertActionType>,

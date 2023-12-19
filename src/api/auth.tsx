@@ -14,7 +14,6 @@ export const logInApi = async (
     return responseData;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    console.log({ error });
     if (error.response) {
       alertDispatch({
         type: 'ALERT_ERROR',
