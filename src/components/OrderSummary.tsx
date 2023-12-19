@@ -9,7 +9,6 @@ interface OrderSummaryProps {
 }
 
 const OrderSummary = ({ order, bare, classDef }: OrderSummaryProps) => {
-  console.log({ order });
   return (
     <BorderedWrappper
       classDef={`px-5 pt-5 pb-12 pb-8 md:px-8 text-base/6 md:text-lg/6 my-7 md:my-0 ${

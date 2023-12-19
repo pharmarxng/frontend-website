@@ -19,4 +19,5 @@ export const PATH = {
   ORDER_DETAILS: '/order-details',
   ORDER_LIST: '/order-list',
   LOGOUT: '/logout',
+  AUTH: '/auth',
 };

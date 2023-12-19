@@ -28,18 +28,22 @@ const ProductSearchBar = () => {
 
   return (
     <form
-      className={`flex justify-between bg-white text-black w-full md:w-80 px-4 border-solid border-2`}
+      className={`flex justify-between items-center h-auto bg-white text-black w-full md:w-auto px-4 border-solid border-2`}
       onSubmit={handleFormSubmit}
     >
       <input
         placeholder="Search for products"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-[85%] border-none focus:outline-none dark:text-black dark:bg-white"
+        className="w-[85%] border-none focus:outline-none dark:text-black dark:bg-white placeholder:text-sm sm:placeholder:text-base md:placeholder:text-xl placeholder:items-center"
       />
-      <div onClick={handleSearchSubmit}>
-        <img src="/svg/search_icon.svg" alt="Search" />
-      </div>
+
+      <img
+        onClick={handleSearchSubmit}
+        src="/svg/search_icon.svg"
+        alt="Search"
+        className="h-8 w-8 md:w-10 md:h-10 items-center"
+      />
     </form>
   );
 };

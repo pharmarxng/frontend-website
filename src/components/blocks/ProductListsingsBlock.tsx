@@ -78,7 +78,7 @@ const ProductListsingsBlock = ({
   return (
     <div className="text-black">
       {categoryId && (
-        <div className="text-2xl/7 sm:text-4xl md:text-header text-deepBlue-100 mb-5 md:mb-8">
+        <div className="text-2xl/7 sm:text-4xl md:text-header text-deepBlue-100 mb-5 md:mb-8 mt-2 md:mt-5">
           {category?.name}
         </div>
       )}
@@ -113,7 +113,7 @@ const ProductListsingsBlock = ({
       ) : (
         <div>
           {products.length ? (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4">
               {content}
             </div>
           ) : (

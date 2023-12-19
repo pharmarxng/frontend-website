@@ -391,7 +391,6 @@ export const alertReducer = (
     case 'ALERT_ERROR':
     case 'ALERT_INFO':
     case 'ALERT_WARNING':
-      console.log('It is about to dispacth');
       return {
         ...state,
         type: action.type,
