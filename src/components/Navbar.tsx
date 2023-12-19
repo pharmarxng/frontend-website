@@ -1,18 +1,32 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { authLinks, links } from '../utils/constants';
 import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
-import { ILink } from '../utils/interfaces';
-import { isAthenticated, logout } from '../utils/auth';
+import { ILink, IUser } from '../utils/interfaces';
+import { getItem, isAthenticated, logout } from '../utils/auth';
 import { PATH } from '../utils/path-constant';
 import ProductSearchBar from './ProductSearchBar';
+import { useEffect, useState } from 'react';
+import { formatString } from '../utils/string';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const authVerifiedLinksForSmallScreens = !isAthenticated()
+  const [authenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState<IUser | null>();
+  useEffect(() => {
+    const authenticated = isAthenticated();
+    setAuthenticated(authenticated);
+    if (authenticated) {
+      const { user } = getItem('auth');
+      setUser(user);
+    }
+  }, [authenticated]);
+
+  const authVerifiedLinksForSmallScreens = !authenticated
     ? authLinks.slice(2, 4)
     : authLinks.slice(3);
 
   const handleLogout = () => {
+    setAuthenticated(false);
     logout();
     navigate(PATH.HOME);
   };
@@ -57,11 +71,22 @@ const Navbar = () => {
             key={link.path}
             className="relative group flex justify-center h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10"
           >
-            <div className="hover:cursor-pointer">
+            <div className="hover:cursor-pointer flex flex-row items-center">
               <img src={`/svg/${link.icon}.svg`} alt={link.text} />
             </div>
 
             <div className="hidden group-hover:flex absolute top-full z-50 text-black bg-white whitespace-nowrap flex-col shadow-sm">
+              {authenticated && (
+                <div className="text-sm px-5 py-2 font-semibold">
+                  <div className="flex flex-row space-x-2">
+                    <div className="flex flex-row space-x-1">
+                      <div>Hi, </div>
+                      <div>{`${formatString(user!.firstName)}`}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="border-b border-greyBorder-200">
                 {handleLinkRendering(
                   'flex items-center bg-white text-sm px-5 py-4 hover:shadow-sm hover:bg-gray-300',

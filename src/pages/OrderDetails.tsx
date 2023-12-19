@@ -12,6 +12,7 @@ import axios from '../axios/axios';
 import { getOrderByIdApi } from '../api/order';
 import { AlertState } from '../context/alertContext';
 import { OrderState } from '../context/orderContext';
+import { formatString } from '../utils/string';
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -135,11 +136,11 @@ const OrderDetails = () => {
                     </div>
                     <div>
                       <span className="font-bold">Email: </span>
-                      {order.email}
+                      {formatString(order.email)}
                     </div>
                     <div>
                       <span className="font-bold">Delivery Type: </span>
-                      {order.deliveryType}
+                      {formatString(order.deliveryType)}
                     </div>
                     {order.deliveryType === 'pickup' && (
                       <div>
@@ -151,15 +152,17 @@ const OrderDetails = () => {
                       <div className="gap-2.5 ">
                         <div>
                           <span className="font-bold">Full name: </span>
-                          {`${order.firstName} ${order.lastName}`}
+                          {`${formatString(order.firstName)} ${formatString(
+                            order.lastName
+                          )}`}
                         </div>
                         <div>
                           <span className="font-bold">Address: </span>
-                          {order.address}
+                          {formatString(order.address)}
                         </div>
                         <div>
                           <span className="font-bold">City: </span>
-                          {order.city}
+                          {formatString(order.city)}
                         </div>
                       </div>
                     )}
