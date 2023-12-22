@@ -1,9 +1,20 @@
-import { PageWrapper } from "../../components";
+import { PageWrapper, DatePicker } from "../../components";
 import { TableConfig as config, IRow, IColumn } from "./TableConfig";
 import { data } from "./static";
+// import { Range } from 'react-date-range';
+// import { useState } from 'react';
+
 
 const Orders = (): JSX.Element => {
     const { columns = [], rows = [] } = config(data) || {};
+
+    // const [date, setDate] = useState<Range[]>([
+    //     {
+    //         startDate: new Date(),
+    //         endDate: undefined,
+    //         key: 'selection'
+    //     }
+    // ])
 
     function checkAll(): void {
         let elements = document.getElementsByTagName('input') ?? [];
@@ -16,9 +27,9 @@ const Orders = (): JSX.Element => {
     return (
         <PageWrapper>
             <div className="flex-1 min-h-screen p-12">
-                <header className="flex flex-row justify-between mb-7">
+                <header className="flex flex-row justify-between mb-7 items-center">
                     <h2 className="text-2xl text-black font-bold">Orders</h2>
-                    <div>Dropdown</div>
+                    <DatePicker />
                 </header>
 
                 <table className="bg-white w-full ">
