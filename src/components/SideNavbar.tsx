@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { A } from '../assets/svg';
 
 
 const SideNavbar = (): JSX.Element => {
@@ -19,7 +18,7 @@ const SideNavbar = (): JSX.Element => {
                 <div>
                     <img src="/images/pharmarxlogo.png" alt='pharmarx' className="h-30 w-28 mx-auto mb-10" />
                     {
-                        links.map((link, id) =>
+                        links.map((link: string[], id: number) =>
                             <a href={`${link[1]}`}
                                 key={`link-${id}`}
                                 className="text-[#808191] text-base bg-[#d9e0e7] flex items-center my-3 rounded-2xl flex items-start p-3 no-underline hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
