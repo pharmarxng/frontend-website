@@ -17,6 +17,7 @@ const SideNavbar = (): JSX.Element => {
         <nav className="flex-none h-screen overflow-hidden w-1/5 bg-white px-5 py-8">
             <div className="flex flex-col justify-between h-full">
                 <div>
+                    <img src="/images/pharmarxlogo.png" alt='pharmarx' className="h-30 w-28 mx-auto mb-10" />
                     {
                         links.map((link, id) =>
                             <a href={`${link[1]}`}
@@ -29,7 +30,7 @@ const SideNavbar = (): JSX.Element => {
                     }
                 </div>
 
-                <div>
+                <div className="mb-20">
                     <span className="text-[#808191] bg-[#d9e0e7] flex flex-row justify-between my-3 rounded-2xl flex items-start p-3 no-underline hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
                     >
                         <p className="text-base flex justify-start items-center">Settings</p>
