@@ -14,10 +14,10 @@ export interface IColumn {
 };
 
 let colors = {
-    pending: 'red',
+    pending: '#fc9a2e',
     delivered: '#4ce13f',
     cancelled: '#ef0606'
-}
+};
 
 export const TableConfig = (rows: never[] | IRow[] = []) => ({
     columns: [
@@ -42,12 +42,12 @@ export const TableConfig = (rows: never[] | IRow[] = []) => ({
             title: 'Status',
             key: 'status',
             template: (row: IRow): JSX.Element =>
-                <span className="flex flex-row items-center">
+                <span className="flex flex-row items-center gap-1">
                     <div
                         style={{ backgroundColor: colors[row.status as keyof typeof colors] }}
                         className={`rounded-full w-2 h-2`}
                     />
-                    <p className="text-sm">{row.status}</p>
+                    <p className="text-base capitalize">{row.status}</p>
                 </span>
         },
         {

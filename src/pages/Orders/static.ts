@@ -28,7 +28,7 @@ export const data = [
         product: 'Strepsils',
         date: '28/09/2023',
         customer: 'John Doe',
-        status: 'canceled',
+        status: 'cancelled',
         amount: '500',
     },
     {
@@ -60,7 +60,7 @@ export const data = [
         product: 'Strepsils',
         date: '28/09/2023',
         customer: 'John Doe',
-        status: 'canceled',
+        status: 'cancelled',
         amount: '500',
     }
 ]
