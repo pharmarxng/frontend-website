@@ -15,6 +15,7 @@ import ShippingInfo from "./ShippingInfo";
 import OrderDetails from "./OrderDetails";
 import OrderList from "./OrderList";
 import Panel from './Panel';
+import Orders from "./Orders";
 
 export {
   Home,
@@ -33,5 +34,6 @@ export {
   OrderDetails,
   ShippingInfo,
   OrderList,
-  Panel
+  Panel,
+  Orders
 };

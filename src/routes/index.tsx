@@ -20,7 +20,8 @@ import {
   OrderDetails,
   ShippingInfo,
   OrderList,
-  Panel
+  Panel,
+  Orders
 } from '../pages';
 
 
@@ -73,6 +74,7 @@ const ManiRoutes = () => {
           <Route path={PATH.ADMIN} element={<AdminWrapper />}>
             <Route index element={<h1 className='text-black'>Pending...</h1>} />
             <Route path={PATH.PANEL} element={<Panel />} />
+            <Route path={PATH.ORDERS} element={<Orders />} />
           </Route>
         </Routes>
       </BrowserRouter>
