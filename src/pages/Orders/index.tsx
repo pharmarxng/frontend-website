@@ -5,6 +5,14 @@ import { data } from "./static";
 const Orders = (): JSX.Element => {
     const { columns = [], rows = [] } = config(data) || {};
 
+    function checkAll(): void {
+        let elements = document.getElementsByTagName('input') ?? [];
+        elements[0].checked = !elements[0].checked;
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].checked = !elements[i].checked;
+        }
+    };
+
     return (
         <PageWrapper>
             <div className="flex-1 min-h-screen p-12">
@@ -17,7 +25,7 @@ const Orders = (): JSX.Element => {
                     <thead>
                         <tr className="h-20 border-solid border-b">
                             <th className="p-2">
-                                <input type="checkbox" className="bg-white w-6 h-6" />
+                                <input type="checkbox" className="bg-white w-6 h-6" onClick={() => checkAll()} />
                             </th>
                             {
                                 columns.map((header: IColumn, id: number) =>
