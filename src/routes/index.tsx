@@ -84,10 +84,12 @@ const ManiRoutes = () => {
 
 const AdminWrapper = () => {
   return (
-    <Container className='flex h-100'>
-      <SideNavbar />
-      <Outlet />
-    </Container>
+    <div className='h-screen overflow-hidden'>
+      <Container className='flex h-100'>
+        <SideNavbar />
+        <Outlet />
+      </Container>
+    </div>
   )
 }
 

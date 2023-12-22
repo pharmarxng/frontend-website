@@ -10,6 +10,7 @@ const Orders = (): JSX.Element => {
                 <h2 className="text-2xl text-black font-bold">Orders</h2>
                 <div>Dropdown</div>
             </header>
+            
             <table className="bg-white w-full ">
                 <thead>
                     <tr className="h-20 border-solid border-b">
@@ -34,7 +35,7 @@ const Orders = (): JSX.Element => {
                             {rows.map((row: IRow, key: number) => (
                                 <tr key={`row-${key}`} className="h-20 border-solid border-b">
                                     <td className="p-2 text-center">
-                                        <input type="checkbox" className="bg-white w-6 h-6"/>
+                                        <input type="checkbox" className="bg-white w-6 h-6" />
                                     </td>
                                     {columns.map((column: IColumn, id: number) =>
                                         <td key={`cell-${id}`} className="text-black p-2 text-left text-light">
