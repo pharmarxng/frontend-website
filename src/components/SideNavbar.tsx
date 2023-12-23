@@ -5,9 +5,9 @@ const SideNavbar = ({ isSideNavOpen }: { isSideNavOpen: boolean }): JSX.Element 
     const [show, setShow] = useState(false);
 
     let links = [
-        ['Dashboard', '/'],
+        ['Dashboard', '/admin'],
         ['Statistics', '/'],
-        ['Orders', '/'],
+        ['Orders', '/admin/orders'],
         ['Products', '/'],
     ]
 
