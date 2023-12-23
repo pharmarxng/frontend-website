@@ -26,7 +26,7 @@ const Orders = (): JSX.Element => {
 
     return (
         <PageWrapper>
-            <div className="flex-1 min-h-screen p-12">
+            <div className="flex-1 min-h-screen p-6 lg:p-12">
                 <header className="flex flex-row justify-between mb-7 items-center">
                     <h2 className="text-2xl text-black font-bold">Orders</h2>
                     <DatePicker />

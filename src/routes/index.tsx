@@ -1,8 +1,8 @@
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { PATH } from '../utils/path-constant';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { SideNavbar } from '../components';
+import { SideNavbar, TopNavbar } from '../components';
 import {
   Home,
   OnlinePharmacy,
@@ -83,10 +83,13 @@ const ManiRoutes = () => {
 };
 
 const AdminWrapper = () => {
+  const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(true);
+
   return (
     <div className='h-screen overflow-hidden'>
-      <Container className='flex h-100'>
-        <SideNavbar />
+      <Container className='flex h-100 relative'>
+        <TopNavbar setIsSideNavOpen={setIsSideNavOpen} />
+        <SideNavbar isSideNavOpen={isSideNavOpen} />
         <Outlet />
       </Container>
     </div>
