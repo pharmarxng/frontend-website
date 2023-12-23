@@ -1,3 +1,6 @@
+import { EditIcon, DeleteIcon } from "../../assets/svg";
+
+
 export interface IRow {
     name: string;
     id: number;
@@ -52,8 +55,8 @@ export const TableConfig = (rows: never[] | IRow[] = []) => ({
             key: 'actions',
             template: (row: IRow): JSX.Element => (
                 <span className="flex flex-row gap-2">
-                    <p onClick={() => { }}>E</p>
-                    <p onClick={() => { }}>D</p>
+                    <EditIcon onClick={() => { }} />
+                    <DeleteIcon onClick={() => { }} />
                 </span>
             )
         },
