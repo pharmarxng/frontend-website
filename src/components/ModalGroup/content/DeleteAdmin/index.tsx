@@ -2,7 +2,7 @@ import { useModalContext } from "../../../../context/modalContext";
 import { CheckSuccessIcon } from "../../../../assets/svg";
 import { IModal } from "../../../../utils/interfaces";
 
-const ErrorMessage = () => {
+const DeleteAdmin = () => {
     const { setIsOpenModal } = useModalContext() as IModal;
 
     function deleteUser(): void {
@@ -27,4 +27,4 @@ const ErrorMessage = () => {
     )
 };
 
-export default ErrorMessage;
+export default DeleteAdmin;

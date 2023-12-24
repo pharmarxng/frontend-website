@@ -1,9 +1,9 @@
 import AddUser from './AddUser';
-import ErrorMessage from './ErrorMessage';
+import DeleteAdmin from './DeleteAdmin';
 import SuccessMessage from './SuccessMessage';
 
 export  {
     AddUser,
-    ErrorMessage, 
+    DeleteAdmin, 
     SuccessMessage
 }
