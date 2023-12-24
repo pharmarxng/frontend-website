@@ -2,7 +2,7 @@ import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-
 import { PATH } from '../utils/path-constant';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { SideNavbar, TopNavbar } from '../components';
+import { SideNavbar, TopNavbar, ModalGroup } from '../components';
 import {
   Home,
   OnlinePharmacy,
@@ -77,6 +77,7 @@ const ManiRoutes = () => {
             <Route path={PATH.ORDERS} element={<Orders />} />
           </Route>
         </Routes>
+        <ModalGroup />
       </BrowserRouter>
     </div>
   );

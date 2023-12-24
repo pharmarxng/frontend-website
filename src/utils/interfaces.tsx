@@ -1,3 +1,5 @@
+import React, { ReactNode } from "react";
+
 export interface ILink {
   path: string;
   text: string;
@@ -327,3 +329,10 @@ export type AuthActionType = SetRedirectPath | ClearRedirectPath;
 export type AuthStateType = {
   redirectTo?: string | null;
 };
+
+export type IModal = {
+  isOpenModal: boolean;
+  setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  content: ReactNode;
+  setContent: React.Dispatch<React.SetStateAction<ReactNode>>;
+}
