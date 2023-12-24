@@ -22,10 +22,10 @@ const Panel = (): JSX.Element => {
     <PageWrapper>
       <div className="flex-1 min-h-screen p-6 lg:p-12">
         <header className="flex flex-row justify-between mb-7 items-center">
-          <h2 className="text-2xl text-black font-bold">Administrative Panel</h2>
+          <h2 className="text-2xl text-[#292929] font-bold">Administrative Panel</h2>
           <button
             onClick={() => showModal(<AddUser />) }
-            className="capitalize flex flex-row items-center gap-3 bg-white br-2 text-black font-bold p-4 text-base rounded-xl">
+            className="capitalize flex flex-row items-center gap-3 bg-white br-2 text-[#2b2b2b] font-bold p-4 text-base rounded-xl">
             <PlusIcon />
             Add new user
           </button>

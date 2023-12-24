@@ -1,6 +1,6 @@
 const AddUser = () => {
     return (
-        <dialog>Add User</dialog>
+        <div>Add User</div>
     )
 };
 

@@ -8,6 +8,8 @@ import PlusIcon from './plus.svg?react';
 import EditIcon from './edit.svg?react';
 import DeleteIcon from './delete.svg?react';
 import CloseIcon from './close.svg?react';
+import CheckSuccessIcon from './check_success.svg?react';
+import CheckCircleIcon from './check_circle.svg?react';
 
 
 export { 
@@ -20,5 +22,7 @@ export {
     PlusIcon, 
     EditIcon, 
     DeleteIcon,
-    CloseIcon
+    CloseIcon,
+    CheckCircleIcon,
+    CheckSuccessIcon
 };

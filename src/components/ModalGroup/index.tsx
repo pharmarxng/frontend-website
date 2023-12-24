@@ -11,6 +11,10 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    zIndex: '10',
+    transition: 'opacity 1s ease-in 0s',
+    border: 'none',
+    background: 'transparent'
   },
 };
 
@@ -25,8 +29,14 @@ const ModalGroup = () => {
       style={customStyles}
       className=''
     >
-      <CloseIcon onClick={() => setIsOpenModal(false)} />
-      {content}
+
+      <div className='relative'>
+        <CloseIcon
+          className='absolute right-4 top-4 w-4 h-4 cursor-pointer'
+          onClick={() => setIsOpenModal(false)}
+        />
+        {content}
+      </div>
     </Modal>
   )
 }
