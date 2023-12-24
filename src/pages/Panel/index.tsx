@@ -9,14 +9,16 @@ import { ReactNode } from "react";
 
 
 const Panel = (): JSX.Element => {
-  const { columns = [], rows = [] } = config(data) || {};
 
   const { setContent, setIsOpenModal } = useModalContext() as IModal;
 
-  function showModal (content: ReactNode):void  {
+  function showModal(content: ReactNode): void {
     setIsOpenModal(true);
     setContent(content);
-  }
+  };
+
+  const { columns = [], rows = [] } = config(data, showModal) || {};
+
 
   return (
     <PageWrapper>
@@ -24,7 +26,7 @@ const Panel = (): JSX.Element => {
         <header className="flex flex-row justify-between mb-7 items-center">
           <h2 className="text-2xl text-[#292929] font-bold">Administrative Panel</h2>
           <button
-            onClick={() => showModal(<AddUser />) }
+            onClick={() => showModal(<AddUser />)}
             className="capitalize flex flex-row items-center gap-3 bg-white br-2 text-[#2b2b2b] font-bold p-4 text-base rounded-xl">
             <PlusIcon />
             Add new user

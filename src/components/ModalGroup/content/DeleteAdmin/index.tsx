@@ -2,11 +2,12 @@ import { useModalContext } from "../../../../context/modalContext";
 import { CheckSuccessIcon } from "../../../../assets/svg";
 import { IModal } from "../../../../utils/interfaces";
 
-const DeleteAdmin = () => {
+const DeleteAdmin = ({ id }: { id: number }): JSX.Element => {
     const { setIsOpenModal } = useModalContext() as IModal;
 
     function deleteUser(): void {
-        // async api call
+        // async api call using id
+        console.log('deleted user', id)
         setIsOpenModal(false);
     }
 
