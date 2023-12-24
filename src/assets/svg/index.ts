@@ -7,6 +7,8 @@ import DashboardIcon from './dashboard.svg?react';
 import PlusIcon from './plus.svg?react';
 import EditIcon from './edit.svg?react';
 import DeleteIcon from './delete.svg?react';
+import CloseIcon from './close.svg?react';
+
 
 export { 
     ProductsIcon, 
@@ -17,5 +19,6 @@ export {
     DashboardIcon, 
     PlusIcon, 
     EditIcon, 
-    DeleteIcon 
+    DeleteIcon,
+    CloseIcon
 };
