@@ -15,8 +15,8 @@ export const TableConfig = (rows: IRow[] = [], showModal: (content: ReactNode) =
             key: 'name',
             template: (row: IRow): JSX.Element => (
                 <span className="flex flex-col">
-                    <p className="text-lg font-bold">{row.name}</p>
-                    <p className="text-base">{row.id}</p>
+                    <p className="text-base font-bold">{row.name}</p>
+                    <p className="text-sm">{row.id}</p>
                 </span>
             )
         },
