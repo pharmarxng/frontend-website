@@ -5,6 +5,7 @@ import TopNavbar from "./TopNavbar";
 import ModalGroup from './ModalGroup';
 import Input from './Input';
 import Label from "./Label";
+import Table from "./Table";
 
 export {
     SideNavbar,
@@ -13,5 +14,6 @@ export {
     TopNavbar,
     ModalGroup,
     Label,
-    Input
+    Input,
+    Table
 };
