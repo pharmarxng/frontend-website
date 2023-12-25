@@ -47,9 +47,9 @@ const SideNavbar = ({ isSideNavOpen }: { isSideNavOpen: boolean }): JSX.Element 
             </div>
 
             <div className="mb-20">
-              <span className="text-[#808191] bg-[#d9e0e7] flex flex-row justify-between my-3 rounded-2xl flex items-center p-3 no-underline hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
+              <span className="link text-[#808191] bg-[#d9e0e7] flex flex-row justify-between my-3 rounded-2xl flex items-center p-3 no-underline hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
               >
-                <p className="link text-base flex justify-start items-center gap-2 px-2">
+                <p className="text-base flex justify-start items-center gap-2 px-2">
                   <DashboardIcon />
                   Settings
                 </p>
