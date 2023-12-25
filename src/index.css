@@ -23,3 +23,13 @@
   background: rgba(0, 0, 0, 0.2) !important;
   backdrop-filter: blur(0.0714rem);
 }
+
+.link:hover svg path,
+.link:active svg path,
+.link:focus svg path,
+.link:hover svg rect,
+.link:active svg rect,
+.link:focus svg rect {
+  stroke: white;
+  fill: white;
+}

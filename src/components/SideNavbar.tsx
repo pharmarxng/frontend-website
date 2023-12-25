@@ -37,7 +37,7 @@ const SideNavbar = ({ isSideNavOpen }: { isSideNavOpen: boolean }): JSX.Element 
                 upper_panel.map((link: (string | JSX.Element)[], id: number) =>
                   <a href={`${link[1]}`}
                     key={`link-${id}`}
-                    className="text-[#808191] text-base bg-[#d9e0e7] flex items-center my-3 rounded-2xl flex items-start py-3 px-5 no-underline gap-2 hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
+                    className="link text-[#808191] text-base bg-[#d9e0e7] flex items-center my-3 rounded-2xl flex items-start py-3 px-5 no-underline gap-2 hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
                   >
                     {link[2]}
                     {link[0]}
@@ -49,7 +49,7 @@ const SideNavbar = ({ isSideNavOpen }: { isSideNavOpen: boolean }): JSX.Element 
             <div className="mb-20">
               <span className="text-[#808191] bg-[#d9e0e7] flex flex-row justify-between my-3 rounded-2xl flex items-center p-3 no-underline hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
               >
-                <p className="text-base flex justify-start items-center gap-2 px-2">
+                <p className="link text-base flex justify-start items-center gap-2 px-2">
                   <DashboardIcon />
                   Settings
                 </p>
