@@ -1,26 +1,14 @@
 import { DeleteAdmin } from "components/ModalGroup/content";
 import { EditIcon, DeleteIcon } from "assets/svg";
 import { ReactNode } from "react";
-
-export interface IRow {
-    name: string;
-    id: number;
-    role: string;
-    status: string;
-};
-
-export interface IColumn {
-    title: string;
-    key: string;
-    template?: any;
-};
+import { IRow } from "utils/table";
 
 let colors = {
     active: { bg: '#dcfbea', border: 'transparent', text: '#249f5d' },
     inactive: { bg: '#f7f7f9', border: '#e0e2e7', text: '#6f727a' }
 };
 
-export const TableConfig = (rows: never[] | IRow[] = [], showModal: (content: ReactNode) => void) => ({
+export const TableConfig = (rows: IRow[] = [], showModal: (content: ReactNode) => void) => ({
     columns: [
         {
             title: 'Name',
@@ -57,8 +45,16 @@ export const TableConfig = (rows: never[] | IRow[] = [], showModal: (content: Re
             template: (row: IRow): JSX.Element => {
                 return (
                     <span className="flex flex-row gap-2">
-                        <EditIcon className="cursor-pointer" onClick={() => { }} />
-                        <DeleteIcon className="cursor-pointer" onClick={() => showModal(<DeleteAdmin id={row.id} />)} />
+                        <EditIcon
+                            className="cursor-pointer"
+                            onClick={() => { }}
+                        />
+
+                        <DeleteIcon
+                            className="cursor-pointer"
+                            onClick={() => showModal(<DeleteAdmin id={row.id}
+                            />
+                            )} />
                     </span>
                 )
             }

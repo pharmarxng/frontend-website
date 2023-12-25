@@ -1,17 +1,4 @@
-export interface IRow {
-    id: string;
-    product: string;
-    date: string;
-    customer: string;
-    status: string;
-    amount: string;
-};
-
-export interface IColumn {
-    title: string;
-    key: string;
-    template?: any;
-};
+import { IRow } from "utils/table";
 
 let colors = {
     pending: '#fc9a2e',
@@ -19,8 +6,14 @@ let colors = {
     cancelled: '#ef0606'
 };
 
-export const TableConfig = (rows: never[] | IRow[] = []) => ({
+export const TableConfig = (rows: IRow[] = [], checkAll: () => void) => ({
     columns: [
+        {
+            title: '',
+            key: '',
+            template: () => <input type='checkbox' />,
+            headerTemplate: () => <input type='checkbox' onClick={() => checkAll()} />
+        },
         {
             title: 'Order ID',
             key: 'id',

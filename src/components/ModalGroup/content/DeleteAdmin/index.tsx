@@ -2,7 +2,7 @@ import { useModalContext } from "context/modalContext";
 import { CheckSuccessIcon } from "assets/svg";
 import { IModal } from "utils/interfaces";
 
-const DeleteAdmin = ({ id }: { id: number }): JSX.Element => {
+const DeleteAdmin = ({ id }: { id?: string }): JSX.Element => {
     const { setIsOpenModal } = useModalContext() as IModal;
 
     function deleteUser(): void {

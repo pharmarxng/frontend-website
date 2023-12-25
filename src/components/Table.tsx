@@ -13,7 +13,7 @@ const Table = ({ config }: { config: ITable }): JSX.Element => {
                                 className="text-black text-base p-2 text-left capitalize"
                                 key={`header-${id}`}
                             >
-                                {header.title}
+                                {header.headerTemplate ? header.headerTemplate() : header.title}
                             </th>)
                     }
                 </tr>

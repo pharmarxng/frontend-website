@@ -1,21 +1,26 @@
 import { ReactNode } from "react";
 
 export interface IRow {
-    name: string;
-    id: number;
-    role: string;
-    status: string;
+    name?: string;
+    role?: string;
+    id?: string;
+    product?: string;
+    date?: string;
+    customer?: string;
+    status?: string;
+    amount?: string;
 };
 
 export interface IColumn {
-    title: string;
+    title: string | ReactNode;
     key: string;
-    template?: any;
+    template?: (row: IRow) => ReactNode;
+    headerTemplate?: any;
 };
 
 export interface ITable {
-    rows: never[] | IRow[];
-    columns: never[] | IColumn[];
+    rows: IRow[];
+    columns: IColumn[];
     showModal?: (content: ReactNode) => void;
-
+    checkAll?: () => void;
 };
