@@ -4,10 +4,9 @@ import {
   StatisticsIcon,
   LogoutIcon,
   DashboardIcon,
-  PlusIcon,
   SettingsIcon,
   ArrowdownIcon,
-} from "../assets/svg";
+} from "assets/svg";
 import { useState } from "react";
 
 

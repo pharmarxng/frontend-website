@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { IContextProps, IModal } from '../utils/interfaces';
+import { IContextProps, IModal } from 'utils/interfaces';
 
 const ModalContext = createContext({} as IModal);
 

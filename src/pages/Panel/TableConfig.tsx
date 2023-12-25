@@ -1,5 +1,5 @@
-import { DeleteAdmin } from "../../components/ModalGroup/content";
-import { EditIcon, DeleteIcon } from "../../assets/svg";
+import { DeleteAdmin } from "components/ModalGroup/content";
+import { EditIcon, DeleteIcon } from "assets/svg";
 import { ReactNode } from "react";
 
 export interface IRow {

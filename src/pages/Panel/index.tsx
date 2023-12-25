@@ -1,10 +1,10 @@
-import { PageWrapper } from "../../components";
+import { PageWrapper } from "components";
 import { TableConfig as config, IRow, IColumn } from "./TableConfig";
 import { data } from "./static";
-import { PlusIcon } from "../../assets/svg";
-import { AddUser } from "../../components/ModalGroup/content";
-import { useModalContext } from "../../context/modalContext";
-import { IModal } from "../../utils/interfaces";
+import { PlusIcon } from "assets/svg";
+import { AddUser } from "components/ModalGroup/content";
+import { useModalContext } from "context/modalContext";
+import { IModal } from "utils/interfaces";
 import { ReactNode } from "react";
 
 

@@ -1,8 +1,8 @@
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom';
-import { PATH } from '../utils/path-constant';
+import { PATH } from 'utils/path-constant';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { SideNavbar, TopNavbar, ModalGroup } from '../components';
+import { SideNavbar, TopNavbar, ModalGroup } from 'components';
 import {
   Home,
   OnlinePharmacy,
@@ -22,7 +22,7 @@ import {
   OrderList,
   Panel,
   Orders
-} from '../pages';
+} from 'pages';
 
 
 const ManiRoutes = () => {

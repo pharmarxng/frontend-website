@@ -1,9 +1,9 @@
 import { Formik } from "formik";
-import { Label, Input } from "../../../../components";
-import { useModalContext } from "../../../../context/modalContext";
-import { IModal } from "../../../../utils/interfaces";
+import { Label, Input } from "components";
+import { useModalContext } from "context/modalContext";
+import { IModal } from "utils/interfaces";
 import { string, object } from 'yup';
-import { CheckCircleIcon } from "../../../../assets/svg";
+import { CheckCircleIcon } from "assets/svg";
 
 const AddUser = () => {
     const { setIsOpenModal } = useModalContext() as IModal;

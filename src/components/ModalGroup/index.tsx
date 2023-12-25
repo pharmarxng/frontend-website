@@ -1,7 +1,7 @@
-import { useModalContext } from '../../context/modalContext';
+import { useModalContext } from 'context/modalContext';
 import Modal from 'react-modal';
-import { IModal } from '../../utils/interfaces';
-import { CloseIcon } from '../../assets/svg';
+import { IModal } from 'utils/interfaces';
+import { CloseIcon } from 'assets/svg';
 
 const customStyles = {
   content: {

@@ -1,6 +1,6 @@
-import { useModalContext } from "../../../../context/modalContext";
-import { ErrorIcon } from "../../../../assets/svg";
-import { IModal } from "../../../../utils/interfaces";
+import { useModalContext } from "context/modalContext";
+import { ErrorIcon } from "assets/svg";
+import { IModal } from "utils/interfaces";
 import { AddUser } from "..";
 
 const ErrorMessage = () => {
