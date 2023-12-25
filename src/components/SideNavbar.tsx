@@ -5,6 +5,8 @@ import {
   LogoutIcon,
   DashboardIcon,
   PlusIcon,
+  SettingsIcon,
+  ArrowdownIcon,
 } from "../assets/svg";
 import { useState } from "react";
 
@@ -50,10 +52,10 @@ const SideNavbar = ({ isSideNavOpen }: { isSideNavOpen: boolean }): JSX.Element 
               <span className="link text-[#808191] bg-[#d9e0e7] flex flex-row justify-between my-3 rounded-2xl flex items-center p-3 no-underline hover:bg-[#3f6387] hover:text-[#fff] active:bg-[#3f6387]"
               >
                 <p className="text-base flex justify-start items-center gap-2 px-2">
-                  <DashboardIcon />
+                  <SettingsIcon />
                   Settings
                 </p>
-                <PlusIcon className="cursor-pointer" onClick={() => setShow(!show)} />
+                <ArrowdownIcon className="cursor-pointer" onClick={() => setShow(!show)} />
               </span>
               {show && (
                 <>
