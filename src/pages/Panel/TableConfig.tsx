@@ -29,7 +29,7 @@ export const TableConfig = (rows: IRow[] = [], showModal: (content: ReactNode) =
             key: 'status',
             template: (row: IRow): JSX.Element =>
                 <span
-                    className="border p-3 rounded-3xl w-16"
+                    className="border p-3 rounded-3xl w-16 text-sm"
                     style={{
                         color: colors[row.status as keyof typeof colors].text,
                         background: colors[row.status as keyof typeof colors].bg,
