@@ -16,6 +16,8 @@ const Orders = (): JSX.Element => {
         }
     ])
 
+    //on date change reload paginated data
+
     function checkAll(): void {
         let elements = document.getElementsByTagName('input') ?? [];
         for (let i = 1; i < elements.length; i++) {
