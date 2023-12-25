@@ -11,7 +11,7 @@ const DatePicker = ({ date, setDate }: { date: Range[], setDate: React.Dispatch<
     return (
         <div className='relative flex flex-col'>
             <div
-                className='bg-white text-black cursor-pointer text-center flex flex-row justify-center items-center h-12 rounded-xl px-2'
+                className='bg-white text-black text-sm cursor-pointer text-center flex flex-row justify-center items-center h-12 rounded-xl px-2'
                 onClick={() => setShow(!show)}>
                 {startDate?.toDateString()} - {endDate?.toDateString()}
             </div>
