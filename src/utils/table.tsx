@@ -12,7 +12,7 @@ export interface IRow {
 };
 
 export interface IColumn {
-    title: string | ReactNode;
+    title: string;
     key: string;
     template?: (row: IRow) => ReactNode;
     headerTemplate?: any;

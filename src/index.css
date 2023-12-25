@@ -24,6 +24,11 @@
   backdrop-filter: blur(0.0714rem);
 }
 
+.link svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
 .link:hover svg path,
 .link:active svg path,
 .link:focus svg path,

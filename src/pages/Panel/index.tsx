@@ -24,10 +24,10 @@ const Panel = (): JSX.Element => {
           <h2 className="text-2xl text-[#292929] font-bold">Administrative Panel</h2>
           <button
             onClick={() => showModal(<AddUser />)}
-            className="capitalize flex flex-row items-center gap-3 bg-white br-2 text-[#2b2b2b] font-bold p-4 text-base rounded-xl">
+            className="capitalize flex flex-row items-center gap-3 bg-white br-2 text-[#2b2b2b] font-bold p-3 text-sm rounded-2xl">
             <PlusIcon />
             Add new user
-          </button>
+          </button> 
         </header>
 
         <Table

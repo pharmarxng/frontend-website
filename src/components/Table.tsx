@@ -10,7 +10,7 @@ const Table = ({ config }: { config: ITable }): JSX.Element => {
                     {
                         columns.map((header: IColumn, id: number) =>
                             <th
-                                className="text-black text-base p-2 text-left capitalize"
+                                className="text-black text-sm p-2 text-left capitalize"
                                 key={`header-${id}`}
                             >
                                 {header.headerTemplate ? header.headerTemplate() : header.title}
@@ -23,9 +23,9 @@ const Table = ({ config }: { config: ITable }): JSX.Element => {
                 {rows && rows.length > 0 && (
                     <>
                         {rows.map((row: IRow, key: number) => (
-                            <tr key={`row-${key}`} className="h-20 border-solid border-b">
+                            <tr key={`row-${key}`} className="h-16 border-solid border-b">
                                 {columns.map((column: IColumn, id: number) =>
-                                    <td key={`cell-${id}`} className="text-black capitalize p-2 text-left text-light">
+                                    <td key={`cell-${id}`} className="text-black text-sm capitalize p-2 text-left text-light">
                                         {column.template
                                             ? column.template(row)
                                             : row[column.key as keyof typeof row]

@@ -40,7 +40,7 @@ export const TableConfig = (rows: IRow[] = [], checkAll: () => void) => ({
                         style={{ backgroundColor: colors[row.status as keyof typeof colors] }}
                         className={`rounded-full w-2 h-2`}
                     />
-                    <p className="text-base capitalize">{row.status}</p>
+                    <p className="text-sm capitalize">{row.status}</p>
                 </span>
         },
         {
