@@ -1,4 +1,4 @@
-import { PageWrapper, DatePicker } from "../../components";
+import { PageWrapper, DatePicker } from "components";
 import { TableConfig as config, IRow, IColumn } from "./TableConfig";
 import { data } from "./static";
 // import { Range } from 'react-date-range';
