@@ -52,7 +52,7 @@ export const TableConfig = (rows: IRow[] = [], showModal: (content: ReactNode) =
 
                         <DeleteIcon
                             className="cursor-pointer"
-                            onClick={() => showModal(<DeleteAdmin id={row.id}
+                            onClick={() => showModal(<DeleteAdmin id={`${row.id}`}
                             />
                             )} />
                     </span>

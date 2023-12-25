@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 export interface IRow {
     name?: string;
     role?: string;
-    id?: string;
+    id?: string | number;
     product?: string;
     date?: string;
     customer?: string;
