@@ -18,9 +18,8 @@ const Orders = (): JSX.Element => {
 
     function checkAll(): void {
         let elements = document.getElementsByTagName('input') ?? [];
-        elements[0].checked = !elements[0].checked;
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].checked = !elements[i].checked;
+        for (let i = 1; i < elements.length; i++) {
+            elements[i].checked = elements[0].checked;
         }
     };
 
