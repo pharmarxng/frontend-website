@@ -8,6 +8,7 @@ import Paginator from '../Paginator';
 import FadeLoader from 'react-spinners/FadeLoader';
 import Dropdown from '../Dropdown';
 import { productListingDropdownOptions } from '../../utils/constants';
+import { AlertState } from '../../context/alertContext';
 // import { PATH } from '../../utils/path-constant';
 
 interface ProductListsingsBlockProps {
@@ -26,6 +27,7 @@ const ProductListsingsBlock = ({
     productDispatch,
     productState: { category, products, pagination },
   } = ProductState();
+  const { alertDispatch } = AlertState();
 
   useEffect(() => {
     fetchData({
@@ -37,16 +39,16 @@ const ProductListsingsBlock = ({
 
   const fetchData = async (params?: Record<string, unknown>) => {
     setLoading(true);
-    await getProductsApi(productDispatch, params);
+    await getProductsApi(productDispatch, alertDispatch, params);
     setLoading(false);
   };
 
   useEffect(() => {
     const fetchCategory = async (categoryId: string) => {
-      await getSingleCategorysApi(productDispatch, categoryId);
+      await getSingleCategorysApi(productDispatch, alertDispatch, categoryId);
     };
     fetchCategory(categoryId!);
-  }, [productDispatch, categoryId]);
+  }, [productDispatch, alertDispatch, categoryId]);
 
   const content = products.map((prod: IProducts) => {
     return (
@@ -76,7 +78,7 @@ const ProductListsingsBlock = ({
   return (
     <div className="text-black">
       {categoryId && (
-        <div className="text-2xl/7 sm:text-4xl md:text-header text-deepBlue-100 mb-5 md:mb-8">
+        <div className="text-2xl/7 sm:text-4xl md:text-header text-deepBlue-100 mb-5 md:mb-8 mt-2 md:mt-5">
           {category?.name}
         </div>
       )}
@@ -111,7 +113,7 @@ const ProductListsingsBlock = ({
       ) : (
         <div>
           {products.length ? (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4 ">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 justify-center md:justify-between md:gap-5 md:grid-cols-4">
               {content}
             </div>
           ) : (

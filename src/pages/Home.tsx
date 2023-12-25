@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import ProductSearchBar from '../components/ProductSearchBar';
 import { ILink } from '../utils/interfaces';
 import Categories from '../components/blocks/Categories';
 import EssentialServices from '../components/blocks/EssentialServices';
@@ -14,6 +13,8 @@ import { useEffect } from 'react';
 import { getProductsApi } from '../api/products';
 import { ProductState } from '../context/productContext';
 import { navbarMessages, openWhatsapp } from '../utils/whatsapp';
+import { AlertState } from '../context/alertContext';
+import FlashSales from '../components/blocks/FlashSales';
 
 const HomeButtonsLinks: ILink[] = [
   { path: '/online-pharmacist', text: 'Talk to a pharmacist' },
@@ -23,6 +24,7 @@ const HomeButtonsLinks: ILink[] = [
 
 const Home = () => {
   const { productDispatch } = ProductState();
+  const { alertDispatch } = AlertState();
   const location = useLocation();
 
   useEffect(() => {
@@ -36,10 +38,10 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async (params?: Record<string, unknown>) => {
-      await getProductsApi(productDispatch, params);
+      await getProductsApi(productDispatch, alertDispatch, params);
     };
     fetchData();
-  }, [productDispatch]);
+  }, [productDispatch, alertDispatch]);
 
   const homeButtonContent = HomeButtonsLinks.map((i, index) => {
     if (i.path === '/prescription' || i.path === '/contact') {
@@ -67,9 +69,8 @@ const Home = () => {
     <div className="bg-white min-h-screen">
       <Navbar />
       <PaddedWrapper>
-        <div className="flex justify-center md:hidden mx-7 my-5">
-          <ProductSearchBar />
-        </div>
+        <FlashSales />
+        <Categories />
         <div className="relative">
           <div className="flex flex-col md:flex-row">
             <div className="flex flex-col bg-primary-100 px-4 md:px-16">
@@ -86,11 +87,7 @@ const Home = () => {
               />
             </div>
           </div>
-          <div className="hidden md:flex justify-center absolute top-11 left-[35%] w-[30%]">
-            <ProductSearchBar />
-          </div>
         </div>
-        <Categories />
         <EssentialServices />
         <TrendingProducts />
         <Testimonials />

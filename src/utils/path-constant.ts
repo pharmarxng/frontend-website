@@ -21,4 +21,6 @@ export const PATH = {
   ADMIN: '/admin',
   PANEL: 'panel',
   ORDERS: 'orders'
+  LOGOUT: '/logout',
+  AUTH: '/auth',
 };

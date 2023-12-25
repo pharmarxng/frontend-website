@@ -11,6 +11,7 @@ import Input from '../Input';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { AlertState } from '../../context/alertContext';
 
 interface PickupDetailsBlockProps {
   emailValidationErrors?: { [key: string]: string };
@@ -20,6 +21,7 @@ const PickupDetailsBlock = ({
   emailValidationErrors,
 }: PickupDetailsBlockProps) => {
   const { orderState, orderDispatch } = OrderState();
+  const { alertDispatch } = AlertState();
   const result = getItem('auth');
   const [localFirstName] = useState<string>(
     result?.user?.firstName || orderState.firstName
@@ -64,9 +66,23 @@ const PickupDetailsBlock = ({
       lastName: orderState.lastName,
       phone: orderState.phone,
     };
-    const { order, user, accessToken } = await createOrderApi(body);
-    setItem('auth', { user, accessToken });
-    navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
+    try {
+      const result = await createOrderApi(body, alertDispatch);
+      if (!result || !result.accessToken) {
+        throw new Error('Something went wrong');
+      }
+      const order = result.order;
+      const user = result.user;
+      const accessToken = result.accessToken;
+      setItem('auth', { user, accessToken });
+      navigate(`${PATH.ORDER_DETAILS}/${order.id}`);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.message,
+      });
+    }
   };
 
   const validationSchema = Yup.object().shape({

@@ -12,8 +12,11 @@ export const links: ILink[] = [
 ];
 
 export const authLinks: ILink[] = [
-  { path: PATH.LOGIN, text: `Login`, icon: 'auth_logo' },
+  { path: PATH.AUTH, text: `Auth`, icon: 'auth_logo' },
   { path: PATH.CART, text: `Cart`, icon: 'cart_logo' },
+  { path: PATH.LOGIN, text: `Login`, icon: 'auth_logo' },
+  { path: PATH.ORDER_LIST, text: `Your Orders` },
+  { path: PATH.LOGOUT, text: `Logout` },
 ];
 
 export const essentialServiceLinks: (ILink & { img: string })[] = [

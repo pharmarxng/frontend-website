@@ -16,6 +16,8 @@ const OrderContextProvider = ({ children }: IContextProps) => {
     phone: '',
     postalCode: '',
     discountCode: '',
+    orders: [],
+    searchQuery: '',
   });
 
   return (

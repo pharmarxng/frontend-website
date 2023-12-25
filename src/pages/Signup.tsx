@@ -9,9 +9,11 @@ import { signUpApi } from '../api/auth';
 import { setItem } from '../utils/auth';
 import { FadeLoader } from 'react-spinners';
 import { PATH } from '../utils/path-constant';
+import { AlertState } from '../context/alertContext';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { alertDispatch } = AlertState();
   const [loading, setLoading] = useState<boolean>(false);
   const initialState = {
     firstName: '',
@@ -102,7 +104,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen text-black">
+    <div className="bg-white text-black pb-5">
       <Navbar />
       <div className="flex item-center mt-[30px] px-[30px] py-[0px]">
         <Formik
@@ -112,14 +114,19 @@ const Signup = () => {
             try {
               setSubmitting(true);
               setLoading(true);
-              const { user, accessToken } = await signUpApi({ ...values });
+              const result = await signUpApi({ ...values }, alertDispatch);
+              if (!result || !result.accessToken) {
+                throw new Error('Something went wrong');
+              }
+              const user = result.user;
+              const accessToken = result.accessToken;
               setItem('auth', { user, accessToken });
               setLoading(false);
               setSubmitting(false);
               resetForm({ values: initialState });
               navigate(`${PATH.HOME}`);
-            } catch (error) {
-              console.log(error);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error: any) {
               setLoading(false);
               setSubmitting(false);
             }
@@ -141,8 +148,8 @@ const Signup = () => {
               <div className="font-normal text-[18px] md:text-[32px]">
                 Sign Up
               </div>
-              <div className="h-[597px] px-[16px] py-[0px]">
-                <div className="grid gap-[8px] text-[14px] md:text-[18px] font-normal h-[48px] rounded-[6px]  border-[#CBD2E0]">
+              <div className="px-[16px] py-[0px]">
+                <div className="flex flex-col space-y-3 gap-[8px] text-[14px] md:text-[18px] font-normal rounded-[6px]  border-[#CBD2E0]">
                   <div>
                     <Label label="First Name*" />
                     <Input

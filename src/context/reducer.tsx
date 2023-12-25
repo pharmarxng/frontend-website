@@ -6,11 +6,11 @@ import {
   ProductStateType,
   AlertActionType,
   AlertStateType,
-  IShipping,
   OrderStateType,
   OrderActionType,
   AuthActionType,
   AuthStateType,
+  IOrderDeliveryFees,
 } from '../utils/interfaces';
 
 export const authReducer = (
@@ -60,6 +60,34 @@ export const orderReducer = (
 
     case 'SET_DISCOUNT_CODE':
       return { ...state, discountCode: action.payload };
+
+    case 'GET_ORDERS': {
+      return {
+        ...state,
+        orders: action.payload?.docs,
+        pagination: {
+          hasNextPage: action.payload?.hasNextPage,
+          hasPrevPage: action.payload?.hasPrevPage,
+          limit: action.payload?.limit,
+          nextPage: action.payload?.nextPage,
+          page: action.payload?.page,
+          pagingCounter: action.payload?.pagingCounter,
+          prevPage: action.payload?.prevPage,
+          totalDocs: action.payload?.totalDocs,
+          totalPages: action.payload?.totalPages,
+        },
+      };
+    }
+
+    case 'GET_SINGLE_ORDER': {
+      return {
+        ...state,
+        order: { ...action.payload },
+      };
+    }
+
+    case 'FILTER_BY_SEARCH':
+      return { ...state, searchQuery: action.payload };
 
     default:
       return state;
@@ -176,7 +204,7 @@ export const cartReducer = (
     }
     case 'SET_SHIPPING': {
       const { shipping } = state;
-      let updatedShipping: IShipping | undefined = undefined;
+      let updatedShipping: IOrderDeliveryFees | undefined = undefined;
       if (!shipping) {
         updatedShipping = action.payload;
       } else if (shipping.id !== action.payload.id) {
@@ -359,7 +387,10 @@ export const alertReducer = (
   action: AlertActionType
 ): AlertStateType => {
   switch (action.type) {
-    case 'ALERT_SUCCESS' || 'ALERT_ERROR' || 'ALERT_INFO' || 'ALERT_WARNING':
+    case 'ALERT_SUCCESS':
+    case 'ALERT_ERROR':
+    case 'ALERT_INFO':
+    case 'ALERT_WARNING':
       return {
         ...state,
         type: action.type,
@@ -367,7 +398,7 @@ export const alertReducer = (
         show: true,
       };
     case 'ALERT_CLEAR':
-      return { ...state, type: action.type, show: false };
+      return { ...state, type: '', show: false, message: '' };
     default:
       return state;
   }

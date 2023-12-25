@@ -10,10 +10,15 @@ import OrderSummary from '../components/OrderSummary';
 import { formatDate } from '../utils/date';
 import axios from '../axios/axios';
 import { getOrderByIdApi } from '../api/order';
+import { AlertState } from '../context/alertContext';
+import { OrderState } from '../context/orderContext';
+import { formatString } from '../utils/string';
 
 const OrderDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { alertDispatch } = AlertState();
+  const { orderDispatch } = OrderState();
   const [loading, setLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [order, setOrder] = useState<Record<string, any> | null>(null);
@@ -22,7 +27,11 @@ const OrderDetails = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const fetchedOrder = await getOrderByIdApi(id!);
+        const fetchedOrder = await getOrderByIdApi(
+          id!,
+          orderDispatch,
+          alertDispatch
+        );
         setOrder(fetchedOrder);
       } catch (error) {
         console.error('Error fetching order:', error);
@@ -32,7 +41,7 @@ const OrderDetails = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, alertDispatch, orderDispatch]);
 
   const goToShop = () => {
     navigate(PATH.SHOP);
@@ -122,12 +131,16 @@ const OrderDetails = () => {
                   )}
                   <div className="flex flex-col gap-2.5 px-[17px] py-[22px] text-sm md:text-lg bg-grey-400">
                     <div>
+                      <span className="font-bold">Orderid: </span>#
+                      {order.orderId}
+                    </div>
+                    <div>
                       <span className="font-bold">Email: </span>
-                      {order.email}
+                      {formatString(order.email)}
                     </div>
                     <div>
                       <span className="font-bold">Delivery Type: </span>
-                      {order.deliveryType}
+                      {formatString(order.deliveryType)}
                     </div>
                     {order.deliveryType === 'pickup' && (
                       <div>
@@ -139,15 +152,17 @@ const OrderDetails = () => {
                       <div className="gap-2.5 ">
                         <div>
                           <span className="font-bold">Full name: </span>
-                          {`${order.firstName} ${order.lastName}`}
+                          {`${formatString(order.firstName)} ${formatString(
+                            order.lastName
+                          )}`}
                         </div>
                         <div>
                           <span className="font-bold">Address: </span>
-                          {order.address}
+                          {formatString(order.address)}
                         </div>
                         <div>
                           <span className="font-bold">City: </span>
-                          {order.city}
+                          {formatString(order.city)}
                         </div>
                       </div>
                     )}
