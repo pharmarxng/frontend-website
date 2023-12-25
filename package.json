@@ -18,6 +18,7 @@
     "@types/react-responsive": "^8.0.8",
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
+    "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
     "formik": "^2.4.3",
     "globals": "^13.23.0",
