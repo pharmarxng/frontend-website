@@ -57,8 +57,8 @@ export const TableConfig = (rows: never[] | IRow[] = [], showModal: (content: Re
             template: (row: IRow): JSX.Element => {
                 return (
                     <span className="flex flex-row gap-2">
-                        <EditIcon onClick={() => { }} />
-                        <DeleteIcon onClick={() => showModal(<DeleteAdmin id={row.id} />)} />
+                        <EditIcon className="cursor-pointer" onClick={() => { }} />
+                        <DeleteIcon className="cursor-pointer" onClick={() => showModal(<DeleteAdmin id={row.id} />)} />
                     </span>
                 )
             }
