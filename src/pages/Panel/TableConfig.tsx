@@ -3,7 +3,7 @@ import { EditIcon, DeleteIcon } from "assets/svg";
 import { ReactNode } from "react";
 import { IRow } from "utils/table";
 
-let colors = {
+const colors = {
     active: { bg: '#dcfbea', border: 'transparent', text: '#249f5d' },
     inactive: { bg: '#f7f7f9', border: '#e0e2e7', text: '#6f727a' }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // https://prettier.io/docs/en/options.html
 
 module.exports = {

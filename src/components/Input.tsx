@@ -40,7 +40,7 @@ const Input = ({
           onChange={changed}
           value={value}
           placeholder={placeholder ? placeholder : undefined}
-          className={`border-gray-200 border rounded-lg pl-4 py-3 w-full dark:text-black dark:bg-white  ${classDef}`}
+          className={`border-gray-200 border rounded-lg pl-4 py-3 w-full text-black dark:bg-white  ${classDef}`}
         />
         {endDecorator &&
           <span className='absolute right-1 top-0 flex h-full'>{endDecorator}</span>
