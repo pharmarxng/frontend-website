@@ -15,7 +15,7 @@ const Panel = (): JSX.Element => {
   function showModal(content: ReactNode): void {
     setIsOpenModal(true);
     setContent(content);
-  };
+  }
 
   return (
     <PageWrapper>

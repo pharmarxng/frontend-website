@@ -1,6 +1,6 @@
 import { IRow } from "utils/table";
 
-let colors = {
+const colors = {
     pending: '#fc9a2e',
     delivered: '#4ce13f',
     cancelled: '#ef0606'

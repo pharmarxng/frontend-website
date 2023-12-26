@@ -21,7 +21,10 @@ import {
   ShippingInfo,
   OrderList,
   Panel,
-  Orders
+  Orders,
+  Products,
+  Statistics,
+  ProductDetails
 } from 'pages';
 
 import AlertModal from '../components/AlertModal';
@@ -76,12 +79,14 @@ const ManiRoutes = () => {
           <Route path={PATH.RESET_PASSWORD} element={<Reset />} />
           <Route path={PATH.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
           <Route path={PATH.HELP_AND_SUPPORT} element={<HelpAndSupport />} />
-          {/* <Route path="*" element={<NotFoundError />} /> */}
 
           <Route path={PATH.ADMIN} element={<AdminWrapper />}>
             <Route index element={<h1 className='text-black'>Pending...</h1>} />
             <Route path={PATH.PANEL} element={<Panel />} />
             <Route path={PATH.ORDERS} element={<Orders />} />
+            <Route path={PATH.PRODUCTS} element={<Products/>} />
+            <Route path={PATH.STATISTICS} element={<Statistics/>} />
+            <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails/>} />
           </Route>
         </Routes>
         <ModalGroup />

@@ -371,12 +371,6 @@ export const productReducer = (
 
       return { ...state, recentlyViewed: updatedArrayOfRecentItems };
     }
-    // case 'FILTER_BY_STOCK':
-    //   return { ...state, byStock: !state.byStock };
-    // case 'FILTER_BY_DELIVERY':X
-    //   return { ...state, byFastDelivery: !state.byFastDelivery };
-    // case 'FILTER_BY_RATING':
-    //   return { ...state, byRating: action.payload };
     default:
       return state;
   }
