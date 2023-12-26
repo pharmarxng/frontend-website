@@ -18,6 +18,9 @@ export const PATH = {
   SHIPPING_INFO: '/shipping-info',
   ORDER_DETAILS: '/order-details',
   ORDER_LIST: '/order-list',
+  ADMIN: '/admin',
+  PANEL: 'panel',
+  ORDERS: 'orders'
   LOGOUT: '/logout',
   AUTH: '/auth',
 };
