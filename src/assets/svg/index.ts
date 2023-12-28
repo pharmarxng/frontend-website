@@ -13,7 +13,9 @@ import CheckCircleIcon from './check_circle.svg?react';
 import SettingsIcon from './settings.svg?react';
 import ErrorIcon from './error.svg?react';
 import ArrowdownIcon from './arrow-down.svg?react';
-
+import FilterIcon from './Filter.svg?react';
+import PlusYellowIcon from './PlusYellow.svg?react';
+import EditYellowIcon from './EditYellow.svg?react';
 
 export { 
     ProductsIcon, 
@@ -30,5 +32,8 @@ export {
     CheckSuccessIcon,
     SettingsIcon,
     ArrowdownIcon,
-    ErrorIcon
+    ErrorIcon,
+    FilterIcon,
+    PlusYellowIcon,
+    EditYellowIcon,
 };

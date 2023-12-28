@@ -23,6 +23,7 @@ export default {
           100: '#ebebeb',
           200: '#D9D9D9',
           300: '#1A4570',
+          400: '#0D2B46',
 
         },
         search:{
