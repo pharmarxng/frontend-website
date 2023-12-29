@@ -16,6 +16,9 @@ import ArrowdownIcon from './arrow-down.svg?react';
 import FilterIcon from './Filter.svg?react';
 import PlusYellowIcon from './PlusYellow.svg?react';
 import EditYellowIcon from './EditYellow.svg?react';
+import StarsIcon from './Stars.svg?react';
+import StarBlankIcon from './StarBlank.svg?react';
+import ConfirmIcon from './Confirm.svg?react';
 
 export { 
     ProductsIcon, 
@@ -36,4 +39,7 @@ export {
     FilterIcon,
     PlusYellowIcon,
     EditYellowIcon,
+    StarsIcon,
+    StarBlankIcon,
+    ConfirmIcon,
 };

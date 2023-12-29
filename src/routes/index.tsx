@@ -99,7 +99,7 @@ const AdminWrapper = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(true);
 
   return (
-    <div className='h-screen overflow-hidden'>
+    <div className='h-screen overflow-y-scroll'>
       <Container className='flex h-100 relative'>
         <TopNavbar setIsSideNavOpen={setIsSideNavOpen} />
         <SideNavbar isSideNavOpen={isSideNavOpen} />

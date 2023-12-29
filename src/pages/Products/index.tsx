@@ -2,7 +2,7 @@ import { FilterIcon } from "@assets/svg"
 import { cardContent, navContent } from "./static"
 import { PlusYellowIcon } from "@assets/svg"
 import { EditYellowIcon } from "@assets/svg"
-import NairaWrapper from "@components/NairaWrapper"
+import { Link } from "react-router-dom"
 
 
 
@@ -21,7 +21,9 @@ const Products = () => {
     }
     return <div key={index} className="bg-secondary-300 rounded-lg text-sm text-center">
       <div className="p-[10px] flex flex-col items-center">
-        <img src={card.image} alt="" className="w-[132px] h-[132px] rounded-lg shadow-lg" />
+        <div className="max-w-[300px] pt-3">
+          <img src={card.image} alt="" className=" rounded-lg shadow-lg object-cover" />
+        </div>
         <div className="text-white mt-2">{card.name}</div>
         <div className="flex gap-2 justify-center text-gray-400">
           <div>&#x20A6; {card.price}</div>
@@ -29,8 +31,8 @@ const Products = () => {
           <div>{card.noOfAvailableUnits} pieces</div>
         </div>
       </div>
-
-      <button className="flex justify-center items-center gap-2 bg-grey-400 w-full bg-opacity-25 h-[52px] text-yellow-300 font-bold hover:bg-opacity-40"> <EditYellowIcon /> Edit Product</button>
+      
+      <button className="flex justify-center items-center gap-2 bg-grey-400 w-full bg-opacity-25 h-[52px] text-yellow-300 font-bold hover:bg-opacity-40"> <EditYellowIcon />  Edit Product</button>
 
     </div>
   })
@@ -48,12 +50,12 @@ const Products = () => {
         <nav className="flex justify-between border-b-4">
           {renderdContent}
         </nav>
-        <div className="py-9 grid grid-cols-4 grid-flow-row gap-y-4 gap-x-9 border-b-4">
+        <div className="py-9 grid grid-cols-4 grid-flow-row gap-y-4 gap-x-9 border-b-4 max-h-[400px] overflow-y-scroll">
           {renderedCardContent} 
         </div>
       </div>
       <div className="bg-white my-2 px-7 min-h-40 flex items-center gap-2">
-        <button className="border-4 min-w-44 p-3.5 rounded-lg text-center hover:bg-opacity-40">Discard Changes</button>
+        <button className=" min-w-44 p-3.5 rounded-lg text-center hover:bg-opacity-40">Discard Changes</button>
         <button className="min-w-44 p-4 rounded-lg text-center bg-yellow-400 hover:bg-opacity-80">save Changes</button>
       </div>
     </div>
