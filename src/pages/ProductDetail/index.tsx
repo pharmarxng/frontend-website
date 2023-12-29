@@ -30,9 +30,9 @@ const ProductDetails = () => {
           {renderdContent}
         </nav>
         <div className="flex flex-col">
-          <div className="grid grid-cols-2 gap-10 pt-4 min-h-[675px] py-[50px]">
+          <div className="grid grid-cols-2 gap-10 pt-4 py-[50px]">
             <div className="grid place-content-center">
-              <img src="https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/61h3+-OxMuL.jpg" alt="" className="rounded-lg m-2 object-cover h-full " />
+              <img src="https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/61h3+-OxMuL.jpg" alt="" className="rounded-lg object-cover h-full " />
             </div>
             <div className="flex justify-center items-center">
               <div className="p-5 flex flex-col gap-14 bg-gray-100 rounded-xl">
