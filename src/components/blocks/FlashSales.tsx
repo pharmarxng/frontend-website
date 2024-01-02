@@ -24,7 +24,7 @@ const FlashSales = () => {
   const content =
     products &&
     products.slice(0, 8).map((prod: IProducts) => {
-      return (
+      if (prod) return (
         <Link key={prod.id} to={`/product/${prod.id}`}>
           <ProductCard prod={prod} bare />
         </Link>
