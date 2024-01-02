@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Input from '../components/Input';
-import Label from '../components/Label'; 
 
 const Login = () => {
   return (
@@ -22,7 +21,7 @@ const Login = () => {
                     name="Email"
                     type="text"
                     value=""
-                    changed={(e) => { }}
+                    changed={() => { }}
                     classDef="mt-2 h-[48px] rounded-[6px] border-[2px]"
                   />
                 </label>
