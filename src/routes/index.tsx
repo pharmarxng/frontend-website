@@ -1,22 +1,32 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
-import Home from '../pages/Home';
-import OnlinePharmacy from '../pages/OnlinePharmacy';
-import Shop from '../pages/Shop';
-import ProductListings from '../pages/ProductListings';
-import ProductDescription from '../pages/ProductDescription';
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
-import Otp from '../pages/Otp';
-import Reset from '../pages/Reset';
-import ConfirmPassword from '../pages/ConfirmPassword';
-import HelpAndSupport from '../pages/HelpAndSupport';
-import { PATH } from '../utils/path-constant';
-import Cart from '../pages/Cart';
-import DeliveryInfo from '../pages/DeliveryInfo';
-import ShippingInfo from '../pages/ShippingInfo';
-import { useEffect } from 'react';
-import OrderDetails from '../pages/OrderDetails';
-import OrderList from '../pages/OrderList';
+import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { PATH } from 'utils/path-constant';
+import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { SideNavbar, TopNavbar, ModalGroup } from 'components';
+import {
+  Home,
+  OnlinePharmacy,
+  Shop,
+  ProductDescription,
+  ProductListings,
+  Login,
+  Signup,
+  Otp,
+  Reset,
+  ConfirmPassword,
+  HelpAndSupport,
+  Cart,
+  DeliveryInfo,
+  OrderDetails,
+  ShippingInfo,
+  OrderList,
+  Panel,
+  Orders,
+  Products,
+  Statistics,
+  ProductDetails
+} from 'pages';
+
 import AlertModal from '../components/AlertModal';
 import { AlertState } from '../context/alertContext';
 
@@ -69,11 +79,34 @@ const ManiRoutes = () => {
           <Route path={PATH.RESET_PASSWORD} element={<Reset />} />
           <Route path={PATH.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
           <Route path={PATH.HELP_AND_SUPPORT} element={<HelpAndSupport />} />
-          {/* <Route path="*" element={<NotFoundError />} /> */}
+
+          <Route path={PATH.ADMIN} element={<AdminWrapper />}>
+            <Route index element={<h1 className='text-black'>Pending...</h1>} />
+            <Route path={PATH.PANEL} element={<Panel />} />
+            <Route path={PATH.ORDERS} element={<Orders />} />
+            <Route path={PATH.PRODUCTS} element={<Products/>} />
+            <Route path={PATH.STATISTICS} element={<Statistics/>} />
+            <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails/>} />
+          </Route>
         </Routes>
+        <ModalGroup />
       </BrowserRouter>
     </div>
   );
 };
+
+const AdminWrapper = () => {
+  const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(true);
+
+  return (
+    <div className='h-screen overflow-y-scroll'>
+      <Container className='flex h-100 relative'>
+        <TopNavbar setIsSideNavOpen={setIsSideNavOpen} />
+        <SideNavbar isSideNavOpen={isSideNavOpen} />
+        <Outlet />
+      </Container>
+    </div>
+  )
+}
 
 export default ManiRoutes;

@@ -87,7 +87,7 @@ const ProductListsingsBlock = ({
           {category?.description}
         </div>
       )}
-      <div className="sm:flex justify-between text-sm/4 sm:text-midbase mb-5 md:mb-8 space-y-4 sm:space-y-0">
+      <div className={`sm:flex justify-between text-sm/4 sm:text-midbase ${!category? 'mt-5 md:mt-8': ''} mb-5 md:mb-8 space-y-4 sm:space-y-0`}>
         <div>
           {`Showing ${calculateStartIndex()} - ${calculateEndIndex()} of `}
           <span className="font-bold">{`${pagination.totalDocs} products`}</span>

@@ -18,6 +18,12 @@ export const PATH = {
   SHIPPING_INFO: '/shipping-info',
   ORDER_DETAILS: '/order-details',
   ORDER_LIST: '/order-list',
-  LOGOUT: '/logout',
   AUTH: '/auth',
+  ADMIN: '/admin',
+  LOGOUT: '/logout',
+  PANEL: 'panel',
+  ORDERS: 'orders',
+  PRODUCTS: 'products',
+  STATISTICS: 'statistics',
+  PRODUCT_DETAIL: 'product-detail',
 };

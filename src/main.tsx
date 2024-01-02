@@ -1,11 +1,12 @@
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import App from 'App.tsx';
 import './index.css';
-import Context from './context/productContext.tsx';
-import AlertContext from './context/alertContext.tsx';
-import CartContext from './context/cartContext.tsx';
-import OrderContext from './context/orderContext.tsx';
-import AuthContext from './context/authContext.tsx';
+import Context from 'context/productContext.tsx';
+import AlertContext from 'context/alertContext.tsx';
+import CartContext from 'context/cartContext.tsx';
+import OrderContext from 'context/orderContext.tsx';
+import AuthContext from 'context/authContext.tsx';
+import ModalContext from 'context/modalContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Context>
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <CartContext>
         <OrderContext>
           <AuthContext>
-            <App />
+            <ModalContext>
+              <App />
+            </ModalContext>
           </AuthContext>
         </OrderContext>
       </CartContext>

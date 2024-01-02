@@ -18,3 +18,23 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  background: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(0.0714rem);
+}
+
+.link svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.link:hover svg path,
+.link:active svg path,
+.link:focus svg path,
+.link:hover svg rect,
+.link:active svg rect,
+.link:focus svg rect {
+  stroke: white;
+  fill: white;
+}
