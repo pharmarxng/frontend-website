@@ -2,14 +2,13 @@ import { FilterIcon } from "@assets/svg"
 import { cardContent, navContent } from "./static"
 import { PlusYellowIcon } from "@assets/svg"
 import { EditYellowIcon } from "@assets/svg"
-import { Link } from "react-router-dom"
 
 
 
 const Products = () => {
 
   const renderdContent = navContent.map(i => {
-    return <div className="text-sm h-[51px] p-2.5 font-semibold hover:text-secondary-300 hover:border-b-4 hover:border-secondary-300" key={i.name}>{i.name}</div>
+    return <div className="text-sm h-[51px] p-2.5 font-semibold hover:text-secondary-300 hover:border-b-8 hover:border-secondary-300 hover:cursor-pointer whitespace-nowrap" key={i.name}>{i.name}</div>
   })
 
   const renderedCardContent = cardContent.map((card, index) => {
@@ -47,7 +46,7 @@ const Products = () => {
         </button>
       </div>
       <div className="grid gap-[1px] grid-rows-[50px,1fr] bg-white my-2 px-7">
-        <nav className="flex justify-between border-b-4">
+        <nav className="flex justify-between border-b-4 overflow-x-auto">
           {renderdContent}
         </nav>
         <div className="py-9 grid grid-cols-4 grid-flow-row gap-y-4 gap-x-9 border-b-4 max-h-[400px] overflow-y-scroll">
