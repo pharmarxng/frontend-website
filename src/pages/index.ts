@@ -19,6 +19,8 @@ import Orders from "./Orders";
 import Products from "./Products";
 import Statistics from "./Statistics";
 import ProductDetails from "./ProductDetail";
+import TermOfUse from "./TermOfUse";
+import Privacy from "@components/PrivacyNoticeBlock";
 
 export {
   Home,
@@ -41,5 +43,7 @@ export {
   Orders,
   Products,
   Statistics,
-  ProductDetails
+  ProductDetails, 
+  TermOfUse,
+  Privacy
 };
