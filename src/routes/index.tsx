@@ -26,7 +26,7 @@ import {
   Statistics,
   ProductDetails,
   TermOfUse,
-  Privacy
+  PrivacyNotice,
 } from 'pages';
 
 import AlertModal from '../components/AlertModal';
@@ -82,7 +82,7 @@ const ManiRoutes = () => {
           <Route path={PATH.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
           <Route path={PATH.HELP_AND_SUPPORT} element={<HelpAndSupport />} />
           <Route path={PATH.TERM_OF_USE} element={<TermOfUse />} />
-          <Route path={PATH.PRIVACY_NOTICE} element={<Privacy />} />
+          <Route path={PATH.PRIVACY_NOTICE} element={<PrivacyNotice />} />
 
           <Route path={PATH.ADMIN} element={<AdminWrapper />}>
             <Route index element={<h1 className='text-black'>Pending...</h1>} />

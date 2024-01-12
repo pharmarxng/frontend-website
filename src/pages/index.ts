@@ -20,7 +20,7 @@ import Products from "./Products";
 import Statistics from "./Statistics";
 import ProductDetails from "./ProductDetail";
 import TermOfUse from "./TermOfUse";
-import Privacy from "@components/PrivacyNoticeBlock";
+import PrivacyNotice from "./PrivacyNotice";
 
 export {
   Home,
@@ -45,5 +45,5 @@ export {
   Statistics,
   ProductDetails, 
   TermOfUse,
-  Privacy
+  PrivacyNotice
 };
