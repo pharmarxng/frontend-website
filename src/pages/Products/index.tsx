@@ -15,7 +15,7 @@ const Products = () => {
     if (index === 0) {
       return <div key={index} className="bg-secondary-300 rounded-lg flex flex-col items-center justify-center">
         <PlusYellowIcon />
-        <div className="text-yellow-300 font-bold hover:opacity-30">Add new product</div>
+        <div className="text-yellow-300 font-bold hover:opacity-30 text-center">Add new product</div>
       </div>
     }
     return <div key={index} className="bg-secondary-300 rounded-lg text-sm text-center">
@@ -40,6 +40,8 @@ const Products = () => {
     <div className="text-black w-full p-8 bg-grey-200">
       <div className="flex items-center justify-between w-full">
         <div className="font-bold">Products Management</div>
+          <input type="search"
+            placeholder="Search" className="flex justify-center gap-2 bg-white p-3.5 rounded-lg rounded-lg  min-w-[350px]"/>
         <button className="flex justify-center gap-2 bg-white p-3.5 rounded-lg w-64">
           <FilterIcon />
           Manage Categories
@@ -49,7 +51,7 @@ const Products = () => {
         <nav className="flex justify-between border-b-4 overflow-x-auto">
           {renderdContent}
         </nav>
-        <div className="py-9 grid grid-cols-4 grid-flow-row gap-y-4 gap-x-9 border-b-4 max-h-[400px] overflow-y-scroll">
+        <div className="py-9 grid grid-cols-4 grid-flow-row gap-y-4 gap-x-9 border-b-4 max-h-[350px] overflow-y-scroll">
           {renderedCardContent} 
         </div>
       </div>
