@@ -19,6 +19,7 @@ import EditYellowIcon from './EditYellow.svg?react';
 import StarsIcon from './Stars.svg?react';
 import StarBlankIcon from './StarBlank.svg?react';
 import ConfirmIcon from './Confirm.svg?react';
+import Star from './star.svg?react';
 
 export { 
     ProductsIcon, 
@@ -42,4 +43,5 @@ export {
     StarsIcon,
     StarBlankIcon,
     ConfirmIcon,
+    Star
 };
