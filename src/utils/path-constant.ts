@@ -26,4 +26,6 @@ export const PATH = {
   PRODUCTS: 'products',
   STATISTICS: 'statistics',
   PRODUCT_DETAIL: 'product-detail',
+  TERM_OF_USE: 'term-of-use',
+  PRIVACY_NOTICE: 'privacy-notice',
 };
