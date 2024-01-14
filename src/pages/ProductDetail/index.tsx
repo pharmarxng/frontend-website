@@ -79,7 +79,7 @@ const ProductDetails = () => {
 
               <table className="w-full border-2 border-collapse">
                 <caption className="text-left text-lg font-bold">Specifications</caption>
-                <tr className="border-b border-b-black border-b-2">
+                <tr className="border-b border-b-black">
                   <th className="text-left w-64 h-16 border-x-2 bg-gray-100 text-lg p-5 ">Concern</th>
                   <td className="p-5 text-lg">Alcohol free</td>
                 </tr>
@@ -87,7 +87,7 @@ const ProductDetails = () => {
                   <th className="text-left w-64 h-16 border-x-2 bg-gray-100 text-lg p-5">Form</th>
                   <td className="p-5 text-lg">Solid</td>
                 </tr>
-                <tr className="border-b border-b-black border-b-2">
+                <tr className="border-b border-b-black">
                   <th className="text-left w-64 h-16 border-x-2 bg-gray-100 text-lg p-5">Primary Flavor</th>
                   <td className="p-5 text-lg">Strepsils original flavor</td>
                 </tr>
