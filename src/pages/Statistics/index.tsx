@@ -27,7 +27,7 @@ const Statistics = () => {
           {renderdContent}
         </nav>
         <div className="grid grid-rows-[672px, 1fr]">
-          <div className="border"></div>
+          <div className="border-2-"></div>
           <div></div>
         </div>
       </div>
