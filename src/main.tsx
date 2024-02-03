@@ -7,19 +7,22 @@ import CartContext from 'context/cartContext.tsx';
 import OrderContext from 'context/orderContext.tsx';
 import AuthContext from 'context/authContext.tsx';
 import ModalContext from 'context/modalContext.tsx';
+import AdminContext from '@context/adminContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Context>
-    <AlertContext>
-      <CartContext>
-        <OrderContext>
-          <AuthContext>
-            <ModalContext>
-              <App />
-            </ModalContext>
-          </AuthContext>
-        </OrderContext>
-      </CartContext>
-    </AlertContext>
+    <AdminContext>
+      <AlertContext>
+        <CartContext>
+          <OrderContext>
+            <AuthContext>
+              <ModalContext>
+                <App />
+              </ModalContext>
+            </AuthContext>
+          </OrderContext>
+        </CartContext>
+      </AlertContext>
+    </AdminContext>
   </Context>
 );
