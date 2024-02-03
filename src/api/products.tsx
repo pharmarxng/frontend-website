@@ -52,6 +52,8 @@ export const getProductByIdApi = async (
       payload: responseData,
     });
 
+    console.log({responseData})
+
     dispatch({
       type: 'SET_RECENT_PRODUCTS',
       payload: responseData,

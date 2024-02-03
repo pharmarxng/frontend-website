@@ -21,6 +21,8 @@ export const PATH = {
   AUTH: '/auth',
   ADMIN: '/admin',
   LOGOUT: '/logout',
+  ADMIN_LOGIN: '/admin-login',
+  ADMIN_LOGOUT: '/admin-logout',
   PANEL: 'panel',
   ORDERS: 'orders',
   PRODUCTS: 'products',

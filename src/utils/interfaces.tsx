@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 export interface ILink {
   path: string;
@@ -24,6 +24,38 @@ export enum OrderStatus {
   ONGOING = 'ongoing',
   COMPLETED = 'completed',
   CANCELLED = 'cancelled',
+}
+
+export interface IAdmin {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  roles: AdminRole[];
+  status: AdminStatus;
+}
+
+export interface IAuthenticatedAdmin {
+  admin: IAdmin;
+  accessToken?: string;
+  refreshToken?: string;
+}
+
+export interface IAuthenticatedUser {
+  user: IUser;
+  accessToken?: string;
+  refreshToken?: string;
+}
+
+export enum AdminRole {
+  MASTER_ADMIN = 'MASTER_ADMIN',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+}
+
+export enum AdminStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  SUSPENDED = 'suspended',
 }
 
 interface IDefaultMongoFields {
@@ -113,6 +145,7 @@ export interface IProducts extends IDefaultMongoFields {
   reviews?: string[];
   noOfUnitsAvailable: number;
   noOfUnitsToPurchase?: number;
+  purchasable: boolean;
 }
 
 export interface ICategory extends IDefaultMongoFields {
@@ -278,9 +311,6 @@ export type ProductActionType =
   | IncreasePurchaseableUnitsAction
   | ReducePurchaseableUnitsAction
   | setRecentlyViewedProductsAction;
-// | StockFilterAction
-// | DeliveryFilterAction
-// | RatingFilterAction;
 
 type AlertSuccessType = {
   type: 'ALERT_SUCCESS';
@@ -437,4 +467,27 @@ export type IModal = {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   content: ReactNode;
   setContent: React.Dispatch<React.SetStateAction<ReactNode>>;
-}
+};
+
+type SetAdminAuth = {
+  type: 'SET_ADMIN_AUTH';
+  payload: {
+    isAdminAuthenticated?: boolean;
+    authenticatedAdmin?: IAuthenticatedAdmin;
+  };
+};
+
+type ClearAdminAuth = {
+  type: 'CLEAR_ADMIN_AUTH';
+};
+
+export type AdminActionType = GetOrdersAction | SetAdminAuth | ClearAdminAuth;
+
+export type AdminStateType = {
+  orders?: IOrder[];
+  searchQuery?: string;
+  order?: IOrder;
+  pagination?: unknown;
+  isAdminAuthenticated?: boolean | null;
+  authenticatedAdmin?: IAuthenticatedAdmin | null;
+};

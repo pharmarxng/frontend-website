@@ -29,7 +29,7 @@ const OrderListBlock = () => {
   useEffect(() => {
     try {
       if (!authenticated) {
-        navigate(PATH.HOME);
+        navigate(PATH.LOGIN);
         throw new Error(`Unauthorised. Please login to view`);
       }
       const { accessToken } = getItem('auth');

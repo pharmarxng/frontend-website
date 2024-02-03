@@ -1,4 +1,11 @@
-import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { PATH } from 'utils/path-constant';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
@@ -26,11 +33,13 @@ import {
   Statistics,
   ProductDetails,
   TermOfUse,
-  Privacy
+  Privacy,
+  AdminLogin,
 } from 'pages';
 
 import AlertModal from '../components/AlertModal';
 import { AlertState } from '../context/alertContext';
+import useAdminAuth from '@utils/hooks/admin-auth';
 
 const ManiRoutes = () => {
   const {
@@ -75,6 +84,7 @@ const ManiRoutes = () => {
             path={`${PATH.PRODUCT}/:productId`}
             element={<ProductDescription />}
           />
+          <Route path={PATH.ADMIN_LOGIN} element={<AdminLogin />} />
           <Route path={`${PATH.LOGIN}`} element={<Login />} />
           <Route path={PATH.SIGNUP} element={<Signup />} />
           <Route path={PATH.OTP} element={<Otp />} />
@@ -85,12 +95,12 @@ const ManiRoutes = () => {
           <Route path={PATH.PRIVACY_NOTICE} element={<Privacy />} />
 
           <Route path={PATH.ADMIN} element={<AdminWrapper />}>
-            <Route index element={<h1 className='text-black'>Pending...</h1>} />
+            <Route index element={<h1 className="text-black">Pending...</h1>} />
             <Route path={PATH.PANEL} element={<Panel />} />
             <Route path={PATH.ORDERS} element={<Orders />} />
-            <Route path={PATH.PRODUCTS} element={<Products/>} />
-            <Route path={PATH.STATISTICS} element={<Statistics/>} />
-            <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails/>} />
+            <Route path={PATH.PRODUCTS} element={<Products />} />
+            <Route path={PATH.STATISTICS} element={<Statistics />} />
+            <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails />} />
           </Route>
         </Routes>
         <ModalGroup />
@@ -101,16 +111,28 @@ const ManiRoutes = () => {
 
 const AdminWrapper = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(true);
+  const { isAdminAuthenticated, authenticatedAdmin } = useAdminAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('It is in the wrapper function');
+    console.log({ isAdminAuthenticated });
+    console.log({ authenticatedAdmin });
+
+    if (!isAdminAuthenticated) {
+      navigate('/admin-login');
+    }
+  }, [isAdminAuthenticated, navigate, authenticatedAdmin]);
 
   return (
-    <div className='h-screen overflow-y-scroll'>
-      <Container className='flex h-100 relative'>
+    <div className="h-screen overflow-y-scroll">
+      <Container className="flex h-100 relative">
         <TopNavbar setIsSideNavOpen={setIsSideNavOpen} />
         <SideNavbar isSideNavOpen={isSideNavOpen} />
         <Outlet />
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export default ManiRoutes;

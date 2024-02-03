@@ -41,7 +41,7 @@ const Products = () => {
       <div className="flex items-center justify-between w-full">
         <div className="font-bold">Products Management</div>
           <input type="search"
-            placeholder="Search" className="flex justify-center gap-2 bg-white p-3.5 rounded-lg rounded-lg  min-w-[350px]"/>
+            placeholder="Search" className="flex justify-center gap-2 bg-white p-3.5 rounded-lg  min-w-[350px]"/>
         <button className="flex justify-center gap-2 bg-white p-3.5 rounded-lg w-64">
           <FilterIcon />
           Manage Categories
