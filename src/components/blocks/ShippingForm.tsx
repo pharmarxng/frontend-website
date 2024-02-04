@@ -118,7 +118,7 @@ const ShippingForm = () => {
             <div>{i.location}</div>
           </div>
           <div className="flex justify-end text-deepBlue-100">
-            &#x20A6; {i.price}
+            &#x20A6;{i.price}
           </div>
         </div>
       );
@@ -188,6 +188,10 @@ const ShippingForm = () => {
           before 2 pm. If you're seeking express delivery, simply return to your
           cart and click on the chat widget. Our team is here to assist you with
           expediting your order.
+        </div>
+        <div className="text-sm md:text-base">
+          NB: Prices are not fixed and can go up on down depending on the
+          courier
         </div>
       </div>
 

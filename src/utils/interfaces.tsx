@@ -114,6 +114,7 @@ export interface IOrderDeliveryFees extends IDefaultMongoFields {
   id: string;
   location: string;
   price: number;
+  sideNote: string;
 }
 
 export interface IOrderProducts extends IDefaultMongoFields {
