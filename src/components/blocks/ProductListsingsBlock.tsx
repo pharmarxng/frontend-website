@@ -29,11 +29,18 @@ const ProductListsingsBlock = ({
   } = ProductState();
   const { alertDispatch } = AlertState();
 
+  const getSortParam = () => {
+    return order === productListingDropdownOptions[0] ? 'name,1' : 'name,-1';
+  };
+
+  const params = {
+    search: searchQuery ? searchQuery : null,
+    sort: getSortParam(),
+    categoryId: categoryId ? categoryId : null,
+  };
+
   useEffect(() => {
-    fetchData({
-      search: searchQuery ? searchQuery : null,
-      sort: getSortParam(),
-    });
+    fetchData(params);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, order]);
 
@@ -51,6 +58,10 @@ const ProductListsingsBlock = ({
   }, [productDispatch, alertDispatch, categoryId]);
 
   const content = products.map((prod: IProducts) => {
+    if (!prod.name) {
+      return;
+    }
+
     return (
       <Link key={prod.id} to={`/product/${prod.id}`}>
         <ProductCard prod={prod} />
@@ -71,10 +82,6 @@ const ProductListsingsBlock = ({
     setOrder(selectedOrder);
   };
 
-  const getSortParam = () => {
-    return order === productListingDropdownOptions[0] ? 'name,1' : 'name,-1';
-  };
-
   return (
     <div className="text-black">
       {categoryId && (
@@ -87,7 +94,9 @@ const ProductListsingsBlock = ({
           {category?.description}
         </div>
       )}
-      <div className={`sm:flex justify-between text-sm/4 sm:text-midbase ${!category? 'mt-5 md:mt-8': ''} mb-5 md:mb-8 space-y-4 sm:space-y-0`}>
+      <div
+        className={`sm:flex justify-between text-sm/4 sm:text-midbase ${!category ? 'mt-5 md:mt-8' : ''} mb-5 md:mb-8 space-y-4 sm:space-y-0`}
+      >
         <div>
           {`Showing ${calculateStartIndex()} - ${calculateEndIndex()} of `}
           <span className="font-bold">{`${pagination.totalDocs} products`}</span>
@@ -127,6 +136,7 @@ const ProductListsingsBlock = ({
             currentPage={pagination?.page}
             getPageApi={fetchData}
             setLoading={setLoading}
+            objectParams={params}
           />
         </div>
       )}
