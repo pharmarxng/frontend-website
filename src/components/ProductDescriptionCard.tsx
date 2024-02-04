@@ -5,6 +5,7 @@ import Button from './Button';
 import { CartState } from '../context/cartContext';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../utils/path-constant';
+import { openWhatsapp } from '@utils/whatsapp';
 
 interface ProductDescriptionCardProps {
   product: IProducts;
@@ -57,52 +58,79 @@ const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
           } reviews `}</div>
         </div>
         <div className="sm:text-xl/6">{product.description}</div>
-        <div className="flex flex-col space-y-7">
-          <div className="flex justify-between max-w-xs font-bold items-center">
-            <div>Quantity</div>
-            <div className="flex space-x-2 items-center">
-              <img src="/svg/check_icon.svg" alt="check" />
-              {product.inStock ? <div>In stock</div> : <div>Out of stock</div>}
+        {product.purchasable ? (
+          <div className="flex flex-col space-y-7">
+            <div className="flex justify-between max-w-xs font-bold items-center">
+              <div>Quantity</div>
+              <div className="flex space-x-2 items-center">
+                <img src="/svg/check_icon.svg" alt="check" />
+                {product.inStock ? (
+                  <div>In stock</div>
+                ) : (
+                  <div>Out of stock</div>
+                )}
+              </div>
+            </div>
+            <div className="flex justify-between space-x-5 font-bold">
+              <div className="flex-1">
+                <Button buttonStyle="text-lg/5 sm:text-2xl/7">{`${
+                  product.noOfUnitsToPurchase
+                } unit${product.noOfUnitsToPurchase! > 1 ? 's' : ''}`}</Button>
+              </div>
+              <Button
+                buttonStyle="w-[47px]"
+                onclick={handleReducePurchaseableUnit}
+                disabled={!product.noOfUnitsToPurchase}
+              >
+                <IconWrapper
+                  src="/svg/minus_icon.svg"
+                  alt="minus"
+                  iconStyle=""
+                />
+              </Button>
+              <Button
+                buttonStyle="w-[47px]"
+                onclick={handleAddPurchaseableUnit}
+                disabled={!product.noOfUnitsAvailable}
+              >
+                <IconWrapper src="/svg/add_icon.svg" alt="add" />
+              </Button>
             </div>
           </div>
-          <div className="flex justify-between space-x-5 font-bold">
-            <div className="flex-1">
-              <Button buttonStyle="text-lg/5 sm:text-2xl/7">{`${
-                product.noOfUnitsToPurchase
-              } unit${product.noOfUnitsToPurchase! > 1 ? 's' : ''}`}</Button>
-            </div>
+        ) : (
+          <div className="sm:text-base/5">
+            NB: The following product would probably need a prescription to
+            purchase. Kindly speak to our pharmacist to confirm.
+          </div>
+        )}
+
+        {product.purchasable ? (
+          <div className="flex justify-between space-x-5 sm:space-x-11 text-bold">
             <Button
-              buttonStyle="w-[47px]"
-              onclick={handleReducePurchaseableUnit}
+              buttonStyle="bg-deepBlue-100 w-full text-white"
               disabled={!product.noOfUnitsToPurchase}
+              onclick={handleAddToCart}
             >
-              <IconWrapper src="/svg/minus_icon.svg" alt="minus" iconStyle="" />
+              Add to cart
             </Button>
             <Button
-              buttonStyle="w-[47px]"
-              onclick={handleAddPurchaseableUnit}
-              disabled={!product.noOfUnitsAvailable}
+              buttonStyle="bg-yellow-500 w-full"
+              disabled={!product.noOfUnitsToPurchase}
+              onclick={handleBuyNow}
             >
-              <IconWrapper src="/svg/add_icon.svg" alt="add" />
+              Buy now
             </Button>
           </div>
-        </div>
-        <div className="flex justify-between space-x-5 sm:space-x-11 text-bold">
-          <Button
-            buttonStyle="bg-deepBlue-100 w-full text-white"
-            disabled={!product.noOfUnitsToPurchase}
-            onclick={handleAddToCart}
-          >
-            Add to cart
-          </Button>
-          <Button
-            buttonStyle="bg-yellow-500 w-full"
-            disabled={!product.noOfUnitsToPurchase}
-            onclick={handleBuyNow}
-          >
-            Buy now
-          </Button>
-        </div>
+        ) : (
+          <div>
+            <Button
+              buttonStyle="bg-deepBlue-100 w-full text-white"
+              onclick={() => openWhatsapp()}
+            >
+              Chat with our pharmacist
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

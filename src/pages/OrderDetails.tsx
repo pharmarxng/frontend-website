@@ -123,7 +123,7 @@ const OrderDetails = () => {
                   </div>
                 )}
 
-                <div>
+                <div className="">
                   {order!.isPaid && (
                     <div className="text-base font-xl font-bold">
                       Order Details:

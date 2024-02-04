@@ -1,4 +1,11 @@
-import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { PATH } from 'utils/path-constant';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
@@ -23,14 +30,15 @@ import {
   Panel,
   Orders,
   Products,
-  Statistics,
   ProductDetails,
   TermOfUse,
-  Privacy
+  AdminLogin,
+  PrivacyNotice,
 } from 'pages';
 
 import AlertModal from '../components/AlertModal';
 import { AlertState } from '../context/alertContext';
+import { AdminState } from '@context/adminContext';
 
 const ManiRoutes = () => {
   const {
@@ -75,6 +83,7 @@ const ManiRoutes = () => {
             path={`${PATH.PRODUCT}/:productId`}
             element={<ProductDescription />}
           />
+          <Route path={PATH.ADMIN_LOGIN} element={<AdminLogin />} />
           <Route path={`${PATH.LOGIN}`} element={<Login />} />
           <Route path={PATH.SIGNUP} element={<Signup />} />
           <Route path={PATH.OTP} element={<Otp />} />
@@ -82,15 +91,15 @@ const ManiRoutes = () => {
           <Route path={PATH.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
           <Route path={PATH.HELP_AND_SUPPORT} element={<HelpAndSupport />} />
           <Route path={PATH.TERM_OF_USE} element={<TermOfUse />} />
-          <Route path={PATH.PRIVACY_NOTICE} element={<Privacy />} />
+          <Route path={PATH.PRIVACY_NOTICE} element={<PrivacyNotice />} />
 
           <Route path={PATH.ADMIN} element={<AdminWrapper />}>
-            <Route index element={<h1 className='text-black'>Pending...</h1>} />
+            {/* <Route index element={<h1 className="text-black">Pending...</h1>} /> */}
+            <Route index element={<Products />} />
             <Route path={PATH.PANEL} element={<Panel />} />
             <Route path={PATH.ORDERS} element={<Orders />} />
-            <Route path={PATH.PRODUCTS} element={<Products/>} />
-            <Route path={PATH.STATISTICS} element={<Statistics/>} />
-            <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails/>} />
+            {/* <Route path={PATH.STATISTICS} element={<Statistics />} /> */}
+            <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails />} />
           </Route>
         </Routes>
         <ModalGroup />
@@ -101,16 +110,28 @@ const ManiRoutes = () => {
 
 const AdminWrapper = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(true);
+  const {
+    adminState: { isAdminAuthenticated },
+  } = AdminState();
+  const navigate = useNavigate();
+  const storedAuth = localStorage.getItem('adminAuth');
+
+  useEffect(() => {
+    // Redirect to admin login if not authenticated
+    if (!isAdminAuthenticated && !storedAuth) {
+      navigate('/admin-login');
+    }
+  }, [isAdminAuthenticated, storedAuth, navigate]);
 
   return (
-    <div className='h-screen overflow-y-scroll'>
-      <Container className='flex h-100 relative'>
+    <div className="h-screen overflow-y-scroll">
+      <Container className="flex h-100 relative">
         <TopNavbar setIsSideNavOpen={setIsSideNavOpen} />
         <SideNavbar isSideNavOpen={isSideNavOpen} />
         <Outlet />
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export default ManiRoutes;

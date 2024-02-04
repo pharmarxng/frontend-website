@@ -11,6 +11,8 @@ import {
   AuthActionType,
   AuthStateType,
   IOrderDeliveryFees,
+  AdminStateType,
+  AdminActionType,
 } from '../utils/interfaces';
 
 export const authReducer = (
@@ -393,6 +395,34 @@ export const alertReducer = (
       };
     case 'ALERT_CLEAR':
       return { ...state, type: '', show: false, message: '' };
+    default:
+      return state;
+  }
+};
+
+export const adminReducer = (
+  state: AdminStateType,
+  action: AdminActionType
+): AdminStateType => {
+  switch (action.type) {
+    case 'SET_ADMIN_AUTH':
+      return {
+        ...state,
+        authenticatedAdmin: action.payload.authenticatedAdmin,
+        isAdminAuthenticated: action.payload.isAdminAuthenticated,
+      };
+    case 'CLEAR_ADMIN_AUTH':
+      return {
+        ...state,
+        authenticatedAdmin: null,
+        isAdminAuthenticated: false,
+      };
+    case 'SET_INITIALIZED': {
+      return {
+        ...state,
+        isInitialzed: action.payload,
+      };
+    }
     default:
       return state;
   }

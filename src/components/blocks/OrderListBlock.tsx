@@ -26,20 +26,19 @@ const OrderListBlock = () => {
   const { alertDispatch } = AlertState();
   const navigate = useNavigate();
 
+  const params = {
+    search: searchQuery ? searchQuery : null,
+    sort: 'createdAt,-1',
+  };
+
   useEffect(() => {
     try {
       if (!authenticated) {
-        navigate(PATH.HOME);
+        navigate(PATH.LOGIN);
         throw new Error(`Unauthorised. Please login to view`);
       }
       const { accessToken } = getItem('auth');
-      fetchData(
-        {
-          search: searchQuery.length ? searchQuery : null,
-          sort: 'createdAt,-1',
-        },
-        accessToken
-      );
+      fetchData(params, accessToken);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -141,6 +140,7 @@ const OrderListBlock = () => {
         currentPage={pagination?.page}
         getPageApi={fetchData}
         setLoading={setLoading}
+        objectParams={params}
       />
     </div>
   );

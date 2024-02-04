@@ -6,7 +6,7 @@ interface PaginatorProps {
   pageLimit: number;
   maxPages: number;
   getPageApi: (obj: Record<string, unknown>) => Promise<void>;
-  setLoading?: (v: boolean) => void;
+  setLoading: (v: boolean) => void;
   objectParams?: Record<string, unknown> | undefined;
 }
 const Paginator = ({
@@ -14,7 +14,7 @@ const Paginator = ({
   pageLimit,
   maxPages,
   getPageApi,
-  // setLoading,
+  setLoading,
   objectParams = undefined,
 }: PaginatorProps) => {
   const [paginationGroup, setPaginationGroup] = useState<number[]>([]);
@@ -33,17 +33,18 @@ const Paginator = ({
       );
       delete params['q'];
     }
+
     await getPageApi({
       ...params,
       ...objectParams,
       page: currentPage + 1,
       limit: 8,
     });
-    // setLoading(false);
+    setLoading(false);
   }
 
   async function goToPreviousPage() {
-    // setLoading(true);
+    setLoading(true);
     const params = Object.fromEntries(
       new URLSearchParams(window.location.search)
     );
@@ -63,11 +64,11 @@ const Paginator = ({
       page: currentPage - 1,
       limit: 8,
     });
-    // setLoading(false);
+    setLoading(false);
   }
 
   async function changePage(event: React.MouseEvent<HTMLButtonElement>) {
-    // setLoading(true);
+    setLoading(true);
     const pageNumber = Number(event.currentTarget.textContent);
 
     const params = Object.fromEntries(
@@ -100,8 +101,8 @@ const Paginator = ({
       page: pageNumber,
       limit: 8,
     });
-    // setLoading(true);
-    // setLoading(false);
+    setLoading(true);
+    setLoading(false);
   }
 
   useEffect(() => {
