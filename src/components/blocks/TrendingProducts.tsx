@@ -4,6 +4,7 @@ import { IProducts } from '../../utils/interfaces';
 import ProductCard from '../ProductCard';
 import { getTrendingProductsApi } from '../../api/products';
 import { AlertState } from '../../context/alertContext';
+import { Link } from 'react-router-dom';
 
 const TrendingProducts = () => {
   const {
@@ -19,15 +20,13 @@ const TrendingProducts = () => {
     fetchData();
   }, [productDispatch, alertDispatch]);
 
-  const productsContent = trendingProducts.map(
-    (i: IProducts, index: number) => {
-      return (
-        <div key={index}>
-          <ProductCard prod={i} />
-        </div>
-      );
-    }
-  );
+  const productsContent = trendingProducts.map((i: IProducts) => {
+    return (
+      <Link key={i.id} to={`/product/${i.id}`}>
+        <ProductCard prod={i} />
+      </Link>
+    );
+  });
 
   return (
     <div className="py-5 sm:py-12 text-black">
