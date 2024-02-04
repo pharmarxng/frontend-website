@@ -6,7 +6,7 @@ export default function Privacy() {
       <div className="w-11/12 mx-auto my-16 max-w-7xl">
         <div className="flex flex-col justify-center items-center ">
           <Fade direction="bottom-right">
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 1. Introduction{" "}
               </h3>
@@ -24,7 +24,7 @@ export default function Privacy() {
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl font-bold text-[#000] mb-4">
                 2. Your Personal Data That We Process
               </h3>
@@ -60,7 +60,7 @@ export default function Privacy() {
               </ul>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 3. Cookies{" "}
               </h3>
@@ -72,7 +72,7 @@ export default function Privacy() {
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 4. Purpose Of Processing Your Data And The Lawful Basis{" "}
               </h3>
@@ -150,7 +150,7 @@ export default function Privacy() {
               </div>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 5. Your Rights As A Data Subject
               </h3>
@@ -218,7 +218,7 @@ export default function Privacy() {
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 6. Who We Share Your Data With
               </h3>
@@ -250,7 +250,7 @@ export default function Privacy() {
               </ul>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 7. Retention Of Your Data
               </h3>
@@ -268,7 +268,7 @@ export default function Privacy() {
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 8. How Your Data Is Stored
               </h3>
@@ -279,7 +279,7 @@ Where there is an actual or suspected data breach capable of causing harm to you
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 9. International Transfer Of Data
               </h3>
@@ -302,7 +302,7 @@ Our data transfers to countries that do not offer an adequate protection level a
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 10. Marketing and Communications
               </h3>
@@ -311,7 +311,7 @@ Our data transfers to countries that do not offer an adequate protection level a
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 11. Security Of Your Data
               </h3>
@@ -320,7 +320,7 @@ Our data transfers to countries that do not offer an adequate protection level a
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 12. Complaints
               </h3>
@@ -333,7 +333,7 @@ Our data transfers to countries that do not offer an adequate protection level a
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 13. Changes To This Notice
               </h3>
@@ -342,7 +342,7 @@ Our data transfers to countries that do not offer an adequate protection level a
               </p>
             </div>
 
-            <div className="w-full text-sm text-cstm-grey flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
+            <div className="w-full text-sm text-gray-800 flex flex-col mb-8 md:text-base md:w-[80%] lg:w-[60%]">
               <h3 className="text-2xl mb-4 font-bold text-[#000]">
                 14. Contact Us
               </h3>

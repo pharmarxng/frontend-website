@@ -13,6 +13,7 @@ const RecentlyViewedProducts = ({
   const {
     productState: { recentlyViewed },
   } = ProductState();
+  console.log({recentlyViewed})
   const content = recentlyViewed
     .filter((prod: IProducts) => prod.id !== currentLyViewedProductId)
     .map((prod: IProducts) => (
