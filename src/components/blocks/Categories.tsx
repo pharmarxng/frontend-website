@@ -35,7 +35,7 @@ const Categories = () => {
         </div>
         <Link
           to={`/category/${i.id}`}
-          className="p-1 sm:p-2 mb-1 rounded bg-yellow-500 hover:bg-yellow-200 hover:shadow-lg hover:cursor-pointer"
+          className="p-1 sm:p-2 mb-1 rounded bg-yellow-500 hover:bg-yellow-200 hover:shadow-lg hover:cursor-pointer text-sm sm:text-base"
         >
           {i.name}
         </Link>
