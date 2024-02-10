@@ -22,6 +22,7 @@ export enum PAYMENT_TYPE {
 
 export enum OrderStatus {
   ONGOING = 'ongoing',
+  PAID = 'paid',
   COMPLETED = 'completed',
   CANCELLED = 'cancelled',
 }
@@ -35,14 +36,7 @@ export interface IAdmin {
   status: AdminStatus;
 }
 
-export interface IAuthenticatedAdmin {
-  admin: IAdmin;
-  accessToken?: string;
-  refreshToken?: string;
-}
-
-export interface IAuthenticatedUser {
-  user: IUser;
+export interface IToken {
   accessToken?: string;
   refreshToken?: string;
 }
@@ -75,7 +69,7 @@ export interface IOrder extends IDefaultMongoFields {
   postalCode?: string;
   subTotal: number;
   discountVoucher?: string | IOrderDiscountVoucher;
-  deliveryFee?: string | IOrderDeliveryFees;
+  deliveryFee?: IOrderDeliveryFees | string;
   total: number;
   deliveryType: DeliveryType;
   isPaid: boolean;
@@ -100,7 +94,7 @@ export interface IUser extends IDefaultMongoFields {
 
 export interface IOrderedProducts extends IDefaultMongoFields {
   id: string;
-  productId: string;
+  productId: string | IProducts;
   quantity: number;
 }
 
@@ -473,8 +467,8 @@ export type IModal = {
 type SetAdminAuth = {
   type: 'SET_ADMIN_AUTH';
   payload: {
-    isAdminAuthenticated: boolean;
-    authenticatedAdmin?: IAuthenticatedAdmin | null;
+    adminToken: string;
+    authenticatedAdmin?: IAdmin | null;
   };
 };
 
@@ -487,18 +481,43 @@ type ClearAdminAuth = {
   type: 'CLEAR_ADMIN_AUTH';
 };
 
+type OrderSearchFilterAction = {
+  type: 'FILTER_ORDERS_BY_SEARCH';
+  payload: string;
+};
+
+type ProductSearchFilterAction = {
+  type: 'FILTER_PRODUCTS_BY_SEARCH';
+  payload: string;
+};
+
+type AdminSearchFilterAction = {
+  type: 'FILTER_ADMINS_BY_SEARCH';
+  payload: string;
+};
+
+type ClearAdminFilterAction = {
+  type: 'CLEAR_FILTERS';
+};
+
 export type AdminActionType =
   | GetOrdersAction
   | SetAdminAuth
   | ClearAdminAuth
+  | OrderSearchFilterAction
+  | ProductSearchFilterAction
+  | AdminSearchFilterAction
+  | ClearAdminFilterAction
+  | GetSingleOrderAction
   | SetInitialized;
 
 export type AdminStateType = {
   orders?: IOrder[];
   searchQuery?: string;
+  productSearchQuery?: string;
+  adminsSearchQuery?: string;
   order?: IOrder;
-  pagination?: unknown;
-  isAdminAuthenticated: boolean;
-  isInitialzed: boolean;
-  authenticatedAdmin?: IAuthenticatedAdmin | null;
+  orderPagination?: unknown;
+  adminToken: string;
+  authenticatedAdmin?: IAdmin | null;
 };

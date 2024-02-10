@@ -6,7 +6,7 @@ import timezone from 'dayjs/plugin/timezone';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export const formatDate = (dateString: string) => {
+export const formatDate = (dateString?: string) => {
   const formattedDate = dayjs(dateString)
     .utc() // Convert to UTC time
     .tz('Africa/Lagos') // Set the timezone to WAT (West Africa Time)

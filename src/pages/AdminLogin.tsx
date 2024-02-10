@@ -3,7 +3,6 @@ import FormButton from '@components/FormButton';
 import Input from '@components/Input';
 import { AdminState } from '@context/adminContext';
 import { AlertState } from '@context/alertContext';
-import useAdminAuth from '@utils/hooks/admin-auth';
 import { PATH } from '@utils/path-constant';
 import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
@@ -12,9 +11,9 @@ import { FadeLoader } from 'react-spinners';
 
 const AdminLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { adminLogin } = useAdminAuth();
   const {
     adminState: { isAdminAuthenticated },
+    adminLogin,
   } = AdminState();
   const navigate = useNavigate();
   const { alertDispatch } = AlertState();

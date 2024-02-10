@@ -1,9 +1,10 @@
+import { IOrder } from '@utils/interfaces';
 import BorderedWrappper from './BorderedWrappper';
 import NairaWrapper from './NairaWrapper';
 
 interface OrderSummaryProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  order: Record<string, any>;
+  order: IOrder;
   bare?: boolean;
   classDef?: string;
 }
@@ -16,6 +17,11 @@ const OrderSummary = ({ order, bare, classDef }: OrderSummaryProps) => {
       } ${classDef}`}
     >
       <div className="font-bold mb-4">Order Summary</div>
+      <table>
+        {order.products.map((products) => {
+          return;
+        })}
+      </table>
       <div className="flex flex-col space-y-5">
         <div className="flex justify-between">
           <div>Subtotal</div>
@@ -24,7 +30,9 @@ const OrderSummary = ({ order, bare, classDef }: OrderSummaryProps) => {
         <div className="flex justify-between">
           <div>Shipping Fee</div>
           <NairaWrapper>
-            {order.deliveryFee ? order.deliveryFee.price : 0}
+            {typeof order.deliveryFee === 'object'
+              ? order.deliveryFee.price
+              : 0}
           </NairaWrapper>
         </div>
         <div className="flex justify-between">
