@@ -16,10 +16,37 @@ const OrderSummary = ({ order, bare, classDef }: OrderSummaryProps) => {
         bare ? '' : 'border'
       } ${classDef}`}
     >
-      <div className="font-bold mb-4">Order Summary</div>
-      <table>
+      <div className="font-bold mb-5">Order Summary</div>
+      <table className="flex flex-col space-y-3 mb-5 max-h-[190px] overflow-y-scroll">
         {order.products.map((products) => {
-          return;
+          let image;
+          let price;
+          let name;
+          if (typeof products.productId === 'object') {
+            image = products.productId.image;
+            name = products.productId.name;
+            price = products.productId.price;
+          }
+
+          return (
+            <tbody key={products.id}>
+              <tr className="border-b-2 border-b-gray-200 flex justify-between items-center">
+                <td className="pb-2">
+                  <img src={image} alt="Product image" className="w-16 h-12" />
+                </td>
+                <td>
+                  <div>
+                    <div>
+                      {name} &nbsp;×&nbsp;{products.quantity}
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <NairaWrapper>{price! * products.quantity}</NairaWrapper>
+                </td>
+              </tr>
+            </tbody>
+          );
         })}
       </table>
       <div className="flex flex-col space-y-5">

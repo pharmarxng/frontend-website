@@ -401,12 +401,13 @@ export type OrderActionType =
   | SetDiscountCodeAction
   | GetOrdersAction
   | GetSingleOrderAction
+  | ClearOrderAction
   | SearchFilterAction;
 
 export type OrderStateType = {
   orders?: IOrder[];
   searchQuery?: string;
-  order?: IOrder;
+  order?: IOrder | null;
   pagination?: unknown;
   email?: string;
   deliveryType?: 'pickup' | 'delivery';
@@ -440,6 +441,10 @@ type GetOrdersAction = {
 type GetSingleOrderAction = {
   type: 'GET_SINGLE_ORDER';
   payload: IOrder;
+};
+
+type ClearOrderAction = {
+  type: 'CLEAR_ORDER';
 };
 
 type SetRedirectPath = {
@@ -509,6 +514,7 @@ export type AdminActionType =
   | AdminSearchFilterAction
   | ClearAdminFilterAction
   | GetSingleOrderAction
+  | ClearOrderAction
   | SetInitialized;
 
 export type AdminStateType = {
@@ -516,7 +522,7 @@ export type AdminStateType = {
   searchQuery?: string;
   productSearchQuery?: string;
   adminsSearchQuery?: string;
-  order?: IOrder;
+  order?: IOrder | null;
   orderPagination?: unknown;
   adminToken: string;
   authenticatedAdmin?: IAdmin | null;

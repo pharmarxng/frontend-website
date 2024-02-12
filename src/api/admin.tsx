@@ -75,6 +75,9 @@ export const getOrderByIdApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  dispatch({
+    type: 'CLEAR_ORDER',
+  });
   const url = `${adminSubUrl}/fetch-order/${id}`;
   try {
     const response = await axios.get(url, {
@@ -83,6 +86,49 @@ export const getOrderByIdApi = async (
         Authorization: `Bearer ${adminAuth.accessToken}`,
       },
     });
+    const responseData = response.data.data;
+    dispatch({
+      type: 'GET_SINGLE_ORDER',
+      payload: responseData,
+    });
+    return responseData;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
+  }
+};
+
+export const confirmOrderByIdApi = async (
+  { id, confirm }: { id: string; confirm?: boolean },
+  dispatch: React.Dispatch<AdminActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>
+) => {
+  dispatch({
+    type: 'CLEAR_ORDER',
+  });
+  const url = `${adminSubUrl}/confirm-order/${id}`;
+  try {
+    const response = await axios.post(
+      url,
+      {
+        confirm: confirm ? true : false,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${adminAuth.accessToken}`,
+        },
+      }
+    );
     const responseData = response.data.data;
     dispatch({
       type: 'GET_SINGLE_ORDER',

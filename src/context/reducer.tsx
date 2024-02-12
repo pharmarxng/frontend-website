@@ -88,6 +88,13 @@ export const orderReducer = (
       };
     }
 
+    case 'CLEAR_ORDER': {
+      return {
+        ...state,
+        order: null,
+      };
+    }
+
     case 'FILTER_BY_SEARCH':
       return { ...state, searchQuery: action.payload };
 
@@ -432,6 +439,12 @@ export const adminReducer = (
           totalDocs: action.payload?.totalDocs,
           totalPages: action.payload?.totalPages,
         },
+      };
+    }
+    case 'CLEAR_ORDER': {
+      return {
+        ...state,
+        order: null,
       };
     }
     case 'CLEAR_FILTERS':

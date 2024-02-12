@@ -132,19 +132,19 @@ const AdminLogin = () => {
                 LOGIN
               </FormButton>
             </div>
+            {loading && (
+              <div className="flex justify-center pt-[60px]">
+                <FadeLoader
+                  color={'#2D547B'}
+                  loading={loading}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            )}
           </form>
         )}
       </Formik>
-      {loading && (
-        <div className="flex justify-center pt-[60px]">
-          <FadeLoader
-            color={'#2D547B'}
-            loading={loading}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-      )}
     </div>
   );
 };
