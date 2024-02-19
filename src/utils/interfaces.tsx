@@ -27,6 +27,19 @@ export enum OrderStatus {
   CANCELLED = 'cancelled',
 }
 
+export interface IPagination {
+  totalDocs: number;
+  offset: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: number | null;
+  nextPage: number | null;
+}
+
 export interface IAdmin {
   firstName: string;
   lastName: string;

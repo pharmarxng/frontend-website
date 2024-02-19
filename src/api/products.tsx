@@ -102,11 +102,14 @@ export const getTrendingProductsApi = async (
 };
 
 export const getFlashProductsApi = async (
-  alertDispatch: React.Dispatch<AlertActionType>
+  alertDispatch: React.Dispatch<AlertActionType>,
+  params?: Record<string, unknown>
 ) => {
   const url = productSubUrl + '/get-flash-products';
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      params,
+    });
     return response.data.data;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
