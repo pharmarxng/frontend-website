@@ -10,11 +10,8 @@ const OnlinePharmacy = () => {
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
-      <div className="mx-5 md:mx-0">
-        <OnlinePharmacyHeader />
-      </div>
-
       <PaddedWrapper>
+        <OnlinePharmacyHeader />
         <div className="md:mt-[100px]">
           <EssentialServices />
         </div>

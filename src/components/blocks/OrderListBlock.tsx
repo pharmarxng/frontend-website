@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getItem, isAthenticated } from '../../utils/auth';
+import { isAthenticated } from '../../utils/auth';
 import OrderSummary from '../OrderSummary';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../utils/path-constant';
@@ -37,8 +37,7 @@ const OrderListBlock = () => {
         navigate(PATH.LOGIN);
         throw new Error(`Unauthorised. Please login to view`);
       }
-      const { accessToken } = getItem('auth');
-      fetchData(params, accessToken);
+      fetchData(params);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -54,12 +53,9 @@ const OrderListBlock = () => {
     }));
   };
 
-  const fetchData = async (
-    params?: Record<string, unknown>,
-    accessToken?: string
-  ) => {
+  const fetchData = async (params?: Record<string, unknown>) => {
     setLoading(true);
-    await getOrdersApi(orderDispatch, alertDispatch, params, accessToken);
+    await getOrdersApi(orderDispatch, alertDispatch, params);
     setLoading(false);
   };
 

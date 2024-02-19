@@ -27,6 +27,7 @@ export const PATH = {
   ORDERS: 'orders',
   PRODUCTS: 'products',
   STATISTICS: 'statistics',
+  ADMIN_ORDER_DETAILS: 'order-details',
   PRODUCT_DETAIL: 'product-detail',
   TERM_OF_USE: '/term-of-use',
   PRIVACY_NOTICE: '/privacy-notice',

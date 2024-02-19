@@ -14,6 +14,7 @@ export const authLinks: ILink[] = [
   { path: PATH.AUTH, text: `Auth`, icon: 'auth_logo' },
   { path: PATH.CART, text: `Cart`, icon: 'cart_logo' },
   { path: PATH.LOGIN, text: `Login`, icon: 'auth_logo' },
+  { path: PATH.ADMIN_LOGIN, text: `Login as admin`, icon: 'auth_logo' },
   { path: PATH.ORDER_LIST, text: `Your Orders` },
   { path: PATH.LOGOUT, text: `Logout` },
 ];
