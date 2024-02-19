@@ -22,7 +22,7 @@ const Navbar = () => {
   }, [authenticated]);
 
   const authVerifiedLinksForSmallScreens = !authenticated
-    ? authLinks.slice(2, 4)
+    ? authLinks.slice(2, 5)
     : authLinks.slice(3);
 
   const handleLogout = () => {
@@ -116,24 +116,28 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-secondary-200 text-black px-5 md:px-8 lg:px-12 font-inter text-lg/5 ">
-      <nav className="flex justify-between space-x-3 items-center h-16 md:h-20">
-        <div className="flex items-center hover:border-transparent hover:shadow-sm">
-          <Link to={PATH.HOME} className="w-12 sm:w-auto">
-            <img
-              className="object-cover "
-              src="/svg/pharmLogo.svg"
-              alt="Logo"
-            />
-          </Link>
-        </div>
-        <div>
+    <div>
+      <div className="bg-secondary-200 text-black px-5 md:px-8 lg:px-12 font-inter text-lg/5 ">
+        <nav className="flex justify-between space-x-3 items-center h-16 md:h-20">
+          <div className="flex items-center hover:border-transparent hover:shadow-sm">
+            <Link to={PATH.HOME} className="w-auto">
+              <img
+                className="object-cover "
+                src="/svg/pharmLogo.svg"
+                alt="Logo"
+              />
+            </Link>
+          </div>
+          <div className="flex space-x-4 items-center">
+            {handleLogoLinksRendering('', authLinks.slice(0, 2))}
+          </div>
+        </nav>
+      </div>
+      <div className="flex justify-center">
+        <div className="mx-8 mt-4 w-[700px]">
           <ProductSearchBar />
         </div>
-        <div className="flex space-x-4 items-center">
-          {handleLogoLinksRendering('', authLinks.slice(0, 2))}
-        </div>
-      </nav>
+      </div>
     </div>
   );
 };

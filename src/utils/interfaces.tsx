@@ -136,6 +136,7 @@ export interface IProducts extends IDefaultMongoFields {
   fastDelivery?: boolean;
   rating: number;
   categoryId?: string;
+  category?: string;
   qty?: number;
   reviews?: string[];
   noOfUnitsAvailable: number;
@@ -190,6 +191,11 @@ type SetShippingAction = {
   payload: IOrderDeliveryFees;
 };
 
+type BuyNowAction = {
+  type: 'BUY_NOW';
+  payload: string;
+};
+
 export type CartActionType =
   | AddAction
   | RemoveAction
@@ -199,7 +205,8 @@ export type CartActionType =
   | CheckAllProductsAction
   | ToggleProductCheckAction
   | SetShippingListAction
-  | SetShippingAction;
+  | SetShippingAction
+  | BuyNowAction;
 
 export type CartStateType = {
   cart: IProducts[];
@@ -218,8 +225,6 @@ export type ProductStateType = {
   category?: ICategory;
   sort?: string;
   recentlyViewed: IProducts[];
-  // byStock: boolean;
-  // byRating: number;
 };
 
 type GetProductsAction = {
@@ -515,7 +520,11 @@ export type AdminActionType =
   | ClearAdminFilterAction
   | GetSingleOrderAction
   | ClearOrderAction
-  | SetInitialized;
+  | SetInitialized
+  | GetSingleProductAction
+  | GetProductsAction
+  | GetCategoriesAction
+  | GetSingleCategoryAction;
 
 export type AdminStateType = {
   orders?: IOrder[];
@@ -526,4 +535,9 @@ export type AdminStateType = {
   orderPagination?: unknown;
   adminToken: string;
   authenticatedAdmin?: IAdmin | null;
+  categories?: ICategory[];
+  category?: ICategory;
+  products?: IProducts[];
+  product?: IProducts;
+  productPagination?: unknown;
 };

@@ -113,11 +113,11 @@ export const confirmOrderByIdApi = async (
   dispatch: React.Dispatch<AdminActionType>,
   alertDispatch: React.Dispatch<AlertActionType>
 ) => {
-  dispatch({
-    type: 'CLEAR_ORDER',
-  });
-  const url = `${adminSubUrl}/confirm-order/${id}`;
   try {
+    dispatch({
+      type: 'CLEAR_ORDER',
+    });
+    const url = `${adminSubUrl}/confirm-order/${id}`;
     const response = await axios.post(
       url,
       {
@@ -135,6 +135,81 @@ export const confirmOrderByIdApi = async (
       payload: responseData,
     });
     return responseData;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
+  }
+};
+
+export const getAdminProducts = async (
+  dispatch: React.Dispatch<AdminActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>,
+  params?: Record<string, unknown>
+) => {
+  const url = `${adminSubUrl}/get-products`;
+  try {
+    const response = await axios.get(url, {
+      params,
+      headers: {
+        Authorization: `Bearer ${adminAuth.accessToken}`,
+      },
+    });
+    const responseData = response.data.data;
+
+    dispatch({
+      type: 'GET_PRODUCTS',
+      payload: responseData,
+    });
+    return responseData;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: error.response.data.message,
+      });
+    } else {
+      alertDispatch({
+        type: 'ALERT_ERROR',
+        payload: 'An error occurred.',
+      });
+    }
+  }
+};
+
+export const getAdminCategoriesApi = async (
+  dispatch: React.Dispatch<AdminActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>,
+  params?: Record<string, unknown>
+) => {
+  const url = `${adminSubUrl}/get-all-categories`;
+  try {
+    const response = await axios.get(url, {
+      params,
+      headers: {
+        Authorization: `Bearer ${adminAuth.accessToken}`,
+      },
+    });
+    const responseData = response.data.data;
+
+    dispatch({
+      type: 'GET_CATEGORIES',
+      payload: responseData,
+    });
+
+    return responseData;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (error.response) {

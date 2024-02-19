@@ -3,7 +3,7 @@ import OnlinePharmacyForm from '../OnlinePharmacyForm';
 const OnlinePharmacyHeader = () => {
   return (
     <div>
-      <div className="hidden md:block relative">
+      <div className="hidden md:block relative md:mt-6">
         <img
           src="/svg/pharmConsultant.svg"
           alt="Online Consultant"

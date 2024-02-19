@@ -12,6 +12,9 @@ const AdminContextProvider = ({ children }: IContextProps) => {
     adminToken: localStorage.getItem('adminAuth') || '',
     orders: [],
     searchQuery: '',
+    products: [],
+    productPagination: {},
+    categories: [],
   });
   const navigate = useNavigate();
 

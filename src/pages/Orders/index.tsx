@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { AdminState } from '@context/adminContext';
 import Paginator from '@components/Paginator';
 import { AlertState } from '@context/alertContext';
-import { getItem } from '@utils/auth';
 import { getAdminOrders } from '@api/admin';
 import { IOrder, IOrderedProducts } from '@utils/interfaces';
 import { formatDate } from '@utils/date';
@@ -25,16 +24,13 @@ const Orders = (): JSX.Element => {
     search: searchQuery ? searchQuery : null,
     sort: 'createdAt,-1',
   };
-  const { accessToken } = getItem('adminAuth');
 
   useEffect(() => {
     try {
-      console.group({ accessToken });
       fetchData(params);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log('It got here', error);
       alertDispatch({ type: 'ALERT_ERROR', payload: error.message });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,7 +99,6 @@ const Orders = (): JSX.Element => {
           <Table
             config={TableConfig(
               orders.map((order: IOrder) => {
-                console.log({ order });
                 const prods = order.products
                   .map((product: IOrderedProducts) => {
                     if (typeof product.productId === 'string') {

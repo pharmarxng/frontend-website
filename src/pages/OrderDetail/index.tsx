@@ -96,6 +96,10 @@ const OrderDetails = (): JSX.Element => {
                     {formatString(order.email)}
                   </div>
                   <div>
+                    <span className="font-bold">Phone: </span>
+                    {formatString(order.phone)}
+                  </div>
+                  <div>
                     <span className="font-bold">Delivery Type: </span>
                     {formatString(order.deliveryType)}
                   </div>

@@ -224,6 +224,22 @@ export const cartReducer = (
     case 'SET_SHIPPING_LIST': {
       return { ...state, shippingList: action.payload };
     }
+    case 'BUY_NOW': {
+      const { cart, checkedItems } = state;
+      const updatedCheckItem = checkedItems.filter((checkedItem) => {
+        return checkedItem === action.payload;
+      });
+
+      const updatedCart = cart.filter((cartItem) => {
+        return cartItem.id === action.payload;
+      });
+
+      return {
+        ...state,
+        checkedItems: updatedCheckItem,
+        cart: updatedCart,
+      };
+    }
     default:
       return state;
   }
@@ -474,6 +490,33 @@ export const adminReducer = (
         order: { ...action.payload },
       };
     }
+    case 'GET_PRODUCTS':
+      return {
+        ...state,
+        products: action.payload?.docs.map((product) => {
+          return { ...product, noOfUnitsToPurchase: 0 };
+        }),
+        productPagination: {
+          hasNextPage: action.payload?.hasNextPage,
+          hasPrevPage: action.payload?.hasPrevPage,
+          limit: action.payload?.limit,
+          nextPage: action.payload?.nextPage,
+          page: action.payload?.page,
+          pagingCounter: action.payload?.pagingCounter,
+          prevPage: action.payload?.prevPage,
+          totalDocs: action.payload?.totalDocs,
+          totalPages: action.payload?.totalPages,
+        },
+      };
+    case 'GET_SINGLE_PRODUCT':
+      return {
+        ...state,
+        product: { ...action.payload },
+      };
+    case 'GET_CATEGORIES':
+      return { ...state, categories: action.payload };
+    case 'GET_SINGLE_CATEGORY':
+      return { ...state, category: action.payload };
     default:
       return state;
   }
