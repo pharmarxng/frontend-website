@@ -13,15 +13,18 @@ import { getOrderByIdApi } from '../api/order';
 import { AlertState } from '../context/alertContext';
 import { OrderState } from '../context/orderContext';
 import { formatString } from '../utils/string';
+import { OrderStatus } from '@utils/interfaces';
 
 const OrderDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { alertDispatch } = AlertState();
-  const { orderDispatch } = OrderState();
+  const {
+    orderDispatch,
+    orderState: { order },
+  } = OrderState();
   const [loading, setLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [order, setOrder] = useState<Record<string, any> | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +35,9 @@ const OrderDetails = () => {
           orderDispatch,
           alertDispatch
         );
-        setOrder(fetchedOrder);
+        if (!fetchedOrder) {
+          throw new Error('Something went wrong');
+        }
       } catch (error) {
         console.error('Error fetching order:', error);
       } finally {
@@ -52,10 +57,25 @@ const OrderDetails = () => {
       setLoading(true);
       const response = await axios.get('/api/v1/order/cancel-order/' + id);
       const order = response.data.data;
-      setOrder(order);
+      if (!order) throw new Error('Something went wrong');
+      orderDispatch({
+        type: 'GET_SINGLE_ORDER',
+        payload: order,
+      });
       setLoading(false);
-    } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (error.response) {
+        alertDispatch({
+          type: 'ALERT_ERROR',
+          payload: error.response.data.message,
+        });
+      } else {
+        alertDispatch({
+          type: 'ALERT_ERROR',
+          payload: 'An error occurred.',
+        });
+      }
     }
   };
 
@@ -71,9 +91,21 @@ const OrderDetails = () => {
         '/api/v1/order/make-payment',
         body
       );
+
       window.location.href = paymentResponse.data.data.authorization_url;
-    } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (error.response) {
+        alertDispatch({
+          type: 'ALERT_ERROR',
+          payload: error.response.data.message,
+        });
+      } else {
+        alertDispatch({
+          type: 'ALERT_ERROR',
+          payload: 'An error occurred.',
+        });
+      }
     }
   };
 
@@ -142,6 +174,10 @@ const OrderDetails = () => {
                       <span className="font-bold">Delivery Type: </span>
                       {formatString(order.deliveryType)}
                     </div>
+                    <div>
+                      <span className="font-bold">Order Status: </span>
+                      {formatString(order.status!)}
+                    </div>
                     {order.deliveryType === 'pickup' && (
                       <div>
                         <span className="font-bold">Pickup Location: </span>1A,
@@ -152,17 +188,17 @@ const OrderDetails = () => {
                       <div className="gap-2.5 ">
                         <div>
                           <span className="font-bold">Full name: </span>
-                          {`${formatString(order.firstName)} ${formatString(
-                            order.lastName
+                          {`${formatString(order.firstName!)} ${formatString(
+                            order.lastName!
                           )}`}
                         </div>
                         <div>
                           <span className="font-bold">Address: </span>
-                          {formatString(order.address)}
+                          {formatString(order.address!)}
                         </div>
                         <div>
                           <span className="font-bold">City: </span>
-                          {formatString(order.city)}
+                          {formatString(order.city!)}
                         </div>
                       </div>
                     )}
@@ -172,7 +208,9 @@ const OrderDetails = () => {
                   <OrderSummary order={order} />
                 </div>
 
-                {order!.isPaid || order.status === 'cancelled' ? (
+                {order!.isPaid ||
+                order.status === OrderStatus.CANCELLED ||
+                order.status === OrderStatus.COMPLETED ? (
                   <div className="flex items-center justify-center">
                     <Button
                       onclick={goToShop}

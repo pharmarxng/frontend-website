@@ -22,6 +22,7 @@ import ProductDetails from './ProductDetail';
 import TermOfUse from './TermOfUse';
 import PrivacyNotice from './PrivacyNotice';
 import AdminLogin from './AdminLogin';
+import OrderDetail from './OrderDetail';
 
 export {
   Home,
@@ -48,4 +49,5 @@ export {
   TermOfUse,
   PrivacyNotice,
   AdminLogin,
+  OrderDetail,
 };

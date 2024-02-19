@@ -22,6 +22,7 @@ export enum PAYMENT_TYPE {
 
 export enum OrderStatus {
   ONGOING = 'ongoing',
+  PAID = 'paid',
   COMPLETED = 'completed',
   CANCELLED = 'cancelled',
 }
@@ -35,14 +36,7 @@ export interface IAdmin {
   status: AdminStatus;
 }
 
-export interface IAuthenticatedAdmin {
-  admin: IAdmin;
-  accessToken?: string;
-  refreshToken?: string;
-}
-
-export interface IAuthenticatedUser {
-  user: IUser;
+export interface IToken {
   accessToken?: string;
   refreshToken?: string;
 }
@@ -75,7 +69,7 @@ export interface IOrder extends IDefaultMongoFields {
   postalCode?: string;
   subTotal: number;
   discountVoucher?: string | IOrderDiscountVoucher;
-  deliveryFee?: string | IOrderDeliveryFees;
+  deliveryFee?: IOrderDeliveryFees | string;
   total: number;
   deliveryType: DeliveryType;
   isPaid: boolean;
@@ -100,7 +94,7 @@ export interface IUser extends IDefaultMongoFields {
 
 export interface IOrderedProducts extends IDefaultMongoFields {
   id: string;
-  productId: string;
+  productId: string | IProducts;
   quantity: number;
 }
 
@@ -142,6 +136,7 @@ export interface IProducts extends IDefaultMongoFields {
   fastDelivery?: boolean;
   rating: number;
   categoryId?: string;
+  category?: string;
   qty?: number;
   reviews?: string[];
   noOfUnitsAvailable: number;
@@ -196,6 +191,11 @@ type SetShippingAction = {
   payload: IOrderDeliveryFees;
 };
 
+type BuyNowAction = {
+  type: 'BUY_NOW';
+  payload: string;
+};
+
 export type CartActionType =
   | AddAction
   | RemoveAction
@@ -205,7 +205,8 @@ export type CartActionType =
   | CheckAllProductsAction
   | ToggleProductCheckAction
   | SetShippingListAction
-  | SetShippingAction;
+  | SetShippingAction
+  | BuyNowAction;
 
 export type CartStateType = {
   cart: IProducts[];
@@ -224,8 +225,6 @@ export type ProductStateType = {
   category?: ICategory;
   sort?: string;
   recentlyViewed: IProducts[];
-  // byStock: boolean;
-  // byRating: number;
 };
 
 type GetProductsAction = {
@@ -407,12 +406,13 @@ export type OrderActionType =
   | SetDiscountCodeAction
   | GetOrdersAction
   | GetSingleOrderAction
+  | ClearOrderAction
   | SearchFilterAction;
 
 export type OrderStateType = {
   orders?: IOrder[];
   searchQuery?: string;
-  order?: IOrder;
+  order?: IOrder | null;
   pagination?: unknown;
   email?: string;
   deliveryType?: 'pickup' | 'delivery';
@@ -448,6 +448,10 @@ type GetSingleOrderAction = {
   payload: IOrder;
 };
 
+type ClearOrderAction = {
+  type: 'CLEAR_ORDER';
+};
+
 type SetRedirectPath = {
   type: 'SET_REDIRECT_PATH';
   payload: string;
@@ -473,8 +477,8 @@ export type IModal = {
 type SetAdminAuth = {
   type: 'SET_ADMIN_AUTH';
   payload: {
-    isAdminAuthenticated: boolean;
-    authenticatedAdmin?: IAuthenticatedAdmin | null;
+    adminToken: string;
+    authenticatedAdmin?: IAdmin | null;
   };
 };
 
@@ -487,18 +491,53 @@ type ClearAdminAuth = {
   type: 'CLEAR_ADMIN_AUTH';
 };
 
+type OrderSearchFilterAction = {
+  type: 'FILTER_ORDERS_BY_SEARCH';
+  payload: string;
+};
+
+type ProductSearchFilterAction = {
+  type: 'FILTER_PRODUCTS_BY_SEARCH';
+  payload: string;
+};
+
+type AdminSearchFilterAction = {
+  type: 'FILTER_ADMINS_BY_SEARCH';
+  payload: string;
+};
+
+type ClearAdminFilterAction = {
+  type: 'CLEAR_FILTERS';
+};
+
 export type AdminActionType =
   | GetOrdersAction
   | SetAdminAuth
   | ClearAdminAuth
-  | SetInitialized;
+  | OrderSearchFilterAction
+  | ProductSearchFilterAction
+  | AdminSearchFilterAction
+  | ClearAdminFilterAction
+  | GetSingleOrderAction
+  | ClearOrderAction
+  | SetInitialized
+  | GetSingleProductAction
+  | GetProductsAction
+  | GetCategoriesAction
+  | GetSingleCategoryAction;
 
 export type AdminStateType = {
   orders?: IOrder[];
   searchQuery?: string;
-  order?: IOrder;
-  pagination?: unknown;
-  isAdminAuthenticated: boolean;
-  isInitialzed: boolean;
-  authenticatedAdmin?: IAuthenticatedAdmin | null;
+  productSearchQuery?: string;
+  adminsSearchQuery?: string;
+  order?: IOrder | null;
+  orderPagination?: unknown;
+  adminToken: string;
+  authenticatedAdmin?: IAdmin | null;
+  categories?: ICategory[];
+  category?: ICategory;
+  products?: IProducts[];
+  product?: IProducts;
+  productPagination?: unknown;
 };

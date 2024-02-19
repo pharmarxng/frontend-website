@@ -7,14 +7,16 @@ import {
   OrderActionType,
 } from '../utils/interfaces';
 import axios from '../axios/axios';
+import { getItem } from '@utils/auth';
 
 const orderSubUrl = '/api/v1/order';
+
+const userAuth = getItem('auth');
 
 export const getOrdersApi = async (
   dispatch: React.Dispatch<OrderActionType>,
   alertDispatch: React.Dispatch<AlertActionType>,
-  params?: Record<string, unknown>,
-  accessToken?: string
+  params?: Record<string, unknown>
 ) => {
   const url = orderSubUrl + '/fetch-all-orders';
   params = { ...params, limit: 4 };
@@ -22,7 +24,7 @@ export const getOrdersApi = async (
     const response = await axios.get(url, {
       params,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${userAuth.accessToken}`,
       },
     });
     const responseData = response.data.data;
@@ -54,6 +56,9 @@ export const getOrderByIdApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  dispatch({
+    type: 'CLEAR_ORDER',
+  });
   const url = `${orderSubUrl}/fetch-order/${id}`;
   try {
     const response = await axios.get(url, {

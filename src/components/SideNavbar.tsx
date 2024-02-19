@@ -1,4 +1,4 @@
-import useAdminAuth from '@utils/hooks/admin-auth';
+import { AdminState } from '@context/adminContext';
 import {
   ProductsIcon,
   OrdersIcon,
@@ -17,11 +17,7 @@ const SideNavbar = ({
   isSideNavOpen: boolean;
 }): JSX.Element => {
   const [show, setShow] = useState(false);
-  const { adminLogout } = useAdminAuth();
-
-  const handleLogout = () => {
-    adminLogout();
-  };
+  const { adminLogout } = AdminState();
 
   const upper_panel = [
     // ['Dashboard', '/admin', <DashboardIcon />],
@@ -85,7 +81,7 @@ const SideNavbar = ({
               )}
               <span className="flex flex-row gap-2 items-center cursor-pointer">
                 <LogoutIcon className="w-5 h-5" />
-                <p className="text-[#cf3d3d]" onClick={() => handleLogout()}>
+                <p className="text-[#cf3d3d]" onClick={() => adminLogout()}>
                   Sign out
                 </p>
               </span>

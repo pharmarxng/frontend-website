@@ -44,6 +44,10 @@ const ProductDescriptionCard = ({ product }: ProductDescriptionCardProps) => {
 
   const handleBuyNow = () => {
     checkAllProductsInCart();
+    cartDispatch({
+      type: 'BUY_NOW',
+      payload: product.id,
+    });
     navigate(`${PATH.DELIVERY_INFO}`);
   };
 

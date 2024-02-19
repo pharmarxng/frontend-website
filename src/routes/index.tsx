@@ -1,10 +1,10 @@
 import {
   BrowserRouter,
+  Navigate,
   Outlet,
   Route,
   Routes,
   useLocation,
-  useNavigate,
 } from 'react-router-dom';
 import { PATH } from 'utils/path-constant';
 import { useEffect, useState } from 'react';
@@ -34,11 +34,12 @@ import {
   TermOfUse,
   AdminLogin,
   PrivacyNotice,
+  OrderDetail,
 } from 'pages';
 
 import AlertModal from '../components/AlertModal';
 import { AlertState } from '../context/alertContext';
-import { AdminState } from '@context/adminContext';
+import AdminContext, { AdminState } from '@context/adminContext';
 
 const ManiRoutes = () => {
   const {
@@ -59,50 +60,56 @@ const ManiRoutes = () => {
       {show && <AlertModal />}
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path={PATH.HOME} element={<Home />} />
-          <Route path={PATH.SHOP} element={<Shop />} />
-          <Route path={PATH.CART} element={<Cart />} />
-          <Route path={PATH.ORDER_LIST} element={<OrderList />} />
-          <Route
-            path={`${PATH.ORDER_DETAILS}/:id`}
-            element={<OrderDetails />}
-          />
-          <Route path={PATH.DELIVERY_INFO} element={<DeliveryInfo />} />
-          <Route path={PATH.SHIPPING_INFO} element={<ShippingInfo />} />
-          <Route path={PATH.ONLINE_PHARMACIST} element={<OnlinePharmacy />} />
-          <Route
-            path={`${PATH.CATEGORY}/:categoryId`}
-            element={<ProductListings />}
-          />
-          <Route
-            path={`${PATH.SEARCH}/:searchQuery`}
-            element={<ProductListings />}
-          />
-          <Route
-            path={`${PATH.PRODUCT}/:productId`}
-            element={<ProductDescription />}
-          />
-          <Route path={PATH.ADMIN_LOGIN} element={<AdminLogin />} />
-          <Route path={`${PATH.LOGIN}`} element={<Login />} />
-          <Route path={PATH.SIGNUP} element={<Signup />} />
-          <Route path={PATH.OTP} element={<Otp />} />
-          <Route path={PATH.RESET_PASSWORD} element={<Reset />} />
-          <Route path={PATH.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
-          <Route path={PATH.HELP_AND_SUPPORT} element={<HelpAndSupport />} />
-          <Route path={PATH.TERM_OF_USE} element={<TermOfUse />} />
-          <Route path={PATH.PRIVACY_NOTICE} element={<PrivacyNotice />} />
+        <AdminContext>
+          <Routes>
+            <Route path={PATH.HOME} element={<Home />} />
+            <Route path={PATH.SHOP} element={<Shop />} />
+            <Route path={PATH.CART} element={<Cart />} />
+            <Route path={PATH.ORDER_LIST} element={<OrderList />} />
+            <Route
+              path={`${PATH.ORDER_DETAILS}/:id`}
+              element={<OrderDetails />}
+            />
+            <Route path={PATH.DELIVERY_INFO} element={<DeliveryInfo />} />
+            <Route path={PATH.SHIPPING_INFO} element={<ShippingInfo />} />
+            <Route path={PATH.ONLINE_PHARMACIST} element={<OnlinePharmacy />} />
+            <Route
+              path={`${PATH.CATEGORY}/:categoryId`}
+              element={<ProductListings />}
+            />
+            <Route
+              path={`${PATH.SEARCH}/:searchQuery`}
+              element={<ProductListings />}
+            />
+            <Route
+              path={`${PATH.PRODUCT}/:productId`}
+              element={<ProductDescription />}
+            />
+            <Route path={PATH.ADMIN_LOGIN} element={<AdminLogin />} />
+            <Route path={`${PATH.LOGIN}`} element={<Login />} />
+            <Route path={PATH.SIGNUP} element={<Signup />} />
+            <Route path={PATH.OTP} element={<Otp />} />
+            <Route path={PATH.RESET_PASSWORD} element={<Reset />} />
+            <Route path={PATH.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
+            <Route path={PATH.HELP_AND_SUPPORT} element={<HelpAndSupport />} />
+            <Route path={PATH.TERM_OF_USE} element={<TermOfUse />} />
+            <Route path={PATH.PRIVACY_NOTICE} element={<PrivacyNotice />} />
 
-          <Route path={PATH.ADMIN} element={<AdminWrapper />}>
-            {/* <Route index element={<h1 className="text-black">Pending...</h1>} /> */}
-            <Route index element={<Products />} />
-            <Route path={PATH.PANEL} element={<Panel />} />
-            <Route path={PATH.ORDERS} element={<Orders />} />
-            {/* <Route path={PATH.STATISTICS} element={<Statistics />} /> */}
-            <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails />} />
-          </Route>
-        </Routes>
-        <ModalGroup />
+            <Route path={PATH.ADMIN} element={<AdminWrapper />}>
+              {/* <Route index element={<h1 className="text-black">Pending...</h1>} /> */}
+              <Route index element={<Products />} />
+              <Route path={PATH.PANEL} element={<Panel />} />
+              <Route path={PATH.ORDERS} element={<Orders />} />
+              {/* <Route path={PATH.STATISTICS} element={<Statistics />} /> */}
+              <Route path={PATH.PRODUCT_DETAIL} element={<ProductDetails />} />
+              <Route
+                path={`${PATH.ADMIN_ORDER_DETAILS}/:id`}
+                element={<OrderDetail />}
+              />
+            </Route>
+          </Routes>
+          <ModalGroup />
+        </AdminContext>
       </BrowserRouter>
     </div>
   );
@@ -111,17 +118,10 @@ const ManiRoutes = () => {
 const AdminWrapper = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(true);
   const {
-    adminState: { isAdminAuthenticated },
+    adminState: { adminToken },
   } = AdminState();
-  const navigate = useNavigate();
-  const storedAuth = localStorage.getItem('adminAuth');
 
-  useEffect(() => {
-    // Redirect to admin login if not authenticated
-    if (!isAdminAuthenticated && !storedAuth) {
-      navigate('/admin-login');
-    }
-  }, [isAdminAuthenticated, storedAuth, navigate]);
+  if (!adminToken) return <Navigate to="/admin-login" />;
 
   return (
     <div className="h-screen overflow-y-scroll">
