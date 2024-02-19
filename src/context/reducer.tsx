@@ -254,9 +254,6 @@ export const productReducer = (
       return {
         ...state,
         searchQuery: '',
-        // byStock: false,
-        // byFastDelivery: false,
-        // byRating: 0,
       };
     case 'CLEAR_SORT':
       return { ...state, sort: 'Alphabetically, A-Z' };
