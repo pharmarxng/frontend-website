@@ -45,11 +45,13 @@ const FlashSales = () => {
 
   const content =
     products &&
-    products.map((prod: IProducts) => (
-      <Link key={prod.id} to={`/product/${prod.id}`}>
-        <ProductCard prod={prod} bare />
-      </Link>
-    ));
+    products.map((prod: IProducts) => {
+      return (
+        <Link key={prod.id} to={`/product/${prod.id}`}>
+          <ProductCard prod={prod} bare />
+        </Link>
+      );
+    });
 
   return (
     <>
