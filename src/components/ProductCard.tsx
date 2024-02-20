@@ -19,7 +19,7 @@ const ProductCard = ({ prod, bare, imageHeight }: ProductCardProps) => {
   };
 
   const shortDescription =
-    prod.description.length > allowdCharLength
+    prod.description && prod.description.length > allowdCharLength
       ? prod.description.substring(0, allowdCharLength) + '...'
       : prod.description;
 
@@ -48,22 +48,26 @@ const ProductCard = ({ prod, bare, imageHeight }: ProductCardProps) => {
       {!bare && (
         <div
           className={`text-sm/4 sm:text-base/5 mb-5 ${
-            isExpanded || prod.description.length <= allowdCharLength
+            isExpanded ||
+            (prod.description && prod.description.length <= allowdCharLength)
               ? 'overflow-visible'
               : 'overflow-hidden'
           }`}
         >
-          {isExpanded || prod.description.length <= allowdCharLength
+          {isExpanded ||
+          (prod.description && prod.description.length <= allowdCharLength)
             ? prod.description
             : shortDescription}
-          {!isExpanded && prod.description.length > allowdCharLength && (
-            <button
-              className="text-blue-500 cursor-pointer hover:underline text-xs"
-              onClick={toggleExpand}
-            >
-              Read more
-            </button>
-          )}
+          {!isExpanded &&
+            prod.description &&
+            prod.description.length > allowdCharLength && (
+              <button
+                className="text-blue-500 cursor-pointer hover:underline text-xs"
+                onClick={toggleExpand}
+              >
+                Read more
+              </button>
+            )}
         </div>
       )}
       <NairaWrapper classDef="text-xs/4 sm:text-midbase">
