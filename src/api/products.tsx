@@ -56,6 +56,7 @@ export const getProductByIdApi = async (
       type: 'SET_RECENT_PRODUCTS',
       payload: responseData,
     });
+    return responseData;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (error.response) {
