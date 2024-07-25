@@ -10,7 +10,6 @@ import Paginator from '@components/Paginator';
 import FadeLoader from 'react-spinners/FadeLoader';
 import { useModalContext } from '@context/modalContext';
 import { AddOrEditProduct } from '@components/ModalGroup/content';
-import { getItem } from '@utils/auth';
 
 const Products = () => {
   const {
