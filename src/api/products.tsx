@@ -9,6 +9,7 @@ export const getProductsApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = productSubUrl + '/get-all';
   params = { ...params, limit: 8 };
   try {
@@ -42,6 +43,7 @@ export const getProductByIdApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   productId: string
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = `${productSubUrl}/${productId}`;
   try {
     const response = await axios.get(url);
@@ -77,6 +79,7 @@ export const getTrendingProductsApi = async (
   dispatch: React.Dispatch<ProductActionType>,
   alertDispatch: React.Dispatch<AlertActionType>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = productSubUrl + '/get-trending-products';
   try {
     const response = await axios.get(url);
@@ -106,6 +109,7 @@ export const getFlashProductsApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = productSubUrl + '/get-flash-products';
   try {
     const response = await axios.get(url, {
@@ -134,6 +138,7 @@ export const getCategoriesApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = categorySubUrl + '/get-all';
   try {
     const response = await axios.get(url, {
@@ -163,10 +168,11 @@ export const getCategoriesApi = async (
 
 export const getSingleCategorysApi = async (
   dispatch: React.Dispatch<ProductActionType>,
-  _alertDispatch: React.Dispatch<AlertActionType>,
+  alertDispatch: React.Dispatch<AlertActionType>,
   categoryId: string,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = `${categorySubUrl}/${categoryId}`;
   try {
     const response = await axios.get(url, {

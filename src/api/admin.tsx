@@ -5,12 +5,11 @@ import { getItem } from '@utils/auth';
 const authSubUrl = '/api/v1/admin-auth';
 const adminSubUrl = '/api/v1/admin';
 
-const adminAuth = getItem('adminAuth');
-
 export const adminLogInApi = async (
   body: Record<string, unknown>,
   alertDispatch: React.Dispatch<AlertActionType>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = `${authSubUrl}/login`;
   try {
     const response = await axios.post(url, body);
@@ -37,6 +36,8 @@ export const getAdminOrders = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
+  const adminAuth = getItem('adminAuth');
   const url = `${adminSubUrl}/fetch-all-orders`;
   try {
     const response = await axios.get(url, {
@@ -55,6 +56,7 @@ export const getAdminOrders = async (
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
+    alertDispatch({ type: 'ALERT_CLEAR' });
     if (error.response) {
       alertDispatch({
         type: 'ALERT_ERROR',
@@ -78,6 +80,8 @@ export const getOrderByIdApi = async (
   dispatch({
     type: 'CLEAR_ORDER',
   });
+  alertDispatch({ type: 'ALERT_CLEAR' });
+  const adminAuth = getItem('adminAuth');
   const url = `${adminSubUrl}/fetch-order/${id}`;
   try {
     const response = await axios.get(url, {
@@ -117,6 +121,8 @@ export const confirmOrderByIdApi = async (
     dispatch({
       type: 'CLEAR_ORDER',
     });
+    alertDispatch({ type: 'ALERT_CLEAR' });
+    const adminAuth = getItem('adminAuth');
     const url = `${adminSubUrl}/confirm-order/${id}`;
     const response = await axios.post(
       url,
@@ -156,6 +162,8 @@ export const getAdminProducts = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
+  const adminAuth = getItem('adminAuth');
   const url = `${adminSubUrl}/get-products`;
   try {
     const response = await axios.get(url, {
@@ -193,6 +201,8 @@ export const getAdminCategoriesApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
+  const adminAuth = getItem('adminAuth');
   const url = `${adminSubUrl}/get-all-categories`;
   try {
     const response = await axios.get(url, {

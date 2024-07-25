@@ -100,7 +100,7 @@ const ShippingForm = () => {
       return (
         <div
           key={i.id}
-          className="flex justify-between items-center h-16 font-medium px-7"
+          className="flex justify-between items-center h-16 font-medium px-3 sm:px-7"
         >
           <div className="flex gap-3">
             <Input
@@ -128,7 +128,7 @@ const ShippingForm = () => {
     <div className="flex flex-col text-black pt-[30px] gap-12 ite">
       <div>
         {/* Contact Section */}
-        <form className="flex justify-between items-center border-2 grey-300 rounded-t-lg font-medium px-1">
+        <form className="flex justify-between items-center border-2 grey-300 rounded-t-lg font-medium px-2">
           <div className="flex items-center">
             <div className="opacity-50">
               <Label label="Contact" />
@@ -142,7 +142,7 @@ const ShippingForm = () => {
                 setLocalEmail(e.target.value);
               }}
               onBlur={handleEmailChange}
-              classDef="border-none focus:outline-none text-black bg-white text-sm md:text-lg"
+              classDef="border-none focus:outline-none text-black bg-white text-sm md:text-lg w-full"
             />
           </div>
           <div
@@ -154,7 +154,7 @@ const ShippingForm = () => {
         </form>
 
         {/* Ship To Section */}
-        <div className="flex justify-between items-center border-2 grey-300 rounded-b-lg px-1">
+        <form className="flex justify-between items-center border-2 grey-300 rounded-b-lg px-2">
           <div className="flex items-center">
             <div className="opacity-50">
               <Label label="Ship to" />
@@ -168,7 +168,7 @@ const ShippingForm = () => {
                 setLocalAddress(e.target.value);
               }}
               onBlur={handleAddressChange}
-              classDef="border-none focus:outline-none text-black bg-white text-sm md:text-lg"
+              classDef="border-none focus:outline-none text-black bg-white text-sm md:text-lg w-full"
             />
           </div>
           <div
@@ -177,7 +177,7 @@ const ShippingForm = () => {
           >
             change
           </div>
-        </div>
+        </form>
       </div>
 
       <div className="flex flex-col gap-6">
@@ -189,10 +189,9 @@ const ShippingForm = () => {
           cart and click on the chat widget. Our team is here to assist you with
           expediting your order.
         </div>
-        <div className="text-sm md:text-base">
-          NB: Prices are not fixed and can go up on down depending on the
-          courier
-        </div>
+        {shipping && (
+          <div className="text-sm md:text-base">NB: {shipping.sideNote}</div>
+        )}
       </div>
 
       <div className="">

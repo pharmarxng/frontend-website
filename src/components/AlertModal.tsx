@@ -51,8 +51,8 @@ const AlertModal = () => {
                     type === 'ALERT_SUCCESS'
                       ? 'bg-temp-green-500'
                       : type === 'ALERT_ERROR'
-                      ? 'bg-red-600'
-                      : 'bg-temp-primary'
+                        ? 'bg-red-600'
+                        : 'bg-temp-primary'
                   } `}
                 >
                   <p className="inline-flex items-center justify-center px-6">

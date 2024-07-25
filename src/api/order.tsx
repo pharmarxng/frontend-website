@@ -18,6 +18,7 @@ export const getOrdersApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = orderSubUrl + '/fetch-all-orders';
   params = { ...params, limit: 4 };
   try {
@@ -59,6 +60,7 @@ export const getOrderByIdApi = async (
   dispatch({
     type: 'CLEAR_ORDER',
   });
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = `${orderSubUrl}/fetch-order/${id}`;
   try {
     const response = await axios.get(url, {
@@ -91,6 +93,7 @@ export const getStandardDeliveryFeesApi = async (
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = `${orderSubUrl}/get-delivery-fees`;
   try {
     const response = await axios.get(url, {
@@ -124,6 +127,7 @@ export const createOrderApi = async (
   alertDispatch: React.Dispatch<AlertActionType>
 ) => {
   try {
+    alertDispatch({ type: 'ALERT_CLEAR' });
     const response = await axios.post('/api/v1/order/create-order', body);
     if (response.data.statusCode !== 201) {
       throw new Error(response.data.message);
