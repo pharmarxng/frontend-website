@@ -138,7 +138,7 @@ const Products = () => {
 
   return (
     <div className="text-black w-full p-8 bg-grey-200">
-      <div className="flex items-center justify-between w-full">
+      <div className="gap-3 md:gap-0 pt-14 md:pt-0 flex flex-col md:flex-row mdzitems-center justify-between w-full">
         <div className="font-bold">Products Management</div>
         <input
           type="search"
@@ -151,7 +151,7 @@ const Products = () => {
             });
           }}
           placeholder="Search"
-          className="flex justify-center gap-2 bg-white p-3.5 rounded-lg  min-w-[350px]"
+          className="flex justify-center gap-2 bg-white p-3.5 rounded-lg  md:min-w-[350px]"
         />
         <button className="flex justify-center gap-2 bg-white p-3.5 rounded-lg w-64">
           <FilterIcon />
@@ -173,10 +173,10 @@ const Products = () => {
             <nav className="flex justify-between border-b-4 overflow-x-auto">
               {renderdContent}
             </nav>
-            <div className="py-9 grid grid-cols-4 grid-flow-row gap-y-4 gap-x-9 border-b-4 max-h-[550px] overflow-y-scroll">
+            <div className="py-9 grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 grid-flow-row gap-y-4 gap-x-4 sm:gap-x-9 border-b-4 max-h-[550px] overflow-y-scroll">
               <div
                 onClick={() => showModal(<AddOrEditProduct />)}
-                className="bg-secondary-300 rounded-lg flex flex-col items-center justify-center"
+                className="bg-secondary-300 rounded-lg flex flex-col items-center justify-center min-h-[160px]"
               >
                 <PlusYellowIcon />
                 <div className="text-yellow-300 font-bold hover:opacity-30 text-center">
