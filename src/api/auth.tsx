@@ -7,6 +7,7 @@ export const logInApi = async (
   body: Record<string, unknown>,
   alertDispatch: React.Dispatch<AlertActionType>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = `${authSubUrl}/process/login`;
   try {
     const response = await axios.post(url, body);
@@ -32,6 +33,7 @@ export const signUpApi = async (
   body: Record<string, unknown>,
   alertDispatch: React.Dispatch<AlertActionType>
 ) => {
+  alertDispatch({ type: 'ALERT_CLEAR' });
   const url = `${authSubUrl}/process/signup`;
   try {
     const response = await axios.post(url, body);

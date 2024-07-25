@@ -69,6 +69,7 @@ const AdminLogin = () => {
         validate={validate}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           try {
+            alertDispatch({ type: 'ALERT_CLEAR' });
             setSubmitting(true);
             setLoading(true);
             const result = await adminLogInApi({ ...values }, alertDispatch);

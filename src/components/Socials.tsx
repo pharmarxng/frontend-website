@@ -32,13 +32,24 @@ const Socials = () => {
               </CircularWrapper>
             </a>
           </div>
-          <a href="tel:+2348171833999" className='hover:text-primary-100' >08171833999</a>
-          <a href="mailto:pharmarxng@gmail.com" className='hover:text-primary-100' >pharmarxng@gmail.com</a>
+          <a href="tel:+2348171833999" className="hover:text-primary-100">
+            08171833999
+          </a>
+          <a
+            href="mailto:pharmarxng@gmail.com"
+            className="hover:text-primary-100"
+          >
+            pharmarxng@gmail.com
+          </a>
         </div>
-       <div className='flex space-x-2 '>
-          <Link className='hover:text-primary-100' to={PATH.TERM_OF_USE}> Terms of Service</Link>
-          <Link className='hover:text-primary-100' to={PATH.PRIVACY_NOTICE}> Privacy Notice</Link>
-       </div>
+        <div className="flex space-x-2 ">
+          <Link className="hover:text-primary-100" to={PATH.TERM_OF_USE}>
+            Terms of Service
+          </Link>
+          <Link className="hover:text-primary-100" to={PATH.PRIVACY_NOTICE}>
+            Privacy Notice
+          </Link>
+        </div>
         <div className="flex items-center justify-between">
           <FaRegCopyright />
           <div className="ml-1 text-xs/5 md:text-sm/5 lg:text-base/6">

@@ -96,7 +96,6 @@ const ManiRoutes = () => {
             <Route path={PATH.PRIVACY_NOTICE} element={<PrivacyNotice />} />
 
             <Route path={PATH.ADMIN} element={<AdminWrapper />}>
-              {/* <Route index element={<h1 className="text-black">Pending...</h1>} /> */}
               <Route index element={<Products />} />
               <Route path={PATH.PANEL} element={<Panel />} />
               <Route path={PATH.ORDERS} element={<Orders />} />
