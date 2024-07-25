@@ -11,14 +11,13 @@ import { getItem } from '@utils/auth';
 
 const orderSubUrl = '/api/v1/order';
 
-const userAuth = getItem('auth');
-
 export const getOrdersApi = async (
   dispatch: React.Dispatch<OrderActionType>,
   alertDispatch: React.Dispatch<AlertActionType>,
   params?: Record<string, unknown>
 ) => {
   alertDispatch({ type: 'ALERT_CLEAR' });
+  const userAuth = getItem('auth');
   const url = orderSubUrl + '/fetch-all-orders';
   params = { ...params, limit: 4 };
   try {

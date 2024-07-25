@@ -138,7 +138,7 @@ const Products = () => {
 
   return (
     <div className="text-black w-full p-8 bg-grey-200">
-      <div className="gap-3 md:gap-0 pt-14 md:pt-0 flex flex-col md:flex-row mdzitems-center justify-between w-full">
+      <div className="gap-3 md:gap-0 pt-14 md:pt-0 flex flex-col md:flex-row md:items-center justify-between w-full">
         <div className="font-bold">Products Management</div>
         <input
           type="search"

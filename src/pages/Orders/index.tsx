@@ -1,7 +1,7 @@
-import { PageWrapper, DatePicker, Table } from 'components';
+import { PageWrapper, Table } from 'components';
 import { TableConfig } from './TableConfig';
 import FadeLoader from 'react-spinners/FadeLoader';
-import { Range } from 'react-date-range';
+// import { Range } from 'react-date-range';
 import { useEffect, useState } from 'react';
 import { AdminState } from '@context/adminContext';
 import Paginator from '@components/Paginator';
@@ -42,13 +42,13 @@ const Orders = (): JSX.Element => {
     setLoading(false);
   };
 
-  const [date, setDate] = useState<Range[]>([
-    {
-      startDate: new Date(),
-      endDate: undefined,
-      key: 'selection',
-    },
-  ]);
+  // const [date, setDate] = useState<Range[]>([
+  //   {
+  //     startDate: new Date(),
+  //     endDate: undefined,
+  //     key: 'selection',
+  //   },
+  // ]);
 
   //on date change reload paginated data
 
@@ -66,7 +66,7 @@ const Orders = (): JSX.Element => {
   return (
     <PageWrapper>
       <div className="flex-1 min-h-screen p-6 lg:p-12">
-        <header className="flex flex-row justify-between mb-7 items-center">
+        <header className="gap-3 md:gap-0 pt-14 md:pt-0 flex flex-col md:flex-row justify-between mb-7 md:items-center">
           <h2 className="text-2xl text-black font-bold">Orders</h2>
           <input
             type="search"
@@ -81,7 +81,7 @@ const Orders = (): JSX.Element => {
             }}
             className="flex justify-center gap-2 bg-white p-3.5 rounded-lg  min-w-[350px] text-black"
           />
-          <DatePicker date={date} setDate={setDate} />
+          {/* <DatePicker date={date} setDate={setDate} /> */}
         </header>
 
         {loading ? (
@@ -96,30 +96,32 @@ const Orders = (): JSX.Element => {
         ) : orders.length === 0 ? (
           <div className="text-center mt-10">No Order found</div>
         ) : (
-          <Table
-            config={TableConfig(
-              orders.map((order: IOrder) => {
-                const prods = order.products
-                  .map((product: IOrderedProducts) => {
-                    if (typeof product.productId === 'string') {
-                      return product.productId;
-                    } else {
-                      return product.productId.name;
-                    }
-                  })
-                  .join(', ');
+          <div className="overflow-x-scroll">
+            <Table
+              config={TableConfig(
+                orders.map((order: IOrder) => {
+                  const prods = order.products
+                    .map((product: IOrderedProducts) => {
+                      if (typeof product.productId === 'string') {
+                        return product.productId;
+                      } else {
+                        return product.productId.name;
+                      }
+                    })
+                    .join(', ');
 
-                return {
-                  ...order,
-                  product: prods,
-                  createdAt: formatDate(order.createdAt),
-                  customer: `${order.firstName} ${order.lastName}`,
-                };
-              }),
-              checkAll
-            )}
-            onRowClick={handleOrderRowClicked}
-          />
+                  return {
+                    ...order,
+                    product: prods,
+                    createdAt: formatDate(order.createdAt),
+                    customer: `${order.firstName} ${order.lastName}`,
+                  };
+                }),
+                checkAll
+              )}
+              onRowClick={handleOrderRowClicked}
+            />
+          </div>
         )}
         <Paginator
           pageLimit={orderPagination?.limit}

@@ -10,7 +10,7 @@ const Table = ({
   const { columns = [], rows = [] } = config || {};
 
   return (
-    <table className="bg-white w-full">
+    <table className="bg-white w-full min-w-[900px]">
       <thead>
         <tr className="h-16 border-solid border-b bg-[#f7f7f9]">
           {columns.map((header: IColumn, id: number) => (
